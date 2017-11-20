@@ -1,0 +1,11 @@
+/* Tabs */
+.tabs { width: 20em; }
+.tabs [role="tab"], .tabs [role="tabpanel"] { border: 1px solid lightgrey; padding: 1em; background-color: white; }
+.tabs [role="tablist"] { list-style: none; margin: 0; padding: 0; }
+.tabs [role="tab"] { display: inline-block; border-bottom: none; margin-bottom: -1px; }
+.tabs [role="tab"][aria-selected="false"] { background-color: lightgrey; }
+
+/* Checbox */
+[role="checkbox"][aria-checked="true"]::before { content: "\2713"; }
+[role="checkbox"][aria-checked="false"]::before { content: "\2717"; }
+[role="checkbox"][aria-checked="mixed"]::before { content: "\7e"; }
