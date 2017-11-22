@@ -1,3 +1,17 @@
+/* DISABLE USER SELECTION */
+
+[role="button"], [role="checkbox"], [role="tab"] {
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* ROLES */
+
+/* Alert */
+[role="alert"] { padding: 1em 1em .3em; background-color: firebrick; color: white; }
+
 /* Tabs */
 .tabs { width: 20em; }
 .tabs [role="tab"], .tabs [role="tabpanel"] { border: 1px solid lightgrey; padding: 1em; background-color: white; }
@@ -5,7 +19,26 @@
 .tabs [role="tab"] { display: inline-block; border-bottom: none; margin-bottom: -1px; }
 .tabs [role="tab"][aria-selected="false"] { background-color: lightgrey; }
 
-/* Checbox */
+/* Checkbox */
 [role="checkbox"][aria-checked="true"]::before { content: "\2713"; }
 [role="checkbox"][aria-checked="false"]::before { content: "\2717"; }
 [role="checkbox"][aria-checked="mixed"]::before { content: "\7e"; }
+[role="checkbox"][aria-disabled="true"] { background-color: transparent; }
+[role="checkbox"][aria-disabled="true"]::before { color: darkgrey; }
+
+/* Slider */
+[role="slider"] { width: 20em; height: 1em; position: relative;}
+[role="slider"]::before, [role="slider"]::after { content: ""; display: block; position: absolute; top: 0; left: 0; }
+[role="slider"]::before { width: 100%; background: lightgrey; height: .3em; margin-top: .35em;}
+[role="slider"]::after { margin-left: attr(aria-valuenow) em; height: 1em; width: 1em; background: lightblue; cursor: pointer; }
+[role="slider"][aria-valuenow="1"]::after { margin-left: 32%;}
+[role="slider"][aria-valuenow="2"]::after { margin-left: 63%;}
+[role="slider"][aria-valuenow="3"]::after { margin-left: 95%;}
+
+/* Button */
+[role="button"] { display: inline-block; background-color: lightgrey; padding: .1em 1em; }
+
+/* ARIA attributes */
+
+[aria-pressed="true"] { background-color: grey; }
+[aria-disabled="true"] { background-color: #DADADA; }

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Test</title>
+	<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+	<h4>Accordion</h4>
+	<div class="demo-block">
+		<dl id="accordionGroup"role="presentation"class="Accordion">
+			<dt role="heading" aria-level="3">
+				<button aria-expanded="true" class="Accordion-trigger" aria-controls="sect1" id="accordion1id">
+					<span class="Accordion-title">Personal Information</span>
+				</button>
+			</dt>
+			<dd id="sect1"role="region"aria-labelledby="accordion1id"class="Accordion-panel">
+				<div>
+					<fieldset>
+						<p>
+							<label for="cufc1">Name<span aria-hidden="true">*</span>:</label>
+							<input value="" name="Name" id="cufc1" class="required" aria-required="true" type="text">
+						</p>
+						<p>
+							<label for="cufc2">Email<span aria-hidden="true">*</span>:</label>
+							<input value="" name="Email" id="cufc2" aria-required="true" type="text">
+						</p>
+						<p>
+							<label for="cufc3">Phone:</label>
+							<input value="" name="Phone" id="cufc3" type="text">
+						</p>
+						<p>
+							<label for="cufc4">Extension:</label>
+							<input value="" name="Ext" id="cufc4" type="text">
+						</p>
+						<p>
+							<label for="cufc5">Country:</label>
+							<input value="" name="Country" id="cufc5" type="text">
+						</p>
+						<p>
+							<label for="cufc6">City/Province:</label>
+							<input value="" name="City_Province" id="cufc6" type="text">
+						</p>
+					</fieldset>
+				</div>
+			</dd>
+			<dt role="heading" aria-level="3">
+				<button aria-expanded="false" class="Accordion-trigger" aria-controls="sect2" id="accordion2id">
+					<span class="Accordion-title">Billing Address</span>
+				</button>
+			</dt>
+			<dd id="sect2"role="region"aria-labelledby="accordion2id"class="Accordion-panel"hidden="">
+				<div>
+					<fieldset class="billing flex">
+						<p>
+							<label for="b-add1">Address 1:</label>
+							<input name="b-add1" id="b-add1" type="text">
+						</p>
+						<p>
+							<label for="b-add2">Address 2:</label>
+							<input name="b-add2" id="b-add2" type="text">
+						</p>
+						<p>
+							<label for="b-city">City:</label>
+							<input name="b-city" id="b-city" type="text">
+						</p>
+						<p>
+							<label for="b-state">State:</label>
+							<input name="b-state" id="b-state" type="text">
+						</p>
+						<p>
+							<label for="b-zip">Zip Code:</label>
+							<input name="b-zip" id="b-zip" type="text">
+						</p>
+					</fieldset>
+				</div>
+			</dd>
+			<dt role="heading" aria-level="3">
+				<button aria-expanded="false" class="Accordion-trigger" aria-controls="sect3" id="accordion3id">
+					<span class="Accordion-title">Shipping Address</span>
+				</button>
+			</dt>
+			<dd id="sect3"role="region"aria-labelledby="accordion3id"class="Accordion-panel"hidden="">
+				<div>
+					<fieldset>
+						<p>
+							<label for="m-add1">Address 1:</label>
+							<input name="m-add1" id="m-add1" type="text">
+						</p>
+						<p>
+							<label for="m-add2">Address 2:</label>
+							<input name="m-add2" id="m-add2" type="text">
+						</p>
+						<p>
+							<label for="m-city">City:</label>
+							<input name="m-city" id="m-city" type="text">
+						</p>
+						<p>
+							<label for="m-state">State:</label>
+							<input name="m-state" id="m-state" type="text">
+						</p>
+						<p>
+							<label for="m-zip">Zip Code:</label>
+							<input name="m-zip" id="m-zip" type="text">
+						</p>
+					</fieldset>
+				</div>
+			</dd>
+		</dl>
+	</div>
+	<hr>
+
+	<h4>Alert</h4>
+	<button onclick="addAlert(event)">Trigger Alert</button>
+	<hr>
+
+	<h4>Tablist</h4>
+	<div class="tabs">
+		<ul class="tablist" role="tablist">
+			<li id="tab1" aria-controls="panel1" aria-selected="false" role="tab" tabindex="0">Prices</li>
+			<li id="tab2" aria-controls="panel2" role="tab" aria-selected="true" tabindex="0">Features</li>
+			<li id="tab3" aria-controls="panel3" role="tab" aria-selected="false" tabindex="0">Extra</li>
+		</ul>
+
+		<div id="panel1" aria-labelledby="tab1" role="tabpanel" hidden>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, magnam!</p>
+		</div>
+
+		<div id="panel2" aria-labelledby="tab2" role="tabpanel">
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio quibusdam quos nulla quo explicabo molestiae iure quia magnam distinctio ex?</p>
+		</div>
+
+		<div id="panel3" aria-labelledby="tab3" role="tabpanel" hidden>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+		</div>
+	</div>
+<hr>
+
+<section>
+	<h4>Checkbox</h4>
+	<ul>
+		<li>
+			<div role="checkbox" aria-checked="true" tabindex="0">Normal</div>
+		</li>
+		<li>
+			<div role="checkbox" aria-checked="mixed" tabindex="0">Tri-state</div>
+		</li>
+		<li>
+			<div role="checkbox" aria-checked="true" tabindex="0" aria-disabled="true">Disabled</div>
+		</li>
+		<li>
+			<div role="checkbox" aria-checked="true" tabindex="0" aria-readonly="true">ReadOnly</div>
+		</li>
+	</ul>
+</section>
+<hr>
+
+<section>
+	<h4>Button</h4>
+
+	<div role="button" tabindex="0">Default button</div>
+	<div role="button" tabindex="0" aria-pressed="false">Toggle button [aria-pressed]</div>
+	<div role="button" tabindex="0" aria-disabled="true">Disabled button</div>
+</section>
+<hr>
+
+<button type="button" name="button" aria-pressed="false">Toggle Button</button>
+<button type="button" name="button" aria-haspopup="true" aria-expanded="true">Menu Button</button>
+
+<div id="jklgg">
+	<button type="button" aria-haspopup="true"  aria-controls="jkl" aria-expanded="false">
+		toString
+	</button>
+	<div id="jkl" hidden>
+		hjbk
+	</div>
+</div>
+
+<section>
+	<h4>Slider</h4>
+	<div role="slider" aria-valuenow="0" aria-valuemin="0" aria-valuemax="3"></div>
+</section>
+<hr>
+
+<script src="../build/bundle.js" charset="utf-8"></script>
+<script type="text/javascript">
+	function addAlert(ev) {
+		console.log(ev);
+		var alert = document.createElement('div');
+		alert.setAttribute('role', 'alert');
+		alert.innerHTML = `<span lang='da'>Hej</span>, hello, <span lang='it'>ciao</span>, <span lang='ja'>こんにちは</span>, <span lang='ko'>안녕</span></p>`;
+		ev.target.insertAdjacentElement("afterend", alert);
+	}
+</script>
+</body>
+</html>
