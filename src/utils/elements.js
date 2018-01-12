@@ -1,68 +1,80 @@
-export var storedElements = new WeakMap();
+import create from "./create";
+import getComputedRole from "./getComputedRole";
+
+var ayInstances = new WeakMap();
 
 // todo: loop through presentational roles
-export function getParent(autotility, role) {
-	if(autotility.element.parentNode.getAttribute("role").toLowerCase() == role) {
-		if(storedElements.has(autotility.element.parentNode)) {
-			return storedElements.get(autotility.element.parentNode);
+export function getParent(ay, role) {
+	if(ay.element.parentNode.getAttribute("role").toLowerCase() == role) {
+		if(ayInstances.has(ay.element.parentNode)) {
+			return ayInstances.get(ay.element.parentNode);
 		} else {
-			// todo: create new instance and return that .
-			return false;
+			return create.one(ay.element.parentNode);
 		}
 	} else {
 		return false;
 	}
 }
 
-// todo: find only `direct` children
-export function getChildren(autotility, role) {
-	let children = autotility.element.querySelectorAll(`[role="${role}"]`);
-	var childInstances = [];
+/** @todo find only `direct` children */
+export function getChildren(ay, role) {
+	var results = [];
+	var owns = Array.from(ay.element.children).concat(ay.owns);
 
-	for (let child of children) {
-		if(storedElements.has(child)) {
-			childInstances.push(storedElements.get(child));
-		} else {
-			// todo: create new instance and return that .
+	owns.forEach(child => {
+		if (!role || (role && getComputedRole(child) == role)) {
+			if (ayInstances.has(child)) {
+				results.push(ayInstances.get(child));
+			} else {
+				results.push(create.one(child));
+			}
 		}
-	}
+	});
 
-	return childInstances;
+	return owns;
 }
 
-
-export function getPrev(autotility, parentRole, role) {
-	let parent = getParent(autotility, parentRole);
+export function getPrev(child, parent, role) {
 	if(!parent) return false;
 
 	let children = getChildren(parent, role);
-	let indexPrevElement = Array.prototype.indexOf.call(children, autotility) - 1;
+	let indexPrevElement = Array.prototype.indexOf.call(children, child) - 1;
 	if(indexPrevElement < 0) return false;
 
 	return children[indexPrevElement];
 }
 
-export function getNext(autotility, parentRole, role) {
-	let parent = getParent(autotility, parentRole);
+export function getNext(child, parent, role) {
 	if(!parent) return false;
 
 	let children = getChildren(parent, role);
-	let indexNext = Array.prototype.indexOf.call(children, autotility) + 1;
+	let indexNext = Array.prototype.indexOf.call(children, child) + 1;
 	if(indexNext >= children.length) return false;
 
 	return children[indexNext];
 }
 
-export function getStart(autotility, parentRole, role) {
-	let parent = getParent(autotility, parentRole);
+export function getStart(child, parent, role) {
 	if(!parent) return false;
 	let children = getChildren(parent, role);
 	return children[0];
 }
 
-export function getEnd(autotility, parentRole, role) {
-	let parent = getParent(autotility, parentRole);
+export function getEnd(child, parent, role) {
 	if(!parent) return false;
 	let children = getChildren(parent, role);
 	return children[children.length - 1];
 }
+
+export default {
+	map: ayInstances,
+	get: ayInstances.get.bind(ayInstances),
+	set: ayInstances.set.bind(ayInstances),
+	has: ayInstances.has.bind(ayInstances),
+	getChildren,
+	getParent,
+	getPrev,
+	getNext,
+	getStart,
+	getEnd
+};

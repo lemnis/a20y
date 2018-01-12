@@ -8,18 +8,14 @@ const jsdoc    		      = require("gulp-jsdoc3");
 
 gulp.task("browserify", function() {
 	return browserify("./src/app.js", {debug: true})
-		.transform(babelify, {
-			presets: ["es2015"],
-			sourceMaps:true,
-			sourceType: "module"
-		})
+		.transform(babelify)
 		.on("error",function(e){
-			console.log('17', e.message);
+			console.log("17", e.message);
 			this.emit("end");
 		})
 		.bundle()
 		.on("error",function(e){
-			console.log('22', e.message);
+			console.log("22", e.message);
 			this.emit("end");
 		})
 		.pipe(source("bundle.js")) // output filename
@@ -30,14 +26,39 @@ gulp.task("browserify", function() {
 
 gulp.task("watch", () => {
 	gulp.watch("./src/**/*.js", ["browserify", "doc"]);
-	gulp.watch("./docs/*.md", ["doc"]);
 });
 
-gulp.task("doc", function (cb) {
-	const config = require("./jsdoc.json");
+gulp.task("doc", function () {
+	const fs = require("fs-then-native");
+	const jsdoc2md = require("jsdoc-to-markdown");
+	const path = require("path");
 
-	gulp.src(["README.md", "./src/**/*.js",  "./docs/*.md"], {read: false})
-		.pipe(jsdoc(config, cb));
+	// return jsdoc2md.render({ files: "src/role/*.js" })
+	// 	.then(output => fs.writeFile("api.md", output));
+
+
+	/* input and output paths */
+	const inputFiles = "src/**/*.js";
+	const outputDir = "./docs/";
+
+	const output = jsdoc2md.renderSync({ files: inputFiles })
+	fs.writeFileSync("api.md", output)
+		/* get template data */
+		const templateData = jsdoc2md.getTemplateDataSync({ files: inputFiles })
+
+		/* reduce templateData to an array of class names */
+		const classNames = templateData.reduce((classNames, identifier) => {
+		  if (identifier.kind === "class") classNames.push(identifier.name)
+		  return classNames
+		}, [])
+
+		/* create a documentation file for each class */
+		for (const className of classNames) {
+		  const template = `{{#classes name="${className}"}}{{>docs}}{{/classes}}`
+		  console.log(`rendering ${className}, template: ${template}`)
+		  const output = jsdoc2md.renderSync({ data: templateData, template: template })
+		  fs.writeFileSync(path.resolve(outputDir, `${className}.md`), output)
+		}
 });
 
 gulp.task("test", function () {

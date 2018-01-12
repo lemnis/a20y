@@ -1,5 +1,5 @@
-import {storedElements, getParent} from "./../utils/elements.js";
-import Roletype from "./Roletype.js";
+import elements from "./../utils/elements";
+import Roletype from "./abstract/Roletype";
 import mix from "@vestergaard-company/js-mixin";
 
 import AriaSelected from "./../attributes/aria-selected";
@@ -10,29 +10,28 @@ export const options = {
 	role: "tab"
 };
 
-export default class Tab extends mix(Roletype).with(AriaSelected) {
+class Tab extends mix(Roletype).with(AriaSelected) {
 	constructor(...args) {
 		super(...args);
 	}
 
-	get tablist() {
-		return getParent(this, options.owned, options.role);
-	}
-
-	_onAriaSelected(ev) {
-		let tablist = this.tablist;
+	onSelect(ev) {
+		let tablist = elements.getParent(this, options.owned, options.role);
 		if(!tablist) return false;
-
+		
+		ev.preventDefault();
+		
 		let tabs = tablist.element.querySelectorAll(options.selector + "[aria-selected='true']");
 		[].forEach.call(tabs, (item) => {
-			let inst = storedElements.get(item);
+			let inst = elements.get(item);
 			inst.selected = false;
-			inst.controls[0].element.style.display = "none";
+			inst.controls[0].element.hidden = true;
 		});
 
-		super._onAriaSelected(ev);
-		this.controls[0].element.removeAttribute("hidden");
-		this.controls[0].element.style.display = "block";
-		ev.preventDefault();
+		if (typeof super.onSelect == "function") super.onSelect(ev);
+		
+		this.controls[0].element.hidden = false;
 	}
 }
+
+export default Tab;

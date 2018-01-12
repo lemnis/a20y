@@ -1,4 +1,4 @@
-import * as state from "./../utils/state.js";
+import DOMString from "./../type/DOMString.js";
 
 /**
 * Adds functionality to `aria-checked` attribute.
@@ -11,40 +11,19 @@ import * as state from "./../utils/state.js";
 */
 let AriaChecked = (superclass) => class extends superclass {
 
-	/**
-	* @param  {HTMLElement} element    Element to add functionality to
-	* @param  {Object}      optional   Optional options
-	*/
-	constructor(...args){
+	constructor(...args) {
 		super(...args);
 
-		this.element.addEventListener("click", this._onAriaChecked.bind(this));
-		this.addKeyListener("space", this._onAriaChecked.bind(this));
+		this.addListener("key", this.onChecked.bind(this), {key: "space"});
+		this.addListener("click", this.onChecked.bind(this));
 	}
 
-	/**
-	 * Returns if the element attribute `aria-checked` is set to "true"
-	 * @type	{string}
-	 */
-	get checked() {
-		return state.get(this, "aria-checked");
-	}
-	set checked(val) {
-		return state.set(this, "aria-checked", val);
-	}
-
-	// /**
-	//  * Returns if the element attribute `aria-checked` is set to "mixed"
-	//  * @type	{string}
-	//  */
-	// get indeterminate() {
-	// 	return this.state == IS_MIXED;
-	// }
-
-	_onAriaChecked() {
-		this.checked = state.toggle(this.checked);
-		// this.emit("click", this);
-		// this.emit("change", this);
+	onChecked() {
+		if(this.disabled !== true) {
+			this.checked = DOMString.toggle(this.checked);
+			this.dispatchEvent(new InputEvent("input"));
+			this.dispatchEvent(new Event("change"));
+		}
 	}
 };
 

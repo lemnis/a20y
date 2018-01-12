@@ -20,3 +20,5 @@ rules:
   semi:
     - error
     - always
+  space-before-blocks:
+    - error

@@ -1,0 +1,11 @@
+{
+    "name": "WAI-ARIA support test framework",
+    "manifest_version": 2,
+    "version": "0.0.1",
+    "automation": {
+        "desktop": true
+    },
+    "permissions": [
+        "automation"
+    ]
+}

@@ -1,13 +1,7 @@
-import {storedElements, getPrev, getNext, getStart, getEnd} from "./../utils/elements.js";
-import Roletype from "./Roletype.js";
-import mix from "@vestergaard-company/js-mixin";
+import elements from "./../utils/elements.js";
+import Composite from "./abstract/Composite";
 
-export const options = {
-	owns: "tab", // children roles
-	selector: "[role='tablist']"
-};
-
-export default class Tablist extends mix(Roletype).with() {
+class Tablist extends Composite {
 	constructor(...args) {
 		super(...args);
 
@@ -18,25 +12,27 @@ export default class Tablist extends mix(Roletype).with() {
 	}
 
 	moveToPrev(ev) {
-		let prevInstance = getPrev(storedElements.get(ev.target), this, options.owns);
+		let prevInstance = elements.getPrev(elements.get(ev.target), this, options.owns);
 		prevInstance.element.focus();
 		ev.preventDefault();
 	}
 	moveToNext(ev) {
-		let nextInstance = getNext(storedElements.get(ev.target), this, options.owns);
+		let nextInstance = elements.getNext(elements.get(ev.target), this, options.owns);
 		nextInstance.element.focus();
 		ev.preventDefault();
 	}
 
 	moveToStart(ev) {
-		let firstInstance = getStart(storedElements.get(ev.target), this, options.owns);
+		let firstInstance = elements.getStart(elements.get(ev.target), this, options.owns);
 		firstInstance.element.focus();
 		ev.preventDefault();
 	}
 
 	moveToEnd(ev) {
-		let lastInstance = getEnd(storedElements.get(ev.target), this, options.owns);
+		let lastInstance = elements.getEnd(elements.get(ev.target), this, options.owns);
 		lastInstance.element.focus();
 		ev.preventDefault();
 	}
 }
+
+export default Tablist;

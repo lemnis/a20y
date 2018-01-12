@@ -1,0 +1,4272 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>api</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////Users/lisa/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.3.1/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+ 
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <h2 class="mume-header" id="classes">Classes</h2>
+
+<dl>
+<dt><a href="#Command">Command</a> ⇐ <code><a href="#Widget">Widget</a></code></dt>
+<dd></dd>
+<dt><a href="#Input">Input</a> ⇐ <code><a href="#Widget">Widget</a></code></dt>
+<dd></dd>
+<dt><a href="#Select">Select</a> ⇐ <code><a href="#Roletype">Roletype</a></code></dt>
+<dd><h3 id="keyboard-support">Keyboard Support</h3>
+<h4 id="default">Default</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Down Arrow</td>
+<td>Moves focus to the next option <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+<tr>
+<td>Up Arrow</td>
+<td>Moves focus to the previous option  <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+<tr>
+<td>Home</td>
+<td>Moves focus to the first option  <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+<tr>
+<td>End</td>
+<td>Moves focus to the last option  <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="multiple-selection">Multiple selection</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Space</td>
+<td>Changes the selection state of the focused option.</td>
+</tr>
+<tr>
+<td>Shift + Down Arrow</td>
+<td>Moves focus to and selects the next option.</td>
+</tr>
+<tr>
+<td>Shift + Up Arrow</td>
+<td>Moves focus to and selects the previous option.</td>
+</tr>
+<tr>
+<td>Control + Shift + Home</td>
+<td>Selects from the focused option to the beginning of the list.</td>
+</tr>
+<tr>
+<td>Control + Shift + End</td>
+<td>Selects from the focused option to the end of the list.</td>
+</tr>
+<tr>
+<td>Control + A</td>
+<td>Selects all options in the list. If all options are selected, unselects all options.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="attributes">Attributes</h3>
+<ul>
+<li><code>aria-selected</code><ul>
+<li><code>true</code><ul>
+<li>is the current focussed element</li>
+<li>equals the value of <code>aria-activedescendant</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>tabindex</code><ul>
+<li>allows usage of the element by keys when in focus</li>
+</ul>
+</li>
+<li><code>aria-activedescendant</code> equals ID of current focussed element</li>
+</ul>
+<h4 id="multiple-selection">Multiple selection</h4>
+<ul>
+<li><code>aria-selected</code><ul>
+<li><code>true</code><pre class="language-text">* can be applied to multiple element
+</pre><ul>
+<li>not automatically applied to the focused element</li>
+<li><code>false</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>tabindex</code><ul>
+<li>allows usage of the element by keys when in focus</li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt><a href="#Widget">Widget</a> ⇐ <code><a href="#Roletype">Roletype</a></code></dt>
+<dd></dd>
+<dt><a href="#Alert">Alert</a></dt>
+<dd></dd>
+<dt><a href="#Alertdialog">Alertdialog</a></dt>
+<dd></dd>
+<dt><a href="#Base">Base</a></dt>
+<dd><p>Adds some basic functionality that is greatly used inside the components</p>
+</dd>
+<dt><a href="#Button">Button</a> ⇐ <code><a href="#Command">Command</a></code></dt>
+<dd></dd>
+<dt><a href="#Combobox">Combobox</a> ⇐ <code><a href="#Roletype">Roletype</a></code></dt>
+<dd><p>A combobox is a widget made up of the combination of two distinct elements: </p>
+<ol>
+<li>a single-line textbox</li>
+<li>an associated pop-up element for helping users set the value of the textbox. </li>
+</ol>
+<p>The popup may be a listbox, grid, tree, or dialog. Many implementations also include a third 
+optional element -- a graphical button adjacent to the textbox, indicating the availability of
+the popup. Activating the button displays the popup if suggestions are available.</p>
+</dd>
+<dt><a href="#Dialog">Dialog</a></dt>
+<dd></dd>
+<dt><a href="#Link">Link</a> ⇐ <code><a href="#Command">Command</a></code></dt>
+<dd><p>An interactive reference to an internal or external resource that,
+when activated, causes the user agent to navigate to that resource.</p>
+</dd>
+<dt><a href="#Listbox">Listbox</a> ⇐ <code><a href="#Roletype">Roletype</a></code></dt>
+<dd><h3 id="keyboard-support">Keyboard Support</h3>
+<h4 id="default">Default</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Down Arrow</td>
+<td>Moves focus to the next option <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+<tr>
+<td>Up Arrow</td>
+<td>Moves focus to the previous option  <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+<tr>
+<td>Home</td>
+<td>Moves focus to the first option  <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+<tr>
+<td>End</td>
+<td>Moves focus to the last option  <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="multiple-selection">Multiple selection</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Space</td>
+<td>Changes the selection state of the focused option.</td>
+</tr>
+<tr>
+<td>Shift + Down Arrow</td>
+<td>Moves focus to and selects the next option.</td>
+</tr>
+<tr>
+<td>Shift + Up Arrow</td>
+<td>Moves focus to and selects the previous option.</td>
+</tr>
+<tr>
+<td>Control + Shift + Home</td>
+<td>Selects from the focused option to the beginning of the list.</td>
+</tr>
+<tr>
+<td>Control + Shift + End</td>
+<td>Selects from the focused option to the end of the list.</td>
+</tr>
+<tr>
+<td>Control + A</td>
+<td>Selects all options in the list. If all options are selected, unselects all options.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a href="#Option">Option</a> ⇐ <code><a href="#Roletype">Roletype</a></code></dt>
+<dd></dd>
+<dt><a href="#Radio">Radio</a> ⇐ <code><a href="#Command">Command</a></code></dt>
+<dd><p>A checkable input in a group of elements with the same role,
+only one of which can be checked at a time.</p>
+</dd>
+<dt><a href="#Range">Range</a> ⇐ <code><a href="#Roletype">Roletype</a></code></dt>
+<dd><p><strong>(Abstract role) SHOULD NOT USED IN THE DOM</strong> 
+An input representing a range of values that can be set by the user.</p>
+</dd>
+<dt><a href="#Roletype">Roletype</a> ⇐ <code><a href="#AccessibleNode">AccessibleNode</a></code></dt>
+<dd></dd>
+<dt><a href="#Slider">Slider</a> ⇐ <code><a href="#Range">Range</a></code></dt>
+<dd><p><code>slider</code> elements let the user specify a numeric value which must be no less
+than a given value, and no more than another given value. The precise value,
+however, is not considered important. This is typically represented using a
+slider or dial control rather than a text entry box like the &quot;number&quot; input
+type. Because this kind of widget is imprecise, it shouldn&#39;t typically be
+used unless the control&#39;s exact value isn&#39;t important.</p>
+</dd>
+<dt><a href="#Spinbutton">Spinbutton</a> ⇐ <code><a href="#Range">Range</a></code></dt>
+<dd><p>A input field with 2 button to increase or decrease the numberical value</p>
+</dd>
+<dt><a href="#Textbox">Textbox</a></dt>
+<dd></dd>
+<dt><a href="#AccessibleNode">AccessibleNode</a> ⇐ <code><a href="#Base">Base</a></code></dt>
+<dd><p>Based on the AOM spec</p>
+</dd>
+</dl>
+<h2 class="mume-header" id="members">Members</h2>
+
+<dl>
+<dt><a href="#role">role</a> : <code>String</code></dt>
+<dd><p>Defines a type it represents, e.g. <code>tab</code></p>
+</dd>
+<dt><a href="#roleDescription">roleDescription</a> : <code>String</code></dt>
+<dd><p>Defines a human-readable, author-localized description for the role</p>
+</dd>
+<dt><a href="#label">label</a> : <code>String</code></dt>
+<dd><p>Defines a string value that labels the current element.</p>
+</dd>
+<dt><a href="#current">current</a> : <code>Boolean</code> | <code>String</code></dt>
+<dd><p>Indicates the element that represents the current item within a container or set of related elements.</p>
+<p>Possible strings are:</p>
+<ul>
+<li><code>page</code>, used to indicate a link within a set of pagination links, <pre class="language-text">  where the link is visually styled to represent the currently-displayed page.
+</pre></li>
+<li><code>step</code>, used to indicate a link within a step indicator for a step-based process,<pre class="language-text">  where the link is visually styled to represent the current step.
+</pre></li>
+<li><code>location</code>, used to indicate the image that is visually highlighted as the current component of a flow chart.</li>
+<li><code>date</code>, used to indicate the current date within a calendar.</li>
+<li><code>time</code>, used to indicate the current time within a timetable.</li>
+</ul>
+</dd>
+<dt><a href="#autocomplete">autocomplete</a> : <code>String</code></dt>
+<dd><p>Indicates whether inputting text could trigger display of one or more predictions of the user&#39;s
+intended value for an input and specifies how predictions would be presented if they are made.</p>
+<p>The behavior during input is depends on the provided value, it follows beneath table.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inline</td>
+<td>Text suggesting may be dynamically inserted after the caret.</td>
+</tr>
+<tr>
+<td>list</td>
+<td>A collection of values that could complete the provided input is displayed.</td>
+</tr>
+<tr>
+<td>both</td>
+<td>Implements <code>inline</code> and <code>list</code></td>
+</tr>
+<tr>
+<td>none</td>
+<td>No prediction is shown</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><a href="#hidden">hidden</a> : <code>Boolean</code></dt>
+<dd><p>Returns/sets the visibility of the element who is exposed to an accessibility API.</p>
+</dd>
+<dt><a href="#keyShortcuts">keyShortcuts</a> : <code>String</code></dt>
+<dd><p>Indicates keyboard shortcuts that an author has implemented to activate or
+give focus to an element.</p>
+</dd>
+<dt><a href="#modal">modal</a> : <code>Boolean</code></dt>
+<dd><p>Indicates whether an element is modal when displayed.</p>
+</dd>
+<dt><a href="#multiline">multiline</a> : <code>Boolean</code></dt>
+<dd><p>Indicates whether a text box accepts multiple lines of input or only a single line.</p>
+</dd>
+<dt><a href="#multiselectable">multiselectable</a> : <code>Boolean</code></dt>
+<dd><p>Indicates that the user may select more than one item from the current selectable descendants.</p>
+</dd>
+<dt><a href="#orientation">orientation</a> : <code>String</code></dt>
+<dd><p>Indicates whether the element&#39;s orientation is <code>horizontal</code>, <code>vertical</code>, or <code>null</code>.</p>
+</dd>
+<dt><a href="#readOnly">readOnly</a> : <code>Boolean</code></dt>
+<dd><p>Indicates that the user may select more than one item from the current selectable descendants.</p>
+</dd>
+<dt><a href="#required">required</a> : <code>Boolean</code></dt>
+<dd><p>Indicates that user input is required on the element before a form may be submitted.</p>
+</dd>
+<dt><a href="#selected">selected</a> : <code>Boolean</code></dt>
+<dd><p>Indicates that user input is required on the element before a form may be submitted.</p>
+</dd>
+<dt><a href="#sort">sort</a> : <code>Boolean</code></dt>
+<dd><p>Indicates if items in a table or grid are sorted in ascending or descending order.<br>Possible values are <code>acending</code>, <code>descending</code>, <code>none</code>, <code>other</code> or <code>null</code>.</p>
+</dd>
+<dt><a href="#checked">checked</a> : <code>DOMString</code></dt>
+<dd></dd>
+<dt><a href="#expanded">expanded</a> : <code>Boolean</code></dt>
+<dd></dd>
+<dt><a href="#disabled">disabled</a> : <code>Boolean</code></dt>
+<dd></dd>
+<dt><a href="#invalid">invalid</a> : <code>DOMString</code></dt>
+<dd></dd>
+<dt><a href="#hasPopUp">hasPopUp</a> : <code>DOMString</code></dt>
+<dd></dd>
+<dt><a href="#pressed">pressed</a> : <code>DOMString</code></dt>
+<dd></dd>
+<dt><a href="#valueText">valueText</a> : <code>Double</code></dt>
+<dd><p>Defines the human readable text alternative of
+<a href="#aria-valuenow">#aria-valuenow</a> for a <a href="#Range">Range</a> widget.</p>
+</dd>
+<dt><a href="#placeholder">placeholder</a> : <code>DOMString</code></dt>
+<dd></dd>
+<dt><a href="#valueNow">valueNow</a> : <code>Double</code></dt>
+<dd><p>Defines the current value for a range widget.</p>
+</dd>
+<dt><a href="#valueMin">valueMin</a> : <code>Double</code></dt>
+<dd><p>Defines the minimum allowed value for a range widget.</p>
+</dd>
+<dt><a href="#valueMax">valueMax</a> : <code>Double</code></dt>
+<dd><p>Defines the maximum allowed value for a range widget.</p>
+</dd>
+<dt><a href="#colCount">colCount</a> : <code>Long</code></dt>
+<dd></dd>
+<dt><a href="#colIndex">colIndex</a> : <code>Long</code></dt>
+<dd></dd>
+<dt><a href="#colSpan">colSpan</a> : <code>Long</code></dt>
+<dd></dd>
+<dt><a href="#posInSet">posInSet</a> : <code>Long</code></dt>
+<dd></dd>
+<dt><a href="#rowCount">rowCount</a> : <code>Long</code></dt>
+<dd></dd>
+<dt><a href="#rowIndex">rowIndex</a> : <code>Long</code></dt>
+<dd></dd>
+<dt><a href="#rowSpan">rowSpan</a> : <code>Long</code></dt>
+<dd></dd>
+<dt><a href="#setSize">setSize</a> : <code>Long</code></dt>
+<dd><p>Defines the number of items in the current set of listitems or treeitems.
+Not required if <strong>all</strong> elements in the set are present in the DOM.</p>
+</dd>
+<dt><a href="#level">level</a> : <code>Long</code></dt>
+<dd><p>Defines the hierarchical level of an element within a structure.
+E.g. <code>&lt;h1&gt;&lt;h1/&gt;</code> equals <code>&lt;div role=&quot;heading&quot; aria-level=&quot;1&quot;&gt;&lt;/div&gt;</code></p>
+</dd>
+<dt><a href="#allowedRoles">allowedRoles</a> : <code>Object</code></dt>
+<dd><p>Stores info which is used in functions of rolePerHTMLTag,
+mostly a key as tagName with an array of allowed roles for that tag</p>
+</dd>
+<dt><a href="#rolePerHTMLTag">rolePerHTMLTag</a> : <code>Object</code></dt>
+<dd><p>Contains a function for each htmlTag where not all roles allowed</p>
+</dd>
+</dl>
+<h2 class="mume-header" id="constants">Constants</h2>
+
+<dl>
+<dt><a href="#roles">roles</a></dt>
+<dd></dd>
+</dl>
+<h2 class="mume-header" id="functions">Functions</h2>
+
+<dl>
+<dt><a href="#AriaChecked">AriaChecked()</a></dt>
+<dd><p>Adds functionality to <code>aria-checked</code> attribute.</p>
+<p>Changes value when clicked or while focused pressing <code>Space</code>.</p>
+<p><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-checked">https://www.w3.org/TR/wai-aria-1.1/#aria-checked</a></p>
+</dd>
+<dt><a href="#AriaExpanded">AriaExpanded()</a></dt>
+<dd><p>Adds functionality to <code>aria-expanded</code> attribute</p>
+</dd>
+<dt><a href="#AriaPressed">AriaPressed()</a></dt>
+<dd><p>Adds functionality to <code>aria-pressed</code> attribute.</p>
+<p>Changes value when clicked or while focused pressing <code>Space</code> or <code>Enter</code>.</p>
+<p><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-pressed">https://www.w3.org/TR/wai-aria-1.1/#aria-pressed</a></p>
+</dd>
+<dt><a href="#AriaSelected">AriaSelected()</a></dt>
+<dd><p>gets and sets the <code>aria-selected</code> attribute.</p>
+<p>Indicates if a element is selectable</p>
+</dd>
+<dt><a href="#AccessibleNodeList">AccessibleNodeList()</a></dt>
+<dd></dd>
+<dt><a href="#toggle">toggle()</a> ⇒ <code>Boolean</code></dt>
+<dd><p>Returns the opposite state of the attribute</p>
+</dd>
+<dt><a href="#toggle">toggle()</a> ⇒ <code>String</code></dt>
+<dd><p>Returns the opposite state of the attribute</p>
+</dd>
+<dt><a href="#getParentWithTagName">getParentWithTagName(el, tagName)</a> ⇒ <code>HTMLElement</code></dt>
+<dd><p>Finds nearest parent with a specifig tagName</p>
+</dd>
+<dt><a href="#hasAllowedRole">hasAllowedRole(tagName, role)</a> ⇒ <code>Boolean</code></dt>
+<dd><p>Checks if given role is allowed for given tag</p>
+</dd>
+<dt><a href="#scrollIntoView">scrollIntoView(child)</a></dt>
+<dd><p>Scrolls an element into its parent view</p>
+</dd>
+<dt><a href="#start">start(descendants)</a></dt>
+<dd><p>Adds focus to the first element</p>
+</dd>
+<dt><a href="#prev">prev(descendants, child)</a></dt>
+<dd><p>Adds focus to the prev element</p>
+</dd>
+<dt><a href="#next">next(descendants, child)</a></dt>
+<dd><p>Adds focus to the next element</p>
+</dd>
+<dt><a href="#end">end(descendants)</a></dt>
+<dd><p>Adds focus to the last element</p>
+</dd>
+</dl>
+<p><a name="Command" href=""></a></p>
+<h2 class="mume-header" id="command-codewidgetcodewidget">Command ⇐ <a href="#Widget"><code>Widget</code></a></h2>
+
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#Widget"><code>Widget</code></a></p>
+<ul>
+<li><a href="#Command">Command</a> ⇐ <a href="#Widget"><code>Widget</code></a>
+<ul>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="commandlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">command.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Command"><code>Command</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="commanddescribedby-codeaccessiblenodelistcodeaccessiblenodelist">command.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Command"><code>Command</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="commandcontrols-codeaccessiblenodelistcodeaccessiblenodelist">command.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Command"><code>Command</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="commandflowto-codeaccessiblenodelistcodeaccessiblenodelist">command.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Command"><code>Command</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="commandowns-codeaccessiblenodelistcodeaccessiblenodelist">command.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Command"><code>Command</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="commandtabindex-codenumbercode">command.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Command"><code>Command</code></a><br>
+<a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="commandaddlistenerlabel-callback-options">command.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Command"><code>Command</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Input" href=""></a></p>
+<h2 class="mume-header" id="input-codewidgetcodewidget">Input ⇐ <a href="#Widget"><code>Widget</code></a></h2>
+
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#Widget"><code>Widget</code></a></p>
+<ul>
+<li><a href="#Input">Input</a> ⇐ <a href="#Widget"><code>Widget</code></a>
+<ul>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="inputlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">input.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Input"><code>Input</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="inputdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">input.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Input"><code>Input</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="inputcontrols-codeaccessiblenodelistcodeaccessiblenodelist">input.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Input"><code>Input</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="inputflowto-codeaccessiblenodelistcodeaccessiblenodelist">input.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Input"><code>Input</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="inputowns-codeaccessiblenodelistcodeaccessiblenodelist">input.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Input"><code>Input</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="inputtabindex-codenumbercode">input.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Input"><code>Input</code></a><br>
+<a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="inputaddlistenerlabel-callback-options">input.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Input"><code>Input</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Select" href=""></a></p>
+<h2 class="mume-header" id="select-coderoletypecoderoletype">Select ⇐ <a href="#Roletype"><code>Roletype</code></a></h2>
+
+<h3 class="mume-header" id="keyboard-support">Keyboard Support</h3>
+
+<h4 class="mume-header" id="default">Default</h4>
+
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Down Arrow</td>
+<td>Moves focus to the next option <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+<tr>
+<td>Up Arrow</td>
+<td>Moves focus to the previous option  <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+<tr>
+<td>Home</td>
+<td>Moves focus to the first option  <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+<tr>
+<td>End</td>
+<td>Moves focus to the last option  <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+</tbody>
+</table>
+<h4 class="mume-header" id="multiple-selection">Multiple selection</h4>
+
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Space</td>
+<td>Changes the selection state of the focused option.</td>
+</tr>
+<tr>
+<td>Shift + Down Arrow</td>
+<td>Moves focus to and selects the next option.</td>
+</tr>
+<tr>
+<td>Shift + Up Arrow</td>
+<td>Moves focus to and selects the previous option.</td>
+</tr>
+<tr>
+<td>Control + Shift + Home</td>
+<td>Selects from the focused option to the beginning of the list.</td>
+</tr>
+<tr>
+<td>Control + Shift + End</td>
+<td>Selects from the focused option to the end of the list.</td>
+</tr>
+<tr>
+<td>Control + A</td>
+<td>Selects all options in the list. If all options are selected, unselects all options.</td>
+</tr>
+</tbody>
+</table>
+<h3 class="mume-header" id="attributes">Attributes</h3>
+
+<ul>
+<li><code>aria-selected</code>
+<ul>
+<li><code>true</code>
+<ul>
+<li>is the current focussed element</li>
+<li>equals the value of <code>aria-activedescendant</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>tabindex</code>
+<ul>
+<li>allows usage of the element by keys when in focus</li>
+</ul>
+</li>
+<li><code>aria-activedescendant</code> equals ID of current focussed element</li>
+</ul>
+<h4 class="mume-header" id="multiple-selection-1">Multiple selection</h4>
+
+<ul>
+<li><code>aria-selected</code></li>
+<li><code>true</code><br>
+* can be applied to multiple element
+<ul>
+<li>not automatically applied to the focused element</li>
+<li><code>false</code></li>
+</ul>
+</li>
+<li><code>tabindex</code>
+<ul>
+<li>allows usage of the element by keys when in focus</li>
+</ul>
+</li>
+</ul>
+<p><strong>Kind</strong>: global class<br>
+<strong>Summary</strong>: A form widget that allows the user to make selections from a set of choices.<br>
+<strong>Extends</strong>: <a href="#Roletype"><code>Roletype</code></a></p>
+<ul>
+<li><a href="#Select">Select</a> ⇐ <a href="#Roletype"><code>Roletype</code></a>
+<ul>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="selectlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">select.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Select"><code>Select</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="selectdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">select.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Select"><code>Select</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="selectcontrols-codeaccessiblenodelistcodeaccessiblenodelist">select.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Select"><code>Select</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="selectflowto-codeaccessiblenodelistcodeaccessiblenodelist">select.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Select"><code>Select</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="selectowns-codeaccessiblenodelistcodeaccessiblenodelist">select.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Select"><code>Select</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="selecttabindex-codenumbercode">select.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Select"><code>Select</code></a><br>
+<a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="selectaddlistenerlabel-callback-options">select.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Select"><code>Select</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Widget" href=""></a></p>
+<h2 class="mume-header" id="widget-coderoletypecoderoletype">Widget ⇐ <a href="#Roletype"><code>Roletype</code></a></h2>
+
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#Roletype"><code>Roletype</code></a></p>
+<ul>
+<li><a href="#Widget">Widget</a> ⇐ <a href="#Roletype"><code>Roletype</code></a>
+<ul>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="widgetlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">widget.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Widget"><code>Widget</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="widgetdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">widget.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Widget"><code>Widget</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="widgetcontrols-codeaccessiblenodelistcodeaccessiblenodelist">widget.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Widget"><code>Widget</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="widgetflowto-codeaccessiblenodelistcodeaccessiblenodelist">widget.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Widget"><code>Widget</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="widgetowns-codeaccessiblenodelistcodeaccessiblenodelist">widget.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Widget"><code>Widget</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="widgettabindex-codenumbercode">widget.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Widget"><code>Widget</code></a><br>
+<a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="widgetaddlistenerlabel-callback-options">widget.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Widget"><code>Widget</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Alert" href=""></a></p>
+<h2 class="mume-header" id="alert">Alert</h2>
+
+<p><strong>Kind</strong>: global class<br>
+<strong>Summary</strong>: Show a brief, important message to attracts the user's attention without<br>
+interrupting the user's task.<br>
+<a name="new_Alert_new" href=""></a></p>
+<h3 class="mume-header" id="new-alert">new Alert()</h3>
+
+<ul>
+<li>When dynamically added to the DOM it will announce the message to the user<br>
+and may trigger a sound.</li>
+<li>If already present on a webpage it will <strong>not</strong> inform users.</li>
+<li>It will not interfere with the user's tasks,<br>
+if necessary the <a href="">alert dialog</a> should be used.</li>
+<li>It should not affect keyboard focus.</li>
+<li>It should not disappear automatically,<br>
+some users could be unable to read the message before it disappears<br>
+trough a disability or other cause.</li>
+</ul>
+<h5 class="mume-header" id="example">Example</h5>
+
+<div role="alert">Hello, again!</div>
+```html
+<div role="alert">
+	Hello, again!
+</div>
+```
+<p><a name="Alertdialog" href=""></a></p>
+<h2 class="mume-header" id="alertdialog">Alertdialog</h2>
+
+<p><strong>Kind</strong>: global class<br>
+<strong>Summary</strong>: A dialog containing an alert message<br>
+<a name="Base" href=""></a></p>
+<h2 class="mume-header" id="base">Base</h2>
+
+<p>Adds some basic functionality that is greatly used inside the components</p>
+<p><strong>Kind</strong>: global class</p>
+<ul>
+<li><a href="#Base">Base</a>
+<ul>
+<li><a href="#new_Base_new">new Base(element, options)</a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="new_Base_new" href=""></a></p>
+<h3 class="mume-header" id="new-baseelement-options">new Base(element, options)</h3>
+
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>element</td>
+<td><code>Element</code></td>
+<td>Element where a AccessibleNode should be created</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>Object</code></td>
+<td>Additional options to set</td>
+</tr>
+</tbody>
+</table>
+<p><a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="basetabindex-codenumbercode">base.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Base"><code>Base</code></a><br>
+<a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="baseaddlistenerlabel-callback-options">base.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Base"><code>Base</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Button" href=""></a></p>
+<h2 class="mume-header" id="button-codecommandcodecommand">Button ⇐ <a href="#Command"><code>Command</code></a></h2>
+
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#Command"><code>Command</code></a><br>
+<strong>Mixes</strong>: <a href="#AriaExpanded"><code>AriaExpanded</code></a>, <a href="#AriaPressed"><code>AriaPressed</code></a></p>
+<ul>
+<li><a href="#Button">Button</a> ⇐ <a href="#Command"><code>Command</code></a>
+<ul>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="buttonlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">button.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Button"><code>Button</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="buttondescribedby-codeaccessiblenodelistcodeaccessiblenodelist">button.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Button"><code>Button</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="buttoncontrols-codeaccessiblenodelistcodeaccessiblenodelist">button.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Button"><code>Button</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="buttonflowto-codeaccessiblenodelistcodeaccessiblenodelist">button.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Button"><code>Button</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="buttonowns-codeaccessiblenodelistcodeaccessiblenodelist">button.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Button"><code>Button</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="buttontabindex-codenumbercode">button.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Button"><code>Button</code></a><br>
+<a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="buttonaddlistenerlabel-callback-options">button.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Button"><code>Button</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Combobox" href=""></a></p>
+<h2 class="mume-header" id="combobox-coderoletypecoderoletype">Combobox ⇐ <a href="#Roletype"><code>Roletype</code></a></h2>
+
+<p>A combobox is a widget made up of the combination of two distinct elements:</p>
+<ol>
+<li>a single-line textbox</li>
+<li>an associated pop-up element for helping users set the value of the textbox.</li>
+</ol>
+<p>The popup may be a listbox, grid, tree, or dialog. Many implementations also include a third<br>
+optional element -- a graphical button adjacent to the textbox, indicating the availability of<br>
+the popup. Activating the button displays the popup if suggestions are available.</p>
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#Roletype"><code>Roletype</code></a></p>
+<ul>
+<li><a href="#Combobox">Combobox</a> ⇐ <a href="#Roletype"><code>Roletype</code></a>
+<ul>
+<li><a href="#new_Combobox_new">new Combobox()</a></li>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="new_Combobox_new" href=""></a></p>
+<h3 class="mume-header" id="new-combobox">new Combobox()</h3>
+
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options.combobox.input</td>
+<td><code>Element</code></td>
+<td>Defaults to first input element inside the element</td>
+</tr>
+<tr>
+<td>[options.combobox.open]</td>
+<td><code>Element</code></td>
+<td>Optional button to open the pop-up element,  	defaults to first button element inside the element</td>
+</tr>
+</tbody>
+</table>
+<p><a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="comboboxlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">combobox.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Combobox"><code>Combobox</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="comboboxdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">combobox.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Combobox"><code>Combobox</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="comboboxcontrols-codeaccessiblenodelistcodeaccessiblenodelist">combobox.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Combobox"><code>Combobox</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="comboboxflowto-codeaccessiblenodelistcodeaccessiblenodelist">combobox.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Combobox"><code>Combobox</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="comboboxowns-codeaccessiblenodelistcodeaccessiblenodelist">combobox.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Combobox"><code>Combobox</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="comboboxtabindex-codenumbercode">combobox.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Combobox"><code>Combobox</code></a><br>
+<a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="comboboxaddlistenerlabel-callback-options">combobox.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Combobox"><code>Combobox</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Dialog" href=""></a></p>
+<h2 class="mume-header" id="dialog">Dialog</h2>
+
+<p><strong>Kind</strong>: global class<br>
+<strong>Summary</strong>: A child window within a webpage<br>
+<a name="new_Dialog_new" href=""></a></p>
+<h3 class="mume-header" id="new-dialog">new Dialog()</h3>
+
+<ul>
+<li>Prompts the user to perform a specific action</li>
+<li>If it is designed to interrup, it is usually a modal. See <a href="">alertdialog</a></li>
+<li>It should have a label, it can be done with the <code>aria-label</code> attribute</li>
+<li>It should have at least one focusable descendant element.</li>
+<li>It should focus an element in the modal when displayed.</li>
+<li>It should manage focus of modal dialogs (keep the focus inside the open modal).</li>
+</ul>
+<h5 class="mume-header" id="example-1">example</h5>
+
+<div role="dialog" aria-label="Window to confirm your acceptance of this world">
+ Hello world!
+	<button focus="" type="button">Ok</button>
+</div>
+<p><a name="Link" href=""></a></p>
+<h2 class="mume-header" id="link-codecommandcodecommand">Link ⇐ <a href="#Command"><code>Command</code></a></h2>
+
+<p>An interactive reference to an internal or external resource that,<br>
+when activated, causes the user agent to navigate to that resource.</p>
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#Command"><code>Command</code></a><br>
+<strong>Mixes</strong>: <a href="#AriaExpanded"><code>AriaExpanded</code></a></p>
+<ul>
+<li><a href="#Link">Link</a> ⇐ <a href="#Command"><code>Command</code></a>
+<ul>
+<li><a href="#new_Link_new">new Link()</a></li>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Link+onExpanded">.onExpanded(ev)</a></li>
+<li><a href="#Link+onClick">.onClick(ev)</a></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+<li><a href="#Link+event_accessibleclick">&quot;accessibleclick&quot;</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="new_Link_new" href=""></a></p>
+<h3 class="mume-header" id="new-link">new Link()</h3>
+
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options.link.href</td>
+<td><code>String</code></td>
+<td>URL that should be used</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<pre class="language-js"><span class="token operator">&lt;</span>div role<span class="token operator">=</span><span class="token string">"link"</span> data<span class="token operator">-</span>link<span class="token operator">-</span>href<span class="token operator">=</span><span class="token string">"http://www.example.com/"</span> tabindex<span class="token operator">=</span><span class="token string">"0"</span><span class="token operator">></span>
+	Open website
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+</pre>
+<p><a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="linklabelledby-codeaccessiblenodelistcodeaccessiblenodelist">link.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Link"><code>Link</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="linkdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">link.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Link"><code>Link</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="linkcontrols-codeaccessiblenodelistcodeaccessiblenodelist">link.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Link"><code>Link</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="linkflowto-codeaccessiblenodelistcodeaccessiblenodelist">link.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Link"><code>Link</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="linkowns-codeaccessiblenodelistcodeaccessiblenodelist">link.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Link"><code>Link</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="linktabindex-codenumbercode">link.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Link"><code>Link</code></a><br>
+<a name="Link+onExpanded" href=""></a></p>
+<h3 class="mume-header" id="linkonexpandedev">link.onExpanded(ev)</h3>
+
+<p>Fired when state of expanded is changed</p>
+<p><strong>Kind</strong>: instance method of <a href="#Link"><code>Link</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ev</td>
+<td><code>Event</code></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Link+onClick" href=""></a></p>
+<h3 class="mume-header" id="linkonclickev">link.onClick(ev)</h3>
+
+<p>Open the url that is defined in the options,<br>
+fires an click event only if its origin wasn't an click event</p>
+<p><strong>Kind</strong>: instance method of <a href="#Link"><code>Link</code></a><br>
+<strong>Emits</strong>: <code>link#event:accessibleclick</code>, <code>event:click</code></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ev</td>
+<td><code>Event</code></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="linkaddlistenerlabel-callback-options">link.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Link"><code>Link</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Link+event_accessibleclick" href=""></a></p>
+<h3 class="mume-header" id="accessibleclick">&quot;accessibleclick&quot;</h3>
+
+<p>An click triggered by an keyboard or mouse</p>
+<p><strong>Kind</strong>: event emitted by <a href="#Link"><code>Link</code></a><br>
+<a name="Listbox" href=""></a></p>
+<h2 class="mume-header" id="listbox-coderoletypecoderoletype">Listbox ⇐ <a href="#Roletype"><code>Roletype</code></a></h2>
+
+<h3 class="mume-header" id="keyboard-support-1">Keyboard Support</h3>
+
+<h4 class="mume-header" id="default-1">Default</h4>
+
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Down Arrow</td>
+<td>Moves focus to the next option <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+<tr>
+<td>Up Arrow</td>
+<td>Moves focus to the previous option  <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+<tr>
+<td>Home</td>
+<td>Moves focus to the first option  <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+<tr>
+<td>End</td>
+<td>Moves focus to the last option  <br> If not multiselectable, it selects the focused option.</td>
+</tr>
+</tbody>
+</table>
+<h4 class="mume-header" id="multiple-selection-2">Multiple selection</h4>
+
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Space</td>
+<td>Changes the selection state of the focused option.</td>
+</tr>
+<tr>
+<td>Shift + Down Arrow</td>
+<td>Moves focus to and selects the next option.</td>
+</tr>
+<tr>
+<td>Shift + Up Arrow</td>
+<td>Moves focus to and selects the previous option.</td>
+</tr>
+<tr>
+<td>Control + Shift + Home</td>
+<td>Selects from the focused option to the beginning of the list.</td>
+</tr>
+<tr>
+<td>Control + Shift + End</td>
+<td>Selects from the focused option to the end of the list.</td>
+</tr>
+<tr>
+<td>Control + A</td>
+<td>Selects all options in the list. If all options are selected, unselects all options.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#Roletype"><code>Roletype</code></a><br>
+<strong>Emits</strong>: <code>Listbox#event:change</code>, <code>Listbox#event:input</code></p>
+<ul>
+<li><a href="#Listbox">Listbox</a> ⇐ <a href="#Roletype"><code>Roletype</code></a>
+<ul>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="listboxlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">listbox.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Listbox"><code>Listbox</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="listboxdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">listbox.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Listbox"><code>Listbox</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="listboxcontrols-codeaccessiblenodelistcodeaccessiblenodelist">listbox.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Listbox"><code>Listbox</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="listboxflowto-codeaccessiblenodelistcodeaccessiblenodelist">listbox.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Listbox"><code>Listbox</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="listboxowns-codeaccessiblenodelistcodeaccessiblenodelist">listbox.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Listbox"><code>Listbox</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="listboxtabindex-codenumbercode">listbox.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Listbox"><code>Listbox</code></a><br>
+<a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="listboxaddlistenerlabel-callback-options">listbox.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Listbox"><code>Listbox</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Option" href=""></a></p>
+<h2 class="mume-header" id="option-coderoletypecoderoletype">Option ⇐ <a href="#Roletype"><code>Roletype</code></a></h2>
+
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#Roletype"><code>Roletype</code></a></p>
+<ul>
+<li><a href="#Option">Option</a> ⇐ <a href="#Roletype"><code>Roletype</code></a>
+<ul>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="optionlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">option.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Option"><code>Option</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="optiondescribedby-codeaccessiblenodelistcodeaccessiblenodelist">option.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Option"><code>Option</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="optioncontrols-codeaccessiblenodelistcodeaccessiblenodelist">option.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Option"><code>Option</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="optionflowto-codeaccessiblenodelistcodeaccessiblenodelist">option.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Option"><code>Option</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="optionowns-codeaccessiblenodelistcodeaccessiblenodelist">option.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Option"><code>Option</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="optiontabindex-codenumbercode">option.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Option"><code>Option</code></a><br>
+<a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="optionaddlistenerlabel-callback-options">option.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Option"><code>Option</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Radio" href=""></a></p>
+<h2 class="mume-header" id="radio-codecommandcodecommand">Radio ⇐ <a href="#Command"><code>Command</code></a></h2>
+
+<p>A checkable input in a group of elements with the same role,<br>
+only one of which can be checked at a time.</p>
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#Command"><code>Command</code></a><br>
+<strong>Mixes</strong>: <a href="#AriaChecked"><code>AriaChecked</code></a></p>
+<ul>
+<li><a href="#Radio">Radio</a> ⇐ <a href="#Command"><code>Command</code></a>
+<ul>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="radiolabelledby-codeaccessiblenodelistcodeaccessiblenodelist">radio.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Radio"><code>Radio</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="radiodescribedby-codeaccessiblenodelistcodeaccessiblenodelist">radio.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Radio"><code>Radio</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="radiocontrols-codeaccessiblenodelistcodeaccessiblenodelist">radio.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Radio"><code>Radio</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="radioflowto-codeaccessiblenodelistcodeaccessiblenodelist">radio.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Radio"><code>Radio</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="radioowns-codeaccessiblenodelistcodeaccessiblenodelist">radio.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Radio"><code>Radio</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="radiotabindex-codenumbercode">radio.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Radio"><code>Radio</code></a><br>
+<a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="radioaddlistenerlabel-callback-options">radio.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Radio"><code>Radio</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Range" href=""></a></p>
+<h2 class="mume-header" id="range-coderoletypecoderoletype">Range ⇐ <a href="#Roletype"><code>Roletype</code></a></h2>
+
+<p><strong>(Abstract role) SHOULD NOT USED IN THE DOM</strong><br>
+An input representing a range of values that can be set by the user.</p>
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#Roletype"><code>Roletype</code></a><br>
+<strong>See</strong>: <a href="https://w3c.github.io/aria/aria/aria.html#range">https://w3c.github.io/aria/aria/aria.html#range</a></p>
+<ul>
+<li><a href="#Range">Range</a> ⇐ <a href="#Roletype"><code>Roletype</code></a>
+<ul>
+<li><a href="#new_Range_new">new Range(element, [options])</a></li>
+<li><a href="#Range+_">._</a> : <code>Object</code></li>
+<li><a href="#Range+value">.value</a> : <code>String</code></li>
+<li><a href="#Range+valueAsNumber">.valueAsNumber</a> : <code>Number</code></li>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Range+stepDown">.stepDown(ev)</a></li>
+<li><a href="#Range+stepUp">.stepUp(ev)</a></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="new_Range_new" href=""></a></p>
+<h3 class="mume-header" id="new-rangeelement-options">new Range(element, [options])</h3>
+
+<p><strong>Returns</strong>: <a href="#Range"><code>Range</code></a> - this</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>element</td>
+<td><code>HTMLElement</code></td>
+<td>element to derive information nameFrom</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>optional options</td>
+</tr>
+<tr>
+<td>options.step</td>
+<td><code>Number</code> | <code>&quot;any&quot;</code></td>
+<td>increase/decrease value used</td>
+</tr>
+</tbody>
+</table>
+<p><a name="Range+_" href=""></a></p>
+<h3 class="mume-header" id="range_-codeobjectcode">range._ : <code>Object</code></h3>
+
+<p><strong>Kind</strong>: instance property of <a href="#Range"><code>Range</code></a><br>
+<strong>Properties</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>step</td>
+<td><code>Number</code></td>
+<td><code>1</code></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Range+value" href=""></a></p>
+<h3 class="mume-header" id="rangevalue-codestringcode">range.value : <code>String</code></h3>
+
+<p>Passtrough of an stringified <code>valueNow</code></p>
+<p><strong>Kind</strong>: instance property of <a href="#Range"><code>Range</code></a><br>
+<strong>See</strong>: <a href="AccessibleNode#valueNow">AccessibleNode#valueNow</a><br>
+<a name="Range+valueAsNumber" href=""></a></p>
+<h3 class="mume-header" id="rangevalueasnumber-codenumbercode">range.valueAsNumber : <code>Number</code></h3>
+
+<p>Proxy of the <code>valueNow</code> value</p>
+<p><strong>Kind</strong>: instance property of <a href="#Range"><code>Range</code></a><br>
+<strong>See</strong>: <a href="AccessibleNode#valueNow">AccessibleNode#valueNow</a><br>
+<a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="rangelabelledby-codeaccessiblenodelistcodeaccessiblenodelist">range.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Range"><code>Range</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="rangedescribedby-codeaccessiblenodelistcodeaccessiblenodelist">range.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Range"><code>Range</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="rangecontrols-codeaccessiblenodelistcodeaccessiblenodelist">range.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Range"><code>Range</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="rangeflowto-codeaccessiblenodelistcodeaccessiblenodelist">range.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Range"><code>Range</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="rangeowns-codeaccessiblenodelistcodeaccessiblenodelist">range.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Range"><code>Range</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="rangetabindex-codenumbercode">range.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Range"><code>Range</code></a><br>
+<a name="Range+stepDown" href=""></a></p>
+<h3 class="mume-header" id="rangestepdownev">range.stepDown(ev)</h3>
+
+<p>Decrease the value with the amount of 1 step</p>
+<p><strong>Kind</strong>: instance method of <a href="#Range"><code>Range</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ev</td>
+<td><code>Event</code></td>
+<td>Event when triggered through an elements</td>
+</tr>
+</tbody>
+</table>
+<p><a name="Range+stepUp" href=""></a></p>
+<h3 class="mume-header" id="rangestepupev">range.stepUp(ev)</h3>
+
+<p>Increase the value with the amount of 1 step</p>
+<p><strong>Kind</strong>: instance method of <a href="#Range"><code>Range</code></a><br>
+<strong>Package</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ev</td>
+<td><code>Event</code></td>
+<td>Event when triggered through an elements</td>
+</tr>
+</tbody>
+</table>
+<p><a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="rangeaddlistenerlabel-callback-options">range.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Range"><code>Range</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Roletype" href=""></a></p>
+<h2 class="mume-header" id="roletype-codeaccessiblenodecodeaccessiblenode">Roletype ⇐ <a href="#AccessibleNode"><code>AccessibleNode</code></a></h2>
+
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#AccessibleNode"><code>AccessibleNode</code></a></p>
+<ul>
+<li><a href="#Roletype">Roletype</a> ⇐ <a href="#AccessibleNode"><code>AccessibleNode</code></a>
+<ul>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="roletypelabelledby-codeaccessiblenodelistcodeaccessiblenodelist">roletype.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Roletype"><code>Roletype</code></a><br>
+<strong>Overrides</strong>: <a href="#AccessibleNode+labelledBy"><code>labelledBy</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="roletypedescribedby-codeaccessiblenodelistcodeaccessiblenodelist">roletype.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Roletype"><code>Roletype</code></a><br>
+<strong>Overrides</strong>: <a href="#AccessibleNode+describedBy"><code>describedBy</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="roletypecontrols-codeaccessiblenodelistcodeaccessiblenodelist">roletype.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Roletype"><code>Roletype</code></a><br>
+<strong>Overrides</strong>: <a href="#AccessibleNode+controls"><code>controls</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="roletypeflowto-codeaccessiblenodelistcodeaccessiblenodelist">roletype.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Roletype"><code>Roletype</code></a><br>
+<strong>Overrides</strong>: <a href="#AccessibleNode+flowTo"><code>flowTo</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="roletypeowns-codeaccessiblenodelistcodeaccessiblenodelist">roletype.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Roletype"><code>Roletype</code></a><br>
+<strong>Overrides</strong>: <a href="#AccessibleNode+owns"><code>owns</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="roletypetabindex-codenumbercode">roletype.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Roletype"><code>Roletype</code></a><br>
+<strong>Overrides</strong>: <a href="#Base+tabIndex"><code>tabIndex</code></a><br>
+<a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="roletypeaddlistenerlabel-callback-options">roletype.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Roletype"><code>Roletype</code></a><br>
+<strong>Overrides</strong>: <a href="#Base+addListener"><code>addListener</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Slider" href=""></a></p>
+<h2 class="mume-header" id="slider-coderangecoderange">Slider ⇐ <a href="#Range"><code>Range</code></a></h2>
+
+<p><code>slider</code> elements let the user specify a numeric value which must be no less<br>
+than a given value, and no more than another given value. The precise value,<br>
+however, is not considered important. This is typically represented using a<br>
+slider or dial control rather than a text entry box like the &quot;number&quot; input<br>
+type. Because this kind of widget is imprecise, it shouldn't typically be<br>
+used unless the control's exact value isn't important.</p>
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#Range"><code>Range</code></a><br>
+<strong>Emits</strong>: <code>event:changed</code>, <code>event:input</code><br>
+<strong>Todo</strong></p>
+<ul>
+<li><input type="checkbox" class="task-list-item-checkbox"> add support for &quot;any&quot;</li>
+<li><input type="checkbox" class="task-list-item-checkbox"> add events</li>
+</ul>
+<ul>
+<li><a href="#Slider">Slider</a> ⇐ <a href="#Range"><code>Range</code></a>
+<ul>
+<li><a href="#new_Slider_new">new Slider(element, [options])</a></li>
+<li><a href="#Slider+valueMin">.valueMin</a></li>
+<li><a href="#Range+_">._</a> : <code>Object</code></li>
+<li><a href="#Range+value">.value</a> : <code>String</code></li>
+<li><a href="#Range+valueAsNumber">.valueAsNumber</a> : <code>Number</code></li>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Range+stepDown">.stepDown(ev)</a></li>
+<li><a href="#Range+stepUp">.stepUp(ev)</a></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="new_Slider_new" href=""></a></p>
+<h3 class="mume-header" id="new-sliderelement-options">new Slider(element, [options])</h3>
+
+<p><strong>Returns</strong>: <a href="#Slider"><code>Slider</code></a> - thisArg</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>element</td>
+<td><code>HTMLElement</code></td>
+<td>element to derive information nameFrom</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>optional options</td>
+</tr>
+<tr>
+<td>[options.slider.track]</td>
+<td><code>HTMLElement</code></td>
+<td>The element that resembles the track, defaults to the elements parent</td>
+</tr>
+<tr>
+<td>[options.step]</td>
+<td><code>Number</code> | <code>&quot;any&quot;</code></td>
+<td>increase/decrease amount</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<pre class="language-js"><span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"track"</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>button type<span class="token operator">=</span><span class="token string">"button"</span> role<span class="token operator">=</span><span class="token string">"slider"</span> aria<span class="token operator">-</span>label<span class="token operator">=</span><span class="token string">"slider"</span> <span class="token operator">/</span><span class="token operator">></span><span class="token operator">&lt;</span>button<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+</pre>
+<p><a name="Slider+valueMin" href=""></a></p>
+<h3 class="mume-header" id="slidervaluemin">slider.valueMin</h3>
+
+<p><strong>Kind</strong>: instance property of <a href="#Slider"><code>Slider</code></a><br>
+<strong>Default</strong>: <code>[0]</code><br>
+<a name="Range+_" href=""></a></p>
+<h3 class="mume-header" id="slider_-codeobjectcode">slider._ : <code>Object</code></h3>
+
+<p><strong>Kind</strong>: instance property of <a href="#Slider"><code>Slider</code></a><br>
+<strong>Properties</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>step</td>
+<td><code>Number</code></td>
+<td><code>1</code></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Range+value" href=""></a></p>
+<h3 class="mume-header" id="slidervalue-codestringcode">slider.value : <code>String</code></h3>
+
+<p>Passtrough of an stringified <code>valueNow</code></p>
+<p><strong>Kind</strong>: instance property of <a href="#Slider"><code>Slider</code></a><br>
+<strong>See</strong>: <a href="AccessibleNode#valueNow">AccessibleNode#valueNow</a><br>
+<a name="Range+valueAsNumber" href=""></a></p>
+<h3 class="mume-header" id="slidervalueasnumber-codenumbercode">slider.valueAsNumber : <code>Number</code></h3>
+
+<p>Proxy of the <code>valueNow</code> value</p>
+<p><strong>Kind</strong>: instance property of <a href="#Slider"><code>Slider</code></a><br>
+<strong>See</strong>: <a href="AccessibleNode#valueNow">AccessibleNode#valueNow</a><br>
+<a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="sliderlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">slider.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Slider"><code>Slider</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="sliderdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">slider.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Slider"><code>Slider</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="slidercontrols-codeaccessiblenodelistcodeaccessiblenodelist">slider.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Slider"><code>Slider</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="sliderflowto-codeaccessiblenodelistcodeaccessiblenodelist">slider.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Slider"><code>Slider</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="sliderowns-codeaccessiblenodelistcodeaccessiblenodelist">slider.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Slider"><code>Slider</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="slidertabindex-codenumbercode">slider.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Slider"><code>Slider</code></a><br>
+<a name="Range+stepDown" href=""></a></p>
+<h3 class="mume-header" id="sliderstepdownev">slider.stepDown(ev)</h3>
+
+<p>Decrease the value with the amount of 1 step</p>
+<p><strong>Kind</strong>: instance method of <a href="#Slider"><code>Slider</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ev</td>
+<td><code>Event</code></td>
+<td>Event when triggered through an elements</td>
+</tr>
+</tbody>
+</table>
+<p><a name="Range+stepUp" href=""></a></p>
+<h3 class="mume-header" id="sliderstepupev">slider.stepUp(ev)</h3>
+
+<p>Increase the value with the amount of 1 step</p>
+<p><strong>Kind</strong>: instance method of <a href="#Slider"><code>Slider</code></a><br>
+<strong>Package</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ev</td>
+<td><code>Event</code></td>
+<td>Event when triggered through an elements</td>
+</tr>
+</tbody>
+</table>
+<p><a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="slideraddlistenerlabel-callback-options">slider.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Slider"><code>Slider</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Spinbutton" href=""></a></p>
+<h2 class="mume-header" id="spinbutton-coderangecoderange">Spinbutton ⇐ <a href="#Range"><code>Range</code></a></h2>
+
+<p>A input field with 2 button to increase or decrease the numberical value</p>
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#Range"><code>Range</code></a><br>
+<strong>See</strong>: <a href="https://html.spec.whatwg.org/multipage/input.html#number-state-(type=number)">https://html.spec.whatwg.org/multipage/input.html#number-state-(type=number)</a></p>
+<ul>
+<li><a href="#Spinbutton">Spinbutton</a> ⇐ <a href="#Range"><code>Range</code></a>
+<ul>
+<li><a href="#Spinbutton+_">._</a> : <code>Object</code></li>
+<li><a href="#Spinbutton+valueNow">.valueNow</a> : <code>Number</code></li>
+<li><a href="#Range+value">.value</a> : <code>String</code></li>
+<li><a href="#Range+valueAsNumber">.valueAsNumber</a> : <code>Number</code></li>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Range+stepDown">.stepDown(ev)</a></li>
+<li><a href="#Range+stepUp">.stepUp(ev)</a></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="Spinbutton+_" href=""></a></p>
+<h3 class="mume-header" id="spinbutton_-codeobjectcode">spinbutton._ : <code>Object</code></h3>
+
+<p><strong>Kind</strong>: instance property of <a href="#Spinbutton"><code>Spinbutton</code></a><br>
+<strong>Overrides</strong>: <a href="#Range+_"><code>_</code></a><br>
+<strong>Properties</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>spinbutton.up</td>
+<td><code>HTMLElement</code></td>
+</tr>
+<tr>
+<td>spinbutton.down</td>
+<td><code>HTMLElement</code></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Spinbutton+valueNow" href=""></a></p>
+<h3 class="mume-header" id="spinbuttonvaluenow-codenumbercode">spinbutton.valueNow : <code>Number</code></h3>
+
+<p><strong>Kind</strong>: instance property of <a href="#Spinbutton"><code>Spinbutton</code></a><br>
+<strong>Default</strong>: <code>[0]</code><br>
+<a name="Range+value" href=""></a></p>
+<h3 class="mume-header" id="spinbuttonvalue-codestringcode">spinbutton.value : <code>String</code></h3>
+
+<p>Passtrough of an stringified <code>valueNow</code></p>
+<p><strong>Kind</strong>: instance property of <a href="#Spinbutton"><code>Spinbutton</code></a><br>
+<strong>See</strong>: <a href="AccessibleNode#valueNow">AccessibleNode#valueNow</a><br>
+<a name="Range+valueAsNumber" href=""></a></p>
+<h3 class="mume-header" id="spinbuttonvalueasnumber-codenumbercode">spinbutton.valueAsNumber : <code>Number</code></h3>
+
+<p>Proxy of the <code>valueNow</code> value</p>
+<p><strong>Kind</strong>: instance property of <a href="#Spinbutton"><code>Spinbutton</code></a><br>
+<strong>See</strong>: <a href="AccessibleNode#valueNow">AccessibleNode#valueNow</a><br>
+<a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="spinbuttonlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">spinbutton.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Spinbutton"><code>Spinbutton</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="spinbuttondescribedby-codeaccessiblenodelistcodeaccessiblenodelist">spinbutton.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Spinbutton"><code>Spinbutton</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="spinbuttoncontrols-codeaccessiblenodelistcodeaccessiblenodelist">spinbutton.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Spinbutton"><code>Spinbutton</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="spinbuttonflowto-codeaccessiblenodelistcodeaccessiblenodelist">spinbutton.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#Spinbutton"><code>Spinbutton</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="spinbuttonowns-codeaccessiblenodelistcodeaccessiblenodelist">spinbutton.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#Spinbutton"><code>Spinbutton</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="spinbuttontabindex-codenumbercode">spinbutton.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#Spinbutton"><code>Spinbutton</code></a><br>
+<a name="Range+stepDown" href=""></a></p>
+<h3 class="mume-header" id="spinbuttonstepdownev">spinbutton.stepDown(ev)</h3>
+
+<p>Decrease the value with the amount of 1 step</p>
+<p><strong>Kind</strong>: instance method of <a href="#Spinbutton"><code>Spinbutton</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ev</td>
+<td><code>Event</code></td>
+<td>Event when triggered through an elements</td>
+</tr>
+</tbody>
+</table>
+<p><a name="Range+stepUp" href=""></a></p>
+<h3 class="mume-header" id="spinbuttonstepupev">spinbutton.stepUp(ev)</h3>
+
+<p>Increase the value with the amount of 1 step</p>
+<p><strong>Kind</strong>: instance method of <a href="#Spinbutton"><code>Spinbutton</code></a><br>
+<strong>Package</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ev</td>
+<td><code>Event</code></td>
+<td>Event when triggered through an elements</td>
+</tr>
+</tbody>
+</table>
+<p><a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="spinbuttonaddlistenerlabel-callback-options">spinbutton.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#Spinbutton"><code>Spinbutton</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="Textbox" href=""></a></p>
+<h2 class="mume-header" id="textbox">Textbox</h2>
+
+<p><strong>Kind</strong>: global class<br>
+<strong>Todo</strong></p>
+<ul>
+<li><input type="checkbox" class="task-list-item-checkbox"> Add options to keep or remove pasted styling</li>
+</ul>
+<p><a name="AccessibleNode" href=""></a></p>
+<h2 class="mume-header" id="accessiblenode-codebasecodebase">AccessibleNode ⇐ <a href="#Base"><code>Base</code></a></h2>
+
+<p>Based on the AOM spec</p>
+<p><strong>Kind</strong>: global class<br>
+<strong>Extends</strong>: <a href="#Base"><code>Base</code></a></p>
+<ul>
+<li><a href="#AccessibleNode">AccessibleNode</a> ⇐ <a href="#Base"><code>Base</code></a>
+<ul>
+<li><a href="#AccessibleNode+labelledBy">.labelledBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+describedBy">.describedBy</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+controls">.controls</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+flowTo">.flowTo</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#AccessibleNode+owns">.owns</a> : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></li>
+<li><a href="#Base+tabIndex">.tabIndex</a> : <code>Number</code></li>
+<li><a href="#Base+addListener">.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="AccessibleNode+labelledBy" href=""></a></p>
+<h3 class="mume-header" id="accessiblenodelabelledby-codeaccessiblenodelistcodeaccessiblenodelist">accessibleNode.labelledBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that labels the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#AccessibleNode"><code>AccessibleNode</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+describedBy">describedBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby">https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby</a></li>
+</ul>
+<p><a name="AccessibleNode+describedBy" href=""></a></p>
+<h3 class="mume-header" id="accessiblenodedescribedby-codeaccessiblenodelistcodeaccessiblenodelist">accessibleNode.describedBy : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances that describes the current element</p>
+<p><strong>Kind</strong>: instance property of <a href="#AccessibleNode"><code>AccessibleNode</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#labeledBy">AccessibleNode#labeledBy</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-describedby">https://www.w3.org/TR/wai-aria-1.1/#aria-describedby</a></li>
+</ul>
+<p><a name="AccessibleNode+controls" href=""></a></p>
+<h3 class="mume-header" id="accessiblenodecontrols-codeaccessiblenodelistcodeaccessiblenodelist">accessibleNode.controls : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Returns an list with AccessibleNode instances whose contents or presence are controlled by<br>
+the current element.</p>
+<p><strong>Kind</strong>: instance property of <a href="#AccessibleNode"><code>AccessibleNode</code></a><br>
+<strong>See</strong></p>
+<ul>
+<li><a href="#AccessibleNode+owns">owns</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-controls">https://www.w3.org/TR/wai-aria-1.1/#aria-controls</a></li>
+</ul>
+<p><a name="AccessibleNode+flowTo" href=""></a></p>
+<h3 class="mume-header" id="accessiblenodeflowto-codeaccessiblenodelistcodeaccessiblenodelist">accessibleNode.flowTo : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains the next element(s) in an alternate reading order of content which, at the user's<br>
+discretion, allows assistive technology to override the general default of reading in<br>
+document source order.</p>
+<p><strong>Kind</strong>: instance property of <a href="#AccessibleNode"><code>AccessibleNode</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-flowto">https://www.w3.org/TR/wai-aria-1.1/#aria-flowto</a><br>
+<a name="AccessibleNode+owns" href=""></a></p>
+<h3 class="mume-header" id="accessiblenodeowns-codeaccessiblenodelistcodeaccessiblenodelist">accessibleNode.owns : <a href="#AccessibleNodeList"><code>AccessibleNodeList</code></a></h3>
+
+<p>Contains children who's ID are referenced inside the <code>aria-owns</code> attribute</p>
+<p><strong>Kind</strong>: instance property of <a href="#AccessibleNode"><code>AccessibleNode</code></a><br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-owns">https://www.w3.org/TR/wai-aria-1.1/#aria-owns</a><br>
+<a name="Base+tabIndex" href=""></a></p>
+<h3 class="mume-header" id="accessiblenodetabindex-codenumbercode">accessibleNode.tabIndex : <code>Number</code></h3>
+
+<p>Current tabindex of the element</p>
+<p><strong>Kind</strong>: instance property of <a href="#AccessibleNode"><code>AccessibleNode</code></a><br>
+<a name="Base+addListener" href=""></a></p>
+<h3 class="mume-header" id="accessiblenodeaddlistenerlabel-callback-options">accessibleNode.addListener(label, callback, [options])</h3>
+
+<p>Adds an listener to the object and targeted element</p>
+<p><strong>Kind</strong>: instance method of <a href="#AccessibleNode"><code>AccessibleNode</code></a><br>
+<strong>See</strong>: customEvents</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>String</code></td>
+<td>Type of event</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><code>function</code></td>
+<td>Callback function</td>
+</tr>
+<tr>
+<td>[options]</td>
+<td><code>Object</code></td>
+<td>Extends AddEventListenerOptions</td>
+</tr>
+<tr>
+<td>[options.key]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>key</code> it specifies the keycombo to listen to</td>
+</tr>
+<tr>
+<td>[options.attribute]</td>
+<td><code>String</code></td>
+<td>When label is set to <code>attributes</code> it specifies which attribute should be changed</td>
+</tr>
+<tr>
+<td>[options.target]</td>
+<td><code>Element</code></td>
+<td>Changes the targeted element</td>
+</tr>
+<tr>
+<td>[options.capture]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.passive]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+<tr>
+<td>[options.once]</td>
+<td><code>Boolean</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a name="role" href=""></a></p>
+<h2 class="mume-header" id="role-codestringcode">role : <code>String</code></h2>
+
+<p>Defines a type it represents, e.g. <code>tab</code></p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#roles">https://www.w3.org/TR/wai-aria-1.1/#roles</a><br>
+<a name="roleDescription" href=""></a></p>
+<h2 class="mume-header" id="roledescription-codestringcode">roleDescription : <code>String</code></h2>
+
+<p>Defines a human-readable, author-localized description for the role</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-roledescription">https://www.w3.org/TR/wai-aria-1.1/#aria-roledescription</a><br>
+<a name="label" href=""></a></p>
+<h2 class="mume-header" id="label-codestringcode">label : <code>String</code></h2>
+
+<p>Defines a string value that labels the current element.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-label">https://www.w3.org/TR/wai-aria-1.1/#aria-label</a><br>
+<a name="current" href=""></a></p>
+<h2 class="mume-header" id="current-codebooleancode-codestringcode">current : <code>Boolean</code> | <code>String</code></h2>
+
+<p>Indicates the element that represents the current item within a container or set of related elements.</p>
+<p>Possible strings are:</p>
+<ul>
+<li><code>page</code>, used to indicate a link within a set of pagination links,<br>
+where the link is visually styled to represent the currently-displayed page.</li>
+<li><code>step</code>, used to indicate a link within a step indicator for a step-based process,<br>
+where the link is visually styled to represent the current step.</li>
+<li><code>location</code>, used to indicate the image that is visually highlighted as the current component of a flow chart.</li>
+<li><code>date</code>, used to indicate the current date within a calendar.</li>
+<li><code>time</code>, used to indicate the current time within a timetable.</li>
+</ul>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-current">https://www.w3.org/TR/wai-aria-1.1/#aria-current</a><br>
+<a name="autocomplete" href=""></a></p>
+<h2 class="mume-header" id="autocomplete-codestringcode">autocomplete : <code>String</code></h2>
+
+<p>Indicates whether inputting text could trigger display of one or more predictions of the user's<br>
+intended value for an input and specifies how predictions would be presented if they are made.</p>
+<p>The behavior during input is depends on the provided value, it follows beneath table.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inline</td>
+<td>Text suggesting may be dynamically inserted after the caret.</td>
+</tr>
+<tr>
+<td>list</td>
+<td>A collection of values that could complete the provided input is displayed.</td>
+</tr>
+<tr>
+<td>both</td>
+<td>Implements <code>inline</code> and <code>list</code></td>
+</tr>
+<tr>
+<td>none</td>
+<td>No prediction is shown</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-autocomplete">https://www.w3.org/TR/wai-aria-1.1/#aria-autocomplete</a><br>
+<a name="hidden" href=""></a></p>
+<h2 class="mume-header" id="hidden-codebooleancode">hidden : <code>Boolean</code></h2>
+
+<p>Returns/sets the visibility of the element who is exposed to an accessibility API.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#disabled">AccessibleNode#disabled</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-hidden">https://www.w3.org/TR/wai-aria-1.1/#aria-hidden</a></li>
+</ul>
+<p><a name="keyShortcuts" href=""></a></p>
+<h2 class="mume-header" id="keyshortcuts-codestringcode">keyShortcuts : <code>String</code></h2>
+
+<p>Indicates keyboard shortcuts that an author has implemented to activate or<br>
+give focus to an element.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-keyshortcuts">https://www.w3.org/TR/wai-aria-1.1/#aria-keyshortcuts</a><br>
+<a name="modal" href=""></a></p>
+<h2 class="mume-header" id="modal-codebooleancode">modal : <code>Boolean</code></h2>
+
+<p>Indicates whether an element is modal when displayed.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-modal">https://www.w3.org/TR/wai-aria-1.1/#aria-modal</a><br>
+<a name="multiline" href=""></a></p>
+<h2 class="mume-header" id="multiline-codebooleancode">multiline : <code>Boolean</code></h2>
+
+<p>Indicates whether a text box accepts multiple lines of input or only a single line.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-multiline">https://www.w3.org/TR/wai-aria-1.1/#aria-multiline</a><br>
+<a name="multiselectable" href=""></a></p>
+<h2 class="mume-header" id="multiselectable-codebooleancode">multiselectable : <code>Boolean</code></h2>
+
+<p>Indicates that the user may select more than one item from the current selectable descendants.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-multiselectable">https://www.w3.org/TR/wai-aria-1.1/#aria-multiselectable</a><br>
+<a name="orientation" href=""></a></p>
+<h2 class="mume-header" id="orientation-codestringcode">orientation : <code>String</code></h2>
+
+<p>Indicates whether the element's orientation is <code>horizontal</code>, <code>vertical</code>, or <code>null</code>.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-orientation">https://www.w3.org/TR/wai-aria-1.1/#aria-orientation</a><br>
+<a name="readOnly" href=""></a></p>
+<h2 class="mume-header" id="readonly-codebooleancode">readOnly : <code>Boolean</code></h2>
+
+<p>Indicates that the user may select more than one item from the current selectable descendants.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-readonly">https://www.w3.org/TR/wai-aria-1.1/#aria-readonly</a><br>
+<a name="required" href=""></a></p>
+<h2 class="mume-header" id="required-codebooleancode">required : <code>Boolean</code></h2>
+
+<p>Indicates that user input is required on the element before a form may be submitted.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-required">https://www.w3.org/TR/wai-aria-1.1/#aria-required</a><br>
+<a name="selected" href=""></a></p>
+<h2 class="mume-header" id="selected-codebooleancode">selected : <code>Boolean</code></h2>
+
+<p>Indicates that user input is required on the element before a form may be submitted.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-selected">https://www.w3.org/TR/wai-aria-1.1/#aria-selected</a><br>
+<a name="sort" href=""></a></p>
+<h2 class="mume-header" id="sort-codebooleancode">sort : <code>Boolean</code></h2>
+
+<p>Indicates if items in a table or grid are sorted in ascending or descending order.<br>
+Possible values are <code>acending</code>, <code>descending</code>, <code>none</code>, <code>other</code> or <code>null</code>.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-sort">https://www.w3.org/TR/wai-aria-1.1/#aria-sort</a><br>
+<a name="checked" href=""></a></p>
+<h2 class="mume-header" id="checked-codedomstringcode">checked : <code>DOMString</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="expanded" href=""></a></p>
+<h2 class="mume-header" id="expanded-codebooleancode">expanded : <code>Boolean</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="disabled" href=""></a></p>
+<h2 class="mume-header" id="disabled-codebooleancode">disabled : <code>Boolean</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="invalid" href=""></a></p>
+<h2 class="mume-header" id="invalid-codedomstringcode">invalid : <code>DOMString</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="hasPopUp" href=""></a></p>
+<h2 class="mume-header" id="haspopup-codedomstringcode">hasPopUp : <code>DOMString</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="pressed" href=""></a></p>
+<h2 class="mume-header" id="pressed-codedomstringcode">pressed : <code>DOMString</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="valueText" href=""></a></p>
+<h2 class="mume-header" id="valuetext-codedoublecode">valueText : <code>Double</code></h2>
+
+<p>Defines the human readable text alternative of<br>
+<a href="#aria-valuenow">#aria-valuenow</a> for a <a href="#Range">Range</a> widget.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-valuetext">https://www.w3.org/TR/wai-aria-1.1/#aria-valuetext</a><br>
+<a name="placeholder" href=""></a></p>
+<h2 class="mume-header" id="placeholder-codedomstringcode">placeholder : <code>DOMString</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="valueNow" href=""></a></p>
+<h2 class="mume-header" id="valuenow-codedoublecode">valueNow : <code>Double</code></h2>
+
+<p>Defines the current value for a range widget.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-valuenow">https://www.w3.org/TR/wai-aria-1.1/#aria-valuenow</a><br>
+<a name="valueMin" href=""></a></p>
+<h2 class="mume-header" id="valuemin-codedoublecode">valueMin : <code>Double</code></h2>
+
+<p>Defines the minimum allowed value for a range widget.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-valuemin">https://www.w3.org/TR/wai-aria-1.1/#aria-valuemin</a><br>
+<a name="valueMax" href=""></a></p>
+<h2 class="mume-header" id="valuemax-codedoublecode">valueMax : <code>Double</code></h2>
+
+<p>Defines the maximum allowed value for a range widget.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-valuemax">https://www.w3.org/TR/wai-aria-1.1/#aria-valuemax</a><br>
+<a name="colCount" href=""></a></p>
+<h2 class="mume-header" id="colcount-codelongcode">colCount : <code>Long</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="colIndex" href=""></a></p>
+<h2 class="mume-header" id="colindex-codelongcode">colIndex : <code>Long</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="colSpan" href=""></a></p>
+<h2 class="mume-header" id="colspan-codelongcode">colSpan : <code>Long</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="posInSet" href=""></a></p>
+<h2 class="mume-header" id="posinset-codelongcode">posInSet : <code>Long</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="rowCount" href=""></a></p>
+<h2 class="mume-header" id="rowcount-codelongcode">rowCount : <code>Long</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="rowIndex" href=""></a></p>
+<h2 class="mume-header" id="rowindex-codelongcode">rowIndex : <code>Long</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="rowSpan" href=""></a></p>
+<h2 class="mume-header" id="rowspan-codelongcode">rowSpan : <code>Long</code></h2>
+
+<p><strong>Kind</strong>: global variable<br>
+<a name="setSize" href=""></a></p>
+<h2 class="mume-header" id="setsize-codelongcode">setSize : <code>Long</code></h2>
+
+<p>Defines the number of items in the current set of listitems or treeitems.<br>
+Not required if <strong>all</strong> elements in the set are present in the DOM.</p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong></p>
+<ul>
+<li><a href="AccessibleNode#posInSet">AccessibleNode#posInSet</a></li>
+<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-setsize">https://www.w3.org/TR/wai-aria-1.1/#aria-setsize</a></li>
+</ul>
+<p><a name="level" href=""></a></p>
+<h2 class="mume-header" id="level-codelongcode">level : <code>Long</code></h2>
+
+<p>Defines the hierarchical level of an element within a structure.<br>
+E.g. <code>&lt;h1&gt;&lt;h1/&gt;</code> equals <code>&lt;div role=&quot;heading&quot; aria-level=&quot;1&quot;&gt;&lt;/div&gt;</code></p>
+<p><strong>Kind</strong>: global variable<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-level">https://www.w3.org/TR/wai-aria-1.1/#aria-level</a><br>
+<a name="allowedRoles" href=""></a></p>
+<h2 class="mume-header" id="allowedroles-codeobjectcode">allowedRoles : <code>Object</code></h2>
+
+<p>Stores info which is used in functions of rolePerHTMLTag,<br>
+mostly a key as tagName with an array of allowed roles for that tag</p>
+<p><strong>Kind</strong>: global variable<br>
+<a name="rolePerHTMLTag" href=""></a></p>
+<h2 class="mume-header" id="roleperhtmltag-codeobjectcode">rolePerHTMLTag : <code>Object</code></h2>
+
+<p>Contains a function for each htmlTag where not all roles allowed</p>
+<p><strong>Kind</strong>: global variable<br>
+<a name="roles" href=""></a></p>
+<h2 class="mume-header" id="roles">roles</h2>
+
+<p><strong>Kind</strong>: global constant</p>
+<ul>
+<li><a href="#roles">roles</a>
+<ul>
+<li><a href="#roles.banner">.banner</a></li>
+<li><a href="#roles.combobox">.combobox</a></li>
+<li><a href="#roles.contentinfo">.contentinfo</a></li>
+<li><a href="#roles.none">.none</a></li>
+<li><a href="#roles.option">.option</a></li>
+<li><a href="#roles.region">.region</a></li>
+<li><a href="#roles.row">.row</a></li>
+<li><a href="#roles.separator">.separator</a></li>
+</ul>
+</li>
+</ul>
+<p><a name="roles.banner" href=""></a></p>
+<h3 class="mume-header" id="rolesbanner">roles.banner</h3>
+
+<p><strong>Kind</strong>: static property of <a href="#roles"><code>roles</code></a><br>
+<strong>Todo</strong></p>
+<ul>
+<li><input type="checkbox" class="task-list-item-checkbox"> more strict banner selector</li>
+</ul>
+<p><a name="roles.combobox" href=""></a></p>
+<h3 class="mume-header" id="rolescombobox">roles.combobox</h3>
+
+<p><strong>Kind</strong>: static property of <a href="#roles"><code>roles</code></a><br>
+<strong>Todo</strong></p>
+<ul>
+<li><input type="checkbox" class="task-list-item-checkbox"> size attribute doesn't check faulty values</li>
+</ul>
+<p><a name="roles.contentinfo" href=""></a></p>
+<h3 class="mume-header" id="rolescontentinfo">roles.contentinfo</h3>
+
+<p><strong>Kind</strong>: static property of <a href="#roles"><code>roles</code></a><br>
+<strong>Todo</strong></p>
+<ul>
+<li><input type="checkbox" class="task-list-item-checkbox"> more strict footer selector</li>
+</ul>
+<p><a name="roles.none" href=""></a></p>
+<h3 class="mume-header" id="rolesnone">roles.none</h3>
+
+<p><strong>Kind</strong>: static property of <a href="#roles"><code>roles</code></a><br>
+<strong>Todo</strong></p>
+<ul>
+<li><input type="checkbox" class="task-list-item-checkbox"> reconsider if none == presentation</li>
+</ul>
+<p><a name="roles.option" href=""></a></p>
+<h3 class="mume-header" id="rolesoption">roles.option</h3>
+
+<p><strong>Kind</strong>: static property of <a href="#roles"><code>roles</code></a><br>
+<strong>Todo</strong></p>
+<ul>
+<li><input type="checkbox" class="task-list-item-checkbox"> more strict datalist selector</li>
+</ul>
+<p><a name="roles.region" href=""></a></p>
+<h3 class="mume-header" id="rolesregion">roles.region</h3>
+
+<p><strong>Kind</strong>: static property of <a href="#roles"><code>roles</code></a><br>
+<strong>Todo</strong></p>
+<ul>
+<li><input type="checkbox" class="task-list-item-checkbox"> add section selector to check accessible</li>
+</ul>
+<p><a name="roles.row" href=""></a></p>
+<h3 class="mume-header" id="rolesrow">roles.row</h3>
+
+<p><strong>Kind</strong>: static property of <a href="#roles"><code>roles</code></a><br>
+<strong>Todo</strong></p>
+<ul>
+<li><input type="checkbox" class="task-list-item-checkbox"> more strict tr selector</li>
+</ul>
+<p><a name="roles.separator" href=""></a></p>
+<h3 class="mume-header" id="rolesseparator">roles.separator</h3>
+
+<p><strong>Kind</strong>: static property of <a href="#roles"><code>roles</code></a><br>
+<strong>Todo</strong></p>
+<ul>
+<li><input type="checkbox" class="task-list-item-checkbox"> seperation of focusable</li>
+</ul>
+<p><a name="AriaChecked" href=""></a></p>
+<h2 class="mume-header" id="ariachecked">AriaChecked()</h2>
+
+<p>Adds functionality to <code>aria-checked</code> attribute.</p>
+<p>Changes value when clicked or while focused pressing <code>Space</code>.</p>
+<p><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-checked">https://www.w3.org/TR/wai-aria-1.1/#aria-checked</a></p>
+<p><strong>Kind</strong>: global function<br>
+<strong>Emits</strong>: <code>event:click when clicked or while focused pressing `Space`.</code>, <code>event:change when clicked or while focused pressing `Space`.</code><br>
+<a name="AriaExpanded" href=""></a></p>
+<h2 class="mume-header" id="ariaexpanded">AriaExpanded()</h2>
+
+<p>Adds functionality to <code>aria-expanded</code> attribute</p>
+<p><strong>Kind</strong>: global function<br>
+<strong>Todo</strong></p>
+<ul>
+<li><input type="checkbox" class="task-list-item-checkbox"> add a setting to define how the visibility should be toggled</li>
+</ul>
+<p><a name="AriaPressed" href=""></a></p>
+<h2 class="mume-header" id="ariapressed">AriaPressed()</h2>
+
+<p>Adds functionality to <code>aria-pressed</code> attribute.</p>
+<p>Changes value when clicked or while focused pressing <code>Space</code> or <code>Enter</code>.</p>
+<p><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-pressed">https://www.w3.org/TR/wai-aria-1.1/#aria-pressed</a></p>
+<p><strong>Kind</strong>: global function<br>
+<strong>Emits</strong>: <code>event:click when clicked or while focused pressing `Space` or `Enter`.</code><br>
+<a name="AriaSelected" href=""></a></p>
+<h2 class="mume-header" id="ariaselected">AriaSelected()</h2>
+
+<p>gets and sets the <code>aria-selected</code> attribute.</p>
+<p>Indicates if a element is selectable</p>
+<p><strong>Kind</strong>: global function<br>
+<strong>See</strong>: <a href="https://www.w3.org/TR/wai-aria-1.1/#aria-selected">https://www.w3.org/TR/wai-aria-1.1/#aria-selected</a><br>
+<a name="AccessibleNodeList" href=""></a></p>
+<h2 class="mume-header" id="accessiblenodelist">AccessibleNodeList()</h2>
+
+<p><strong>Kind</strong>: global function<br>
+<a name="toggle" href=""></a></p>
+<h2 class="mume-header" id="toggle-codebooleancode">toggle() ⇒ <code>Boolean</code></h2>
+
+<p>Returns the opposite state of the attribute</p>
+<p><strong>Kind</strong>: global function<br>
+<strong>Returns</strong>: <code>Boolean</code> - New state<br>
+<a name="toggle" href=""></a></p>
+<h2 class="mume-header" id="toggle-codestringcode">toggle() ⇒ <code>String</code></h2>
+
+<p>Returns the opposite state of the attribute</p>
+<p><strong>Kind</strong>: global function<br>
+<strong>Returns</strong>: <code>String</code> - New state<br>
+<a name="getParentWithTagName" href=""></a></p>
+<h2 class="mume-header" id="getparentwithtagnameel-tagname-codehtmlelementcode">getParentWithTagName(el, tagName) ⇒ <code>HTMLElement</code></h2>
+
+<p>Finds nearest parent with a specifig tagName</p>
+<p><strong>Kind</strong>: global function<br>
+<strong>Returns</strong>: <code>HTMLElement</code> - Parent that matches one of the tagnames</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>el</td>
+<td><code>HTMLElement</code></td>
+<td>child - starting pointer</td>
+</tr>
+<tr>
+<td>tagName</td>
+<td><code>Array.&lt;String&gt;</code></td>
+<td>Array containg capatilized tagnames</td>
+</tr>
+</tbody>
+</table>
+<p><a name="hasAllowedRole" href=""></a></p>
+<h2 class="mume-header" id="hasallowedroletagname-role-codebooleancode">hasAllowedRole(tagName, role) ⇒ <code>Boolean</code></h2>
+
+<p>Checks if given role is allowed for given tag</p>
+<p><strong>Kind</strong>: global function<br>
+<strong>Returns</strong>: <code>Boolean</code> - True if allowed</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tagName</td>
+<td><code>string</code></td>
+<td>key of allowedRoles</td>
+</tr>
+<tr>
+<td>role</td>
+<td><code>string</code></td>
+<td>current role</td>
+</tr>
+</tbody>
+</table>
+<p><a name="scrollIntoView" href=""></a></p>
+<h2 class="mume-header" id="scrollintoviewchild">scrollIntoView(child)</h2>
+
+<p>Scrolls an element into its parent view</p>
+<p><strong>Kind</strong>: global function</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>child</td>
+<td><code>Element</code></td>
+<td>Element to show</td>
+</tr>
+</tbody>
+</table>
+<p><a name="start" href=""></a></p>
+<h2 class="mume-header" id="startdescendants">start(descendants)</h2>
+
+<p>Adds focus to the first element</p>
+<p><strong>Kind</strong>: global function</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>descendants</td>
+<td><code>Array</code></td>
+<td>Array of all descendants</td>
+</tr>
+</tbody>
+</table>
+<p><a name="prev" href=""></a></p>
+<h2 class="mume-header" id="prevdescendants-child">prev(descendants, child)</h2>
+
+<p>Adds focus to the prev element</p>
+<p><strong>Kind</strong>: global function</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>descendants</td>
+<td><code>Array</code></td>
+<td>Array of all descendants</td>
+</tr>
+<tr>
+<td>child</td>
+<td><code>Object</code></td>
+<td>Current focused element</td>
+</tr>
+</tbody>
+</table>
+<p><a name="next" href=""></a></p>
+<h2 class="mume-header" id="nextdescendants-child">next(descendants, child)</h2>
+
+<p>Adds focus to the next element</p>
+<p><strong>Kind</strong>: global function</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>descendants</td>
+<td><code>Array</code></td>
+<td>Array of all descendants</td>
+</tr>
+<tr>
+<td>child</td>
+<td><code>Object</code></td>
+<td>Current focused element</td>
+</tr>
+</tbody>
+</table>
+<p><a name="end" href=""></a></p>
+<h2 class="mume-header" id="enddescendants">end(descendants)</h2>
+
+<p>Adds focus to the last element</p>
+<p><strong>Kind</strong>: global function</p>
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>descendants</td>
+<td><code>Array</code></td>
+<td>Array of all descendants</td>
+</tr>
+</tbody>
+</table>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#classes">Classes</a></li>
+<li><a href="#members">Members</a></li>
+<li><a href="#constants">Constants</a></li>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#command-codewidgetcodewidget">Command ⇐ <code>Widget</code></a>
+<ul>
+<li><a href="#commandlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">command.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#commanddescribedby-codeaccessiblenodelistcodeaccessiblenodelist">command.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#commandcontrols-codeaccessiblenodelistcodeaccessiblenodelist">command.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#commandflowto-codeaccessiblenodelistcodeaccessiblenodelist">command.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#commandowns-codeaccessiblenodelistcodeaccessiblenodelist">command.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#commandtabindex-codenumbercode">command.tabIndex : Number</a></li>
+<li><a href="#commandaddlistenerlabel-callback-options">command.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#input-codewidgetcodewidget">Input ⇐ <code>Widget</code></a>
+<ul>
+<li><a href="#inputlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">input.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#inputdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">input.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#inputcontrols-codeaccessiblenodelistcodeaccessiblenodelist">input.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#inputflowto-codeaccessiblenodelistcodeaccessiblenodelist">input.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#inputowns-codeaccessiblenodelistcodeaccessiblenodelist">input.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#inputtabindex-codenumbercode">input.tabIndex : Number</a></li>
+<li><a href="#inputaddlistenerlabel-callback-options">input.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#select-coderoletypecoderoletype">Select ⇐ <code>Roletype</code></a>
+<ul>
+<li><a href="#keyboard-support">Keyboard Support</a>
+<ul>
+<li><a href="#default">Default</a></li>
+<li><a href="#multiple-selection">Multiple selection</a></li>
+</ul>
+</li>
+<li><a href="#attributes">Attributes</a>
+<ul>
+<li><a href="#multiple-selection-1">Multiple selection</a></li>
+</ul>
+</li>
+<li><a href="#selectlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">select.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#selectdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">select.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#selectcontrols-codeaccessiblenodelistcodeaccessiblenodelist">select.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#selectflowto-codeaccessiblenodelistcodeaccessiblenodelist">select.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#selectowns-codeaccessiblenodelistcodeaccessiblenodelist">select.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#selecttabindex-codenumbercode">select.tabIndex : Number</a></li>
+<li><a href="#selectaddlistenerlabel-callback-options">select.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#widget-coderoletypecoderoletype">Widget ⇐ <code>Roletype</code></a>
+<ul>
+<li><a href="#widgetlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">widget.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#widgetdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">widget.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#widgetcontrols-codeaccessiblenodelistcodeaccessiblenodelist">widget.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#widgetflowto-codeaccessiblenodelistcodeaccessiblenodelist">widget.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#widgetowns-codeaccessiblenodelistcodeaccessiblenodelist">widget.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#widgettabindex-codenumbercode">widget.tabIndex : Number</a></li>
+<li><a href="#widgetaddlistenerlabel-callback-options">widget.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#alert">Alert</a>
+<ul>
+<li><a href="#new-alert">new Alert()</a><br>
+* <a href="#example">Example</a></li>
+</ul>
+</li>
+<li><a href="#alertdialog">Alertdialog</a></li>
+<li><a href="#base">Base</a>
+<ul>
+<li><a href="#new-baseelement-options">new Base(element, options)</a></li>
+<li><a href="#basetabindex-codenumbercode">base.tabIndex : Number</a></li>
+<li><a href="#baseaddlistenerlabel-callback-options">base.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#button-codecommandcodecommand">Button ⇐ <code>Command</code></a>
+<ul>
+<li><a href="#buttonlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">button.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#buttondescribedby-codeaccessiblenodelistcodeaccessiblenodelist">button.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#buttoncontrols-codeaccessiblenodelistcodeaccessiblenodelist">button.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#buttonflowto-codeaccessiblenodelistcodeaccessiblenodelist">button.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#buttonowns-codeaccessiblenodelistcodeaccessiblenodelist">button.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#buttontabindex-codenumbercode">button.tabIndex : Number</a></li>
+<li><a href="#buttonaddlistenerlabel-callback-options">button.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#combobox-coderoletypecoderoletype">Combobox ⇐ <code>Roletype</code></a>
+<ul>
+<li><a href="#new-combobox">new Combobox()</a></li>
+<li><a href="#comboboxlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">combobox.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#comboboxdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">combobox.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#comboboxcontrols-codeaccessiblenodelistcodeaccessiblenodelist">combobox.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#comboboxflowto-codeaccessiblenodelistcodeaccessiblenodelist">combobox.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#comboboxowns-codeaccessiblenodelistcodeaccessiblenodelist">combobox.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#comboboxtabindex-codenumbercode">combobox.tabIndex : Number</a></li>
+<li><a href="#comboboxaddlistenerlabel-callback-options">combobox.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#dialog">Dialog</a>
+<ul>
+<li><a href="#new-dialog">new Dialog()</a><br>
+* <a href="#example-1">example</a></li>
+</ul>
+</li>
+<li><a href="#link-codecommandcodecommand">Link ⇐ <code>Command</code></a>
+<ul>
+<li><a href="#new-link">new Link()</a></li>
+<li><a href="#linklabelledby-codeaccessiblenodelistcodeaccessiblenodelist">link.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#linkdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">link.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#linkcontrols-codeaccessiblenodelistcodeaccessiblenodelist">link.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#linkflowto-codeaccessiblenodelistcodeaccessiblenodelist">link.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#linkowns-codeaccessiblenodelistcodeaccessiblenodelist">link.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#linktabindex-codenumbercode">link.tabIndex : Number</a></li>
+<li><a href="#linkonexpandedev">link.onExpanded(ev)</a></li>
+<li><a href="#linkonclickev">link.onClick(ev)</a></li>
+<li><a href="#linkaddlistenerlabel-callback-options">link.addListener(label, callback, [options])</a></li>
+<li><a href="#accessibleclick">&quot;accessibleclick&quot;</a></li>
+</ul>
+</li>
+<li><a href="#listbox-coderoletypecoderoletype">Listbox ⇐ <code>Roletype</code></a>
+<ul>
+<li><a href="#keyboard-support-1">Keyboard Support</a>
+<ul>
+<li><a href="#default-1">Default</a></li>
+<li><a href="#multiple-selection-2">Multiple selection</a></li>
+</ul>
+</li>
+<li><a href="#listboxlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">listbox.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#listboxdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">listbox.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#listboxcontrols-codeaccessiblenodelistcodeaccessiblenodelist">listbox.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#listboxflowto-codeaccessiblenodelistcodeaccessiblenodelist">listbox.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#listboxowns-codeaccessiblenodelistcodeaccessiblenodelist">listbox.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#listboxtabindex-codenumbercode">listbox.tabIndex : Number</a></li>
+<li><a href="#listboxaddlistenerlabel-callback-options">listbox.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#option-coderoletypecoderoletype">Option ⇐ <code>Roletype</code></a>
+<ul>
+<li><a href="#optionlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">option.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#optiondescribedby-codeaccessiblenodelistcodeaccessiblenodelist">option.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#optioncontrols-codeaccessiblenodelistcodeaccessiblenodelist">option.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#optionflowto-codeaccessiblenodelistcodeaccessiblenodelist">option.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#optionowns-codeaccessiblenodelistcodeaccessiblenodelist">option.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#optiontabindex-codenumbercode">option.tabIndex : Number</a></li>
+<li><a href="#optionaddlistenerlabel-callback-options">option.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#radio-codecommandcodecommand">Radio ⇐ <code>Command</code></a>
+<ul>
+<li><a href="#radiolabelledby-codeaccessiblenodelistcodeaccessiblenodelist">radio.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#radiodescribedby-codeaccessiblenodelistcodeaccessiblenodelist">radio.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#radiocontrols-codeaccessiblenodelistcodeaccessiblenodelist">radio.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#radioflowto-codeaccessiblenodelistcodeaccessiblenodelist">radio.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#radioowns-codeaccessiblenodelistcodeaccessiblenodelist">radio.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#radiotabindex-codenumbercode">radio.tabIndex : Number</a></li>
+<li><a href="#radioaddlistenerlabel-callback-options">radio.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#range-coderoletypecoderoletype">Range ⇐ <code>Roletype</code></a>
+<ul>
+<li><a href="#new-rangeelement-options">new Range(element, [options])</a></li>
+<li><a href="#range_-codeobjectcode">range._ : Object</a></li>
+<li><a href="#rangevalue-codestringcode">range.value : String</a></li>
+<li><a href="#rangevalueasnumber-codenumbercode">range.valueAsNumber : Number</a></li>
+<li><a href="#rangelabelledby-codeaccessiblenodelistcodeaccessiblenodelist">range.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#rangedescribedby-codeaccessiblenodelistcodeaccessiblenodelist">range.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#rangecontrols-codeaccessiblenodelistcodeaccessiblenodelist">range.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#rangeflowto-codeaccessiblenodelistcodeaccessiblenodelist">range.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#rangeowns-codeaccessiblenodelistcodeaccessiblenodelist">range.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#rangetabindex-codenumbercode">range.tabIndex : Number</a></li>
+<li><a href="#rangestepdownev">range.stepDown(ev)</a></li>
+<li><a href="#rangestepupev">range.stepUp(ev)</a></li>
+<li><a href="#rangeaddlistenerlabel-callback-options">range.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#roletype-codeaccessiblenodecodeaccessiblenode">Roletype ⇐ <code>AccessibleNode</code></a>
+<ul>
+<li><a href="#roletypelabelledby-codeaccessiblenodelistcodeaccessiblenodelist">roletype.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#roletypedescribedby-codeaccessiblenodelistcodeaccessiblenodelist">roletype.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#roletypecontrols-codeaccessiblenodelistcodeaccessiblenodelist">roletype.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#roletypeflowto-codeaccessiblenodelistcodeaccessiblenodelist">roletype.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#roletypeowns-codeaccessiblenodelistcodeaccessiblenodelist">roletype.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#roletypetabindex-codenumbercode">roletype.tabIndex : Number</a></li>
+<li><a href="#roletypeaddlistenerlabel-callback-options">roletype.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#slider-coderangecoderange">Slider ⇐ <code>Range</code></a>
+<ul>
+<li><a href="#new-sliderelement-options">new Slider(element, [options])</a></li>
+<li><a href="#slidervaluemin">slider.valueMin</a></li>
+<li><a href="#slider_-codeobjectcode">slider._ : Object</a></li>
+<li><a href="#slidervalue-codestringcode">slider.value : String</a></li>
+<li><a href="#slidervalueasnumber-codenumbercode">slider.valueAsNumber : Number</a></li>
+<li><a href="#sliderlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">slider.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#sliderdescribedby-codeaccessiblenodelistcodeaccessiblenodelist">slider.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#slidercontrols-codeaccessiblenodelistcodeaccessiblenodelist">slider.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#sliderflowto-codeaccessiblenodelistcodeaccessiblenodelist">slider.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#sliderowns-codeaccessiblenodelistcodeaccessiblenodelist">slider.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#slidertabindex-codenumbercode">slider.tabIndex : Number</a></li>
+<li><a href="#sliderstepdownev">slider.stepDown(ev)</a></li>
+<li><a href="#sliderstepupev">slider.stepUp(ev)</a></li>
+<li><a href="#slideraddlistenerlabel-callback-options">slider.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#spinbutton-coderangecoderange">Spinbutton ⇐ <code>Range</code></a>
+<ul>
+<li><a href="#spinbutton_-codeobjectcode">spinbutton._ : Object</a></li>
+<li><a href="#spinbuttonvaluenow-codenumbercode">spinbutton.valueNow : Number</a></li>
+<li><a href="#spinbuttonvalue-codestringcode">spinbutton.value : String</a></li>
+<li><a href="#spinbuttonvalueasnumber-codenumbercode">spinbutton.valueAsNumber : Number</a></li>
+<li><a href="#spinbuttonlabelledby-codeaccessiblenodelistcodeaccessiblenodelist">spinbutton.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#spinbuttondescribedby-codeaccessiblenodelistcodeaccessiblenodelist">spinbutton.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#spinbuttoncontrols-codeaccessiblenodelistcodeaccessiblenodelist">spinbutton.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#spinbuttonflowto-codeaccessiblenodelistcodeaccessiblenodelist">spinbutton.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#spinbuttonowns-codeaccessiblenodelistcodeaccessiblenodelist">spinbutton.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#spinbuttontabindex-codenumbercode">spinbutton.tabIndex : Number</a></li>
+<li><a href="#spinbuttonstepdownev">spinbutton.stepDown(ev)</a></li>
+<li><a href="#spinbuttonstepupev">spinbutton.stepUp(ev)</a></li>
+<li><a href="#spinbuttonaddlistenerlabel-callback-options">spinbutton.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#textbox">Textbox</a></li>
+<li><a href="#accessiblenode-codebasecodebase">AccessibleNode ⇐ <code>Base</code></a>
+<ul>
+<li><a href="#accessiblenodelabelledby-codeaccessiblenodelistcodeaccessiblenodelist">accessibleNode.labelledBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#accessiblenodedescribedby-codeaccessiblenodelistcodeaccessiblenodelist">accessibleNode.describedBy : <code>AccessibleNodeList</code></a></li>
+<li><a href="#accessiblenodecontrols-codeaccessiblenodelistcodeaccessiblenodelist">accessibleNode.controls : <code>AccessibleNodeList</code></a></li>
+<li><a href="#accessiblenodeflowto-codeaccessiblenodelistcodeaccessiblenodelist">accessibleNode.flowTo : <code>AccessibleNodeList</code></a></li>
+<li><a href="#accessiblenodeowns-codeaccessiblenodelistcodeaccessiblenodelist">accessibleNode.owns : <code>AccessibleNodeList</code></a></li>
+<li><a href="#accessiblenodetabindex-codenumbercode">accessibleNode.tabIndex : Number</a></li>
+<li><a href="#accessiblenodeaddlistenerlabel-callback-options">accessibleNode.addListener(label, callback, [options])</a></li>
+</ul>
+</li>
+<li><a href="#role-codestringcode">role : String</a></li>
+<li><a href="#roledescription-codestringcode">roleDescription : String</a></li>
+<li><a href="#label-codestringcode">label : String</a></li>
+<li><a href="#current-codebooleancode-codestringcode">current : Boolean | String</a></li>
+<li><a href="#autocomplete-codestringcode">autocomplete : String</a></li>
+<li><a href="#hidden-codebooleancode">hidden : Boolean</a></li>
+<li><a href="#keyshortcuts-codestringcode">keyShortcuts : String</a></li>
+<li><a href="#modal-codebooleancode">modal : Boolean</a></li>
+<li><a href="#multiline-codebooleancode">multiline : Boolean</a></li>
+<li><a href="#multiselectable-codebooleancode">multiselectable : Boolean</a></li>
+<li><a href="#orientation-codestringcode">orientation : String</a></li>
+<li><a href="#readonly-codebooleancode">readOnly : Boolean</a></li>
+<li><a href="#required-codebooleancode">required : Boolean</a></li>
+<li><a href="#selected-codebooleancode">selected : Boolean</a></li>
+<li><a href="#sort-codebooleancode">sort : Boolean</a></li>
+<li><a href="#checked-codedomstringcode">checked : DOMString</a></li>
+<li><a href="#expanded-codebooleancode">expanded : Boolean</a></li>
+<li><a href="#disabled-codebooleancode">disabled : Boolean</a></li>
+<li><a href="#invalid-codedomstringcode">invalid : DOMString</a></li>
+<li><a href="#haspopup-codedomstringcode">hasPopUp : DOMString</a></li>
+<li><a href="#pressed-codedomstringcode">pressed : DOMString</a></li>
+<li><a href="#valuetext-codedoublecode">valueText : Double</a></li>
+<li><a href="#placeholder-codedomstringcode">placeholder : DOMString</a></li>
+<li><a href="#valuenow-codedoublecode">valueNow : Double</a></li>
+<li><a href="#valuemin-codedoublecode">valueMin : Double</a></li>
+<li><a href="#valuemax-codedoublecode">valueMax : Double</a></li>
+<li><a href="#colcount-codelongcode">colCount : Long</a></li>
+<li><a href="#colindex-codelongcode">colIndex : Long</a></li>
+<li><a href="#colspan-codelongcode">colSpan : Long</a></li>
+<li><a href="#posinset-codelongcode">posInSet : Long</a></li>
+<li><a href="#rowcount-codelongcode">rowCount : Long</a></li>
+<li><a href="#rowindex-codelongcode">rowIndex : Long</a></li>
+<li><a href="#rowspan-codelongcode">rowSpan : Long</a></li>
+<li><a href="#setsize-codelongcode">setSize : Long</a></li>
+<li><a href="#level-codelongcode">level : Long</a></li>
+<li><a href="#allowedroles-codeobjectcode">allowedRoles : Object</a></li>
+<li><a href="#roleperhtmltag-codeobjectcode">rolePerHTMLTag : Object</a></li>
+<li><a href="#roles">roles</a>
+<ul>
+<li><a href="#rolesbanner">roles.banner</a></li>
+<li><a href="#rolescombobox">roles.combobox</a></li>
+<li><a href="#rolescontentinfo">roles.contentinfo</a></li>
+<li><a href="#rolesnone">roles.none</a></li>
+<li><a href="#rolesoption">roles.option</a></li>
+<li><a href="#rolesregion">roles.region</a></li>
+<li><a href="#rolesrow">roles.row</a></li>
+<li><a href="#rolesseparator">roles.separator</a></li>
+</ul>
+</li>
+<li><a href="#ariachecked">AriaChecked()</a></li>
+<li><a href="#ariaexpanded">AriaExpanded()</a></li>
+<li><a href="#ariapressed">AriaPressed()</a></li>
+<li><a href="#ariaselected">AriaSelected()</a></li>
+<li><a href="#accessiblenodelist">AccessibleNodeList()</a></li>
+<li><a href="#toggle-codebooleancode">toggle() ⇒ Boolean</a></li>
+<li><a href="#toggle-codestringcode">toggle() ⇒ String</a></li>
+<li><a href="#getparentwithtagnameel-tagname-codehtmlelementcode">getParentWithTagName(el, tagName) ⇒ HTMLElement</a></li>
+<li><a href="#hasallowedroletagname-role-codebooleancode">hasAllowedRole(tagName, role) ⇒ Boolean</a></li>
+<li><a href="#scrollintoviewchild">scrollIntoView(child)</a></li>
+<li><a href="#startdescendants">start(descendants)</a></li>
+<li><a href="#prevdescendants-child">prev(descendants, child)</a></li>
+<li><a href="#nextdescendants-child">next(descendants, child)</a></li>
+<li><a href="#enddescendants">end(descendants)</a></li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">≡</a>
+    </body>
+    
+    
+    
+    
+    
+    <script>
+(function bindTaskListEvent() {
+  var taskListItemCheckboxes = document.body.getElementsByClassName('task-list-item-checkbox')
+  for (var i = 0; i < taskListItemCheckboxes.length; i++) {
+    var checkbox = taskListItemCheckboxes[i]
+    var li = checkbox.parentElement
+    if (li.tagName !== 'LI') li = li.parentElement
+    if (li.tagName === 'LI') {
+      li.classList.add('task-list-item')
+    }
+  }
+}())    
+</script>
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  </html>

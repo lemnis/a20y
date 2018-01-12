@@ -1,0 +1,9 @@
+{
+	"presets": ["es2015"],
+	"sourceMaps":true,
+	"sourceType": "module",
+	"plugins": [
+		["babel-plugin-transform-builtin-extend", { "globals": ["Array"] }
+	]
+	]
+}

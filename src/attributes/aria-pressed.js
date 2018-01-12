@@ -1,4 +1,4 @@
-import * as state from "./../utils/State.js";
+import DOMString from "./../type/DOMString";
 
 /**
 * Adds functionality to `aria-pressed` attribute.
@@ -9,34 +9,24 @@ import * as state from "./../utils/State.js";
 * @emits click when clicked or while focused pressing `Space` or `Enter`.
 */
 let AriaPressed = (superclass) => class extends superclass {
-
 	/**
 	* @param  {HTMLElement} element Element with an `aria-pressed` attribute
 	*/
-	constructor(...args){
+	constructor(...args) {
 		super(...args);
 
-		this.element.addEventListener("click", this._onAriaPressed.bind(this));
-		this.addKeyListener("enter", this._onAriaPressed.bind(this));
-		this.addKeyListener("space", this._onAriaPressed.bind(this));
+		if(this.pressed !== undefined) { // todo: add when first time aria-pressed is boolean
+			this.addListener("click", this.onPressed.bind(this));
+			this.addListener("key", this.onPressed.bind(this), { key: ["enter", "space"]});
+		}
 	}
 
-	/**
-	 * Returns the element's `aria-pressed` attribute,
-	 * indicating the current "pressed" state of toggle buttons.
-	 *
-	 * When no value is set it will return `"false"`.
-	 * @type	{string}
-	 */
-	get pressed() {
-		return state.get(this, "aria-pressed");
-	}
-	set pressed(val) {
-		return state.set(this, "aria-pressed", val);
-	}
+	onPressed(ev) {
+		if (typeof super.onPressed == "function") super.onPressed(ev);
 
-	_onAriaPressed() {
-		this.pressed = state.toggle(this.pressed);
+		if(this.disabled !== true) {
+			this.pressed = DOMString.toggle(this.pressed);
+		}
 	}
 };
 
