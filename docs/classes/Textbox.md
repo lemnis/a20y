@@ -1,5 +1,5 @@
 
-<base href="//github.com/lemnis/a20y/./docs/">
+<base href="//lemnis.github.io/a20y/">
 <link rel="stylesheet" href="./dist/style.css" />
 <a name="Textbox"></a>
 

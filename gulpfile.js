@@ -36,7 +36,7 @@ gulp.task("doc", function () {
 	/* input and output paths */
 	const inputFiles = "src/**/*.js";
 	const outputDir = "./docs/";
-	const liveDir = "//github.com/lemnis/a20y/" + outputDir;
+	const liveDir = "//lemnis.github.io/a20y/";
 	const partial = [
 		'./dmd/global-index-dl.hbs',
 		'./dmd/sig-link-html.hbs'
