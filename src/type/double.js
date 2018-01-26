@@ -1,17 +1,26 @@
-export function get(autotility, attributeName) {
-	if(!autotility.element.hasAttribute(attributeName)) return null;
-
-	var attrValue = autotility.element.getAttribute(attributeName);
-	if(attrValue === null) return null;
-
-	return Number(attrValue);
+/**
+ * Returns the value of a given attribute as Number
+ * @param {AccessibleNode} ay 
+ * @param {String} attributeName 
+ * @return {Number} attribute's value
+ */
+export function get(ay, attributeName) {
+	var value = ay._.rawAttrs.attributeName || ay.element.getAttribute(attributeName);
+	if (value == undefined) return;
+	return Number(value);
 }
 
-export function set(autotility, attributeName, str) {
+/**
+ * Sync the new value to the DOM
+ * @param {AccessibleNode} ay 
+ * @param {String} attributeName 
+ * @param {String | Number } status 
+ */
+export function set(ay, attributeName, str) {
 	if(str == null) {
-		autotility.element.removeAttribute(attributeName);
+		ay.element.removeAttribute(attributeName);
 	} else {
-		autotility.element.setAttribute(attributeName, str);
+		ay.element.setAttribute(attributeName, str);
 	}
 }
 

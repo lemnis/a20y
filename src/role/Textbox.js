@@ -6,7 +6,17 @@ import Selection from "./../mixins/Selection";
 /**
  * ### Examples
  *
- * ##### Basic example
+ * #### Basic example
+ *   
+ * <div role='textbox' contenteditable></div>
+ * 
+ * ```html
+ * <div role='textbox' contenteditable></div>
+ * ```
+ * 
+ * ---
+ * 
+ * #### Multiline example
  * 
  * <div role='textbox' contenteditable></div>
  * 

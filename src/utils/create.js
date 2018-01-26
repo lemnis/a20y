@@ -29,7 +29,6 @@ var obj = { button: Button, checkbox: Checkbox, combobox: Combobox, dialog: Dial
 function all() {
 	for (let key in obj) {
 		var nodeList = document.querySelectorAll(selector.getRole(key));
-		console.log(key, nodeList);
 		for (let i = 0; i < nodeList.length; i++) {
 			elements.set(nodeList[i], new obj[key](nodeList[i]));
 		}
@@ -51,17 +50,3 @@ function instanceOf(ay, role) {
 }
 
 export default {all, one, instanceOf};
-
-// roles.forEach((Role) => {
-// 	var nodeList = document.querySelectorAll(selector);
-// 	for (let i = 0; i < nodeList.length; i++) {
-// 		elements.set(nodeList[i], new Role(nodeList[i]));
-// 	}
-
-// 	// if(role.options && role.options.selectorsWithImplicitRole) {
-// 	// 	var htmlNodeList = document.querySelectorAll(role.options.selectorsWithImplicitRole.join(","));
-// 	// 	for (let j = 0; j < htmlNodeList.length; j++) {
-// 	// 		elements.set(htmlNodeList[j], new role.default(htmlNodeList[j]));
-// 	// 	}
-// 	// }
-// });

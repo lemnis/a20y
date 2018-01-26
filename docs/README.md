@@ -1,5 +1,5 @@
 
-<base href="//lemnis.github.io/a20y/">
+<base href="D:\Personal\autotility./docs/">
 ## Classes
 
 <dl>
@@ -63,11 +63,6 @@ An input representing a range of values that can be set by the user.</p>
     <dt><a href="./classes/Alertdialog.html">Alertdialog</a> ⇐ <code><a href="#Dialog">Dialog</a></code></dt>
     <dd>
             <p>A dialog containing an alert message</p>
-
-    </dd>
-    <dt><a href="./classes/Base.html">Base</a></dt>
-    <dd>
-            <p>Adds some basic functionality that is greatly used inside the components</p>
 
     </dd>
     <dt><a href="./classes/Button.html">Button</a> ⇐ <code><a href="#Command">Command</a></code></dt>
@@ -140,7 +135,7 @@ only one of which can be checked at a time.</p>
             <p>A type of input that allows free-form text as its value.</p>
 
     </dd>
-    <dt><a href="./classes/AccessibleNode.html">AccessibleNode</a> ⇐ <code><a href="#Base">Base</a></code></dt>
+    <dt><a href="./classes/AccessibleNode.html">AccessibleNode</a></dt>
     <dd>
             <p>Based on the AOM spec</p>
 
@@ -226,14 +221,55 @@ mostly a key as tagName with an array of allowed roles for that tag</p>
     <dd>
             
     </dd>
+    <dt><a href="#get">get(ay, attributeName)</a> ⇒ <code>Boolean</code></dt>
+    <dd>
+            <p>Returns the value of given attribute as Boolean</p>
+
+    </dd>
+    <dt><a href="#set">set(ay, attributeName, status)</a></dt>
+    <dd>
+            <p>Sync the new value to the property</p>
+
+    </dd>
     <dt><a href="#toggle">toggle()</a> ⇒ <code>Boolean</code></dt>
     <dd>
             <p>Returns the opposite state of the attribute</p>
 
     </dd>
+    <dt><a href="#get">get(ay, attributeName)</a> ⇒ <code>String</code></dt>
+    <dd>
+            <p>Returns the value of a given attribute</p>
+
+    </dd>
+    <dt><a href="#set">set(ay, attributeName, status)</a></dt>
+    <dd>
+            <p>Sync the new value to the DOM</p>
+
+    </dd>
     <dt><a href="#toggle">toggle()</a> ⇒ <code>String</code></dt>
     <dd>
-            <p>Returns the opposite state of the attribute</p>
+            <p>Returns the opposite state of the attribute,
+needed when attribute uses an token list</p>
+
+    </dd>
+    <dt><a href="#get">get(ay, attributeName)</a> ⇒ <code>Number</code></dt>
+    <dd>
+            <p>Returns the value of a given attribute as Number</p>
+
+    </dd>
+    <dt><a href="#set">set(ay, attributeName, status)</a></dt>
+    <dd>
+            <p>Sync the new value to the DOM</p>
+
+    </dd>
+    <dt><a href="#get">get(ay, attributeName)</a> ⇒ <code>Number</code></dt>
+    <dd>
+            <p>Returns the value of a given attribute as Integer</p>
+
+    </dd>
+    <dt><a href="#set">set(ay, attributeName, status)</a></dt>
+    <dd>
+            <p>Sync the new value to the DOM</p>
 
     </dd>
     <dt><a href="#getChildren">getChildren()</a></dt>

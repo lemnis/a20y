@@ -38,27 +38,7 @@ function getIds(node, attribute) {
  * 
  */
 function AccessibleNodeList(ay, attribute) {
-	// Object.defineProperties(this, {
-	// 	_element: { value: ay.element, enumerable: false },
-	// 	_attr: { value: attribute, enumerable: false }
-	// });
-
-	// this._value = this._element.getAttribute(this._attr);
-	// if(!this._value) this._value = "";
 	let ids = getIds(ay.element, attribute);
-
-	// // The result can be accessed through the `m`-variable.
-	// ids.forEach((id) => {
-	// 	var el = document.getElementById(id);
-	// 	if(elements.has(el)) {
-	// 		this.add(elements.get(el));
-	// 	} else {
-	// 		elements.set(el, new AccessibleNode.default(el));
-	// 		this.add(elements.get(el));
-	// 		// debugger;
-	// 		// todo: create new instance and return that .
-	// 	}
-	// });
 
 	var arrayChangeHandler = {
 		get: function (target, property) {
