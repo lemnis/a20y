@@ -81,7 +81,7 @@ gulp.task("doc", function () {
 	/* create a documentation file for each mixin */
 	for (const mixinName of mixinNames) {
 		const template = `
-<base href="${__dirname}/docs/">
+<base href="${liveDir}">
 <link rel="stylesheet" href="./dist/style.css" />
 {{#mixines name="${mixinName}"}}{{>docs}}{{/mixines}}
 <script src="./dist/bundle.js" /></script>

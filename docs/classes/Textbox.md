@@ -1,6 +1,6 @@
 
-<base href="D:\Personal\autotility/docs/">
-<link rel="stylesheet" href="./../example/style.css" />
+<base href="//github.com/lemnis/a20y/./docs/">
+<link rel="stylesheet" href="./dist/style.css" />
 <a name="Textbox"></a>
 
 ## Textbox ⇐ [<code>Input</code>](#Input)
@@ -266,5 +266,5 @@ Adds an listener to the object and targeted element
 | [options.once] | <code>Boolean</code> |  |
 
 
-<script src="./../build/bundle.js" /></script>
+<script src="./dist/bundle.js" /></script>
 		
