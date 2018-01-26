@@ -21,7 +21,7 @@ function getSelectorArray(key) {
 
 	let selector = [];
 	selector.push(getRole(key));
-	if (roles[key].implicit) roles.concat(roles[key].implicit);
+	if (roles[key].implicit) selector = selector.concat(roles[key].implicit);
 	return selector;
 }
 
@@ -55,10 +55,10 @@ function getDeepSelectorArray(key) {
 	if (!roles[key]) return;
 
 	let selector = [];
-	selector.concat(getSelectorArray(key));
+	selector = selector.concat(getSelectorArray(key));
 
 	if (roles[key].sub) {
-		roles[key].sub.forEach(val => selector.concat(getSelectorArray(val)));
+		roles[key].sub.forEach(val => selector = selector.concat(getSelectorArray(val)));
 	}
 
 	return selector;

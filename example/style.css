@@ -46,6 +46,13 @@
 [role="slider"] {  position: absolute;  top: -.35em;  left: 0; height: 1em; width: 1em; background: black; }
 [role="slider"][aria-orientation="vertical"] { left: -.35em; top: 0; }
 
+/* Switch */
+[role="switch"][aria-checked="true"]:after { background: grey; }
+[role="switch"]:not([aria-checked="true"]):before { background: grey; }
+[role="switch"]:before, [role="switch"]:after { background: lightgrey; padding: .2em; }
+[role="switch"]:before { content: "off"; }
+[role="switch"]:after { content: "on"; }
+
 /* Tabs */
 .tabs { width: 20em; }
 .tabs [role="tab"], .tabs [role="tabpanel"] { border: 1px solid lightgrey; padding: 1em; background-color: white; }
@@ -53,9 +60,9 @@
 .tabs [role="tab"] { display: inline-block; border-bottom: none; margin-bottom: -1px; }
 .tabs [role="tab"][aria-selected="false"] { background-color: lightgrey; }
 
-/* Textbox */
-[role="textbox"] { padding: 1px; border: 2px inset lightgrey; cursor: text; overflow: auto; }
-[role="textbox"]:not([aria-multiline="true"]) { white-space: nowrap;}
+/* Searchbox + Textbox */
+[role="textbox"], [role="searchbox"] { padding: 1px; border: 2px inset lightgrey; cursor: text; overflow: auto; min-height: 1.5em; }
+[role="textbox"]:not([aria-multiline="true"]), [role="searchbox"]:not([aria-multiline="true"]) { white-space: nowrap;}
 
 
 /* ARIA attributes */

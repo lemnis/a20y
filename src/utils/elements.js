@@ -4,16 +4,22 @@ import getComputedRole from "./getComputedRole";
 var ayInstances = new WeakMap();
 
 // todo: loop through presentational roles
-export function getParent(ay, role) {
-	if(ay.element.parentNode.getAttribute("role").toLowerCase() == role) {
-		if(ayInstances.has(ay.element.parentNode)) {
-			return ayInstances.get(ay.element.parentNode);
-		} else {
-			return create.one(ay.element.parentNode);
+export function getParent(ay, selector) {
+	let element = ay.element;
+
+	while(element.parentNode) {
+		element = element.parentNode;
+
+		if (ay.element.parentNode.matches(selector)) {
+			if (ayInstances.has(ay.element.parentNode)) {
+				return ayInstances.get(ay.element.parentNode);
+			} else {
+				return create.one(ay.element.parentNode);
+			}
 		}
-	} else {
-		return false;
 	}
+
+	return false;
 }
 
 /** @todo find only `direct` children */

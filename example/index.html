@@ -90,7 +90,7 @@
 		<h4>Combobox</h4>
 
 		<div role="combobox" aria-expanded="false" aria-owns="listbox" aria-haspopup="listbox">
-			<input aria-autocomplete="list" aria-controls="listbox" type="text">
+			<div role="textbox" contenteditable aria-autocomplete="list" aria-controls="listbox">Ap</div>
 		</div>
 
 		<div role="combobox" aria-expanded="false" aria-owns="listbox" aria-haspopup="listbox">
@@ -167,6 +167,13 @@
 	</section>
 
 	<section>
+		<h4>Switch</h4>
+
+		<div role="switch" aria-pressed="true" ></div>
+	</section>
+	<hr>
+
+	<section>
 		<h4>Textbox</h4>
 
 		<div role="textbox" contenteditable>Singleline</div>
@@ -233,7 +240,7 @@
 <section>
 	<h4>Spinbutton</h4>
 
-	<input type="text" role="spinbutton" data-spinbutton-up="spinbutton-up">
+	<input type="text" role="spinbutton" data-spinbutton-up="spinbutton-up" data-spinbutton-down="spinbutton-down">
 	<button id="spinbutton-up" type="button">&uarr;</button>
 	<button id="spinbutton-down" type="button">&darr;</button>
 </section>

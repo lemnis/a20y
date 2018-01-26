@@ -1,13 +1,14 @@
-import ValidityState 	from "./ValidityState";
+import ValidityState 	from "./../utils/ValidityState";
 
 /**
- * @mixin Validation
+ * @mixin
  * @borrows ValidityState as validity
+ * @lends Validation#
  */
 let Validation = (superclass) => class Validation extends superclass 
 { 
 	get validity() { 
-		if(!this._validity) this._validity = new ValidityState(this.element);
+		if(!this._validity) this._validity = new ValidityState(this);
 
 		return this._validity;
 	}
@@ -21,6 +22,7 @@ let Validation = (superclass) => class Validation extends superclass
 	/**
 	 * Returns the error message that would be shown to the user
 	 * if the element was to be checked for validity.
+	 * @name Validation#validationMessage
 	 * @type {String}
 	 */
 	get validationMessage() {
@@ -29,10 +31,10 @@ let Validation = (superclass) => class Validation extends superclass
 		if(this.validity.typeMismatch) return "Please use the correct input type.";
 		
 		if (this.validity.tooLong) {
-			return `Please shorten this text to 10 characters or less (you are currently using 48 characters).`;
+			return "Please shorten this text to 10 characters or less (you are currently using 48 characters).";
 		}
 		if(this.validity.tooShort) {
-			return `Please lengthen this text to 10 characters or more (you are currently using 1 character).`;
+			return "Please lengthen this text to 10 characters or more (you are currently using 1 character).";
 		}
 
 		if(this.validity.badInput) return "Please enter a number.";
@@ -50,6 +52,7 @@ let Validation = (superclass) => class Validation extends superclass
 	 * Returns true if the element’s value has no validity problems; false otherwise.
 	 * Fires an invalid event at the element in the latter case.
 	 * @fires invalid
+	 * @name Validation#checkValidity
 	 */
 	checkValidity() {
 		if(!this.validity.valid) this.dispatchEvent("invalid", this);
@@ -60,6 +63,7 @@ let Validation = (superclass) => class Validation extends superclass
 	 * Returns true if the element’s value has no validity problems; otherwise, returns false, fires an
 	 * invalid event at the element, and(if the event isn’t canceled) reports the problem to the user.
 	 * @fires invalid
+	 * @name Validation#reportValidity
 	 */
 	reportValidity() {
 		if (!this.validity.valid) {
@@ -79,6 +83,7 @@ let Validation = (superclass) => class Validation extends superclass
 	 * 
 	 * If the argument is the empty string, clears the custom error.
 	 * 
+	 * @name Validation#setCustomValidity
 	 * @param {?String} message 
 	 */
 	setCustomValidity(message) {
