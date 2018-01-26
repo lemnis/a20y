@@ -4,24 +4,24 @@ const buffer            = require("vinyl-buffer");
 const browserify        = require("browserify");
 const mochaPhantomJS    = require("gulp-mocha-phantomjs");
 const babelify          = require("babelify");
-const jsdoc    		      = require("gulp-jsdoc3");
 
 gulp.task("browserify", function() {
 	return browserify("./src/app.js", {debug: true})
 		.transform(babelify)
-		.on("error",function(e){
+		.on("error",function(e) {
 			console.log("17", e.message);
 			this.emit("end");
 		})
 		.bundle()
-		.on("error",function(e){
+		.on("error",function(e) {
 			console.log("22", e.message);
 			this.emit("end");
 		})
 		.pipe(source("bundle.js")) // output filename
 		.pipe(buffer())
 		// Start piping stream to tasks!
-		.pipe(gulp.dest("./build/"));
+		.pipe(gulp.dest("./build/"))
+		.pipe(gulp.dest("./docs/dist/"));
 });
 
 gulp.task("watch", () => {
@@ -33,32 +33,67 @@ gulp.task("doc", function () {
 	const jsdoc2md = require("jsdoc-to-markdown");
 	const path = require("path");
 
-	// return jsdoc2md.render({ files: "src/role/*.js" })
-	// 	.then(output => fs.writeFile("api.md", output));
-
-
 	/* input and output paths */
 	const inputFiles = "src/**/*.js";
 	const outputDir = "./docs/";
+	const liveDir = "//github.com/lemnis/a20y/" + outputDir;
+	const partial = [
+		'./dmd/global-index-dl.hbs',
+		'./dmd/sig-link-html.hbs'
+	];
 
-	const output = jsdoc2md.renderSync({ files: inputFiles })
-	fs.writeFileSync("api.md", output)
-		/* get template data */
-		const templateData = jsdoc2md.getTemplateDataSync({ files: inputFiles })
+	/* get template data */
+	const templateData = jsdoc2md.getTemplateDataSync({ files: inputFiles });
 
-		/* reduce templateData to an array of class names */
-		const classNames = templateData.reduce((classNames, identifier) => {
-		  if (identifier.kind === "class") classNames.push(identifier.name)
-		  return classNames
-		}, [])
+	/* reduce templateData to an array of class names */
+	const classNames = templateData.filter(item => item.kind === "class").map(item => item.name);
+	const mixinNames = templateData.filter(item => item.kind === "mixin").map(item => item.name);
 
-		/* create a documentation file for each class */
-		for (const className of classNames) {
-		  const template = `{{#classes name="${className}"}}{{>docs}}{{/classes}}`
-		  console.log(`rendering ${className}, template: ${template}`)
-		  const output = jsdoc2md.renderSync({ data: templateData, template: template })
-		  fs.writeFileSync(path.resolve(outputDir, `${className}.md`), output)
-		}
+	/* create indexs */
+	const output = jsdoc2md.renderSync({
+		data: templateData,
+		template: `
+<base href="${liveDir}">
+{{>main-index~}}
+`,
+		partial,
+		helper: './dmd/utils.js'
+	})
+	fs.writeFileSync(path.resolve(outputDir, 'README.md'), output)
+
+	/* create a documentation file for each class */
+	for (const className of classNames) {
+		const template = `
+<base href="${liveDir}">
+<link rel="stylesheet" href="./dist/style.css" />
+{{#classes name="${className}"}}{{>docs}}{{/classes}}
+<script src="./dist/bundle.js" /></script>
+		`;
+		const output = jsdoc2md.renderSync({
+			data: templateData,
+			template: template,
+			partial,
+			helper: './dmd/utils.js'
+		})
+		fs.writeFileSync(path.resolve(outputDir + '/classes/', `${className}.md`), output)
+	}
+
+	/* create a documentation file for each mixin */
+	for (const mixinName of mixinNames) {
+		const template = `
+<base href="${__dirname}/docs/">
+<link rel="stylesheet" href="./dist/style.css" />
+{{#mixines name="${mixinName}"}}{{>docs}}{{/mixines}}
+<script src="./dist/bundle.js" /></script>
+		`;
+		const output = jsdoc2md.renderSync({
+			data: templateData,
+			template: template,
+			partial,
+			helper: './dmd/utils.js'
+		})
+		fs.writeFileSync(path.resolve(outputDir + '/mixins/', `${mixinName}.md`), output)
+	}
 });
 
 gulp.task("test", function () {
