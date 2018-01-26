@@ -7,10 +7,13 @@ import Selection from "./../mixins/Selection";
  * ### Examples
  *
  * ##### Basic example
+ * 
  * <div role='textbox' contenteditable></div>
+ * 
  * ```html
  * <div role='textbox' contenteditable></div>
  * ```
+ * 
  * @summary A type of input that allows free-form text as its value.
  * @extends Input
  * @mixes Selection

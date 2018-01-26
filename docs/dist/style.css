@@ -1,0 +1,74 @@
+:focus, :target {
+  outline: 3px solid blue;
+}
+
+/* DISABLE USER SELECTION */
+
+[role="button"], [role="checkbox"], [role="tab"] {
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* ROLES */
+
+/* Alert */
+
+/* Button */
+[role="button"] { display: inline-block; background-color: lightgrey; padding: .1em 1em; }
+
+/* Checkbox */
+[role="checkbox"][aria-checked="true"]::before { content: "\2713"; }
+[role="checkbox"][aria-checked="false"]::before { content: "\2717"; }
+[role="checkbox"][aria-checked="mixed"]::before { content: "\7e"; }
+[role="checkbox"][aria-disabled="true"] { background-color: transparent; }
+[role="checkbox"][aria-disabled="true"]::before { color: darkgrey; }
+
+/* Dialog */
+[role="dialog"]:not([hidden]) {
+	display: inline-block; position: absolute; left: 50%; transform: translateX(-50%);
+	border-style: solid; padding: 1em; background: white; z-index: 999;
+}
+[role="dialog"]:not([hidden]) + .backdrop {
+  content: ""; display: block; position: fixed; top: 0; right: 0; bottom: 0;
+  left: 0; background: rgba(0, 0, 0, 0.1); z-index: 998;
+}
+
+/* Listbox */
+[role="listbox"] { border: 1px solid; padding: 0; margin: 0; list-style: none; max-height: 5.4em; position: relative; overflow-y: scroll; }
+[role="listbox"] [role="option"] { padding: .3em .5em; }
+[role="listbox"] [role="option"]:hover, [role="listbox"] [role="option"].ay-hover { background: lightgrey; }
+
+/* Slider */
+.slider-track { position: relative; background: lightgrey; height: .3em; width: 20em; margin: .35em 0; cursor: pointer; }
+.slider-track.vertical { height: 20em; width: .3em; margin: 0 .35em; }
+[role="slider"] {  position: absolute;  top: -.35em;  left: 0; height: 1em; width: 1em; background: black; }
+[role="slider"][aria-orientation="vertical"] { left: -.35em; top: 0; }
+
+/* Switch */
+[role="switch"][aria-checked="true"]:after { background: grey; }
+[role="switch"]:not([aria-checked="true"]):before { background: grey; }
+[role="switch"]:before, [role="switch"]:after { background: lightgrey; padding: .2em; }
+[role="switch"]:before { content: "off"; }
+[role="switch"]:after { content: "on"; }
+
+/* Tabs */
+.tabs { width: 20em; }
+.tabs [role="tab"], .tabs [role="tabpanel"] { border: 1px solid lightgrey; padding: 1em; background-color: white; }
+.tabs [role="tablist"] { list-style: none; margin: 0; padding: 0; }
+.tabs [role="tab"] { display: inline-block; border-bottom: none; margin-bottom: -1px; }
+.tabs [role="tab"][aria-selected="false"] { background-color: lightgrey; }
+
+/* Searchbox + Textbox */
+[role="textbox"], [role="searchbox"] { padding: 1px; border: 2px inset lightgrey; cursor: text; overflow: auto; min-height: 1.5em; }
+[role="textbox"]:not([aria-multiline="true"]), [role="searchbox"]:not([aria-multiline="true"]) { white-space: nowrap;}
+
+
+/* ARIA attributes */
+
+[aria-pressed="true"] { background-color: grey; }
+[aria-disabled="true"] { background-color: #DADADA; }
+[aria-selected="true"][aria-selected="true"][aria-selected="true"] { background-color: rgb(133, 159, 216); }
+
+:empty[aria-placeholder]::before { content: attr(aria-placeholder); color: grey; }

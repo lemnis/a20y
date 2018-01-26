@@ -7,7 +7,9 @@
 ### Examples
 
 ##### Basic example
+
 <div role='textbox' contenteditable></div>
+
 ```html
 <div role='textbox' contenteditable></div>
 ```
