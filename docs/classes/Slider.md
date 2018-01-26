@@ -1,46 +1,84 @@
 
 <base href="//lemnis.github.io/a20y/">
 <link rel="stylesheet" href="./dist/style.css" />
-<a name="Textbox"></a>
+<a name="Slider"></a>
 
-## Textbox ⇐ [<code>Input</code>](#Input)
+## Slider ⇐ [<code>Range</code>](#Range)
+The slider element let the user specify a numeric value which must be no less
+than a given value, and no more than another given value. 
+
+The precise value,however, is not considered important. This is typically represented using a slider or
+dial control rather than a text entry box like the "number" input type. Because this kind of widget
+is imprecise, it shouldn't typically be used unless the control's exact value isn't important.
+
 ### Examples
 
 #### Basic example
-  
-<div role='textbox' contenteditable></div>
+
+<div class="slider-track">
+  <div role="slider"  tabindex="0"></div>
+</div>
 
 ```html
-<div role='textbox' contenteditable></div>
+<div class="slider-track">
+  <div role="slider"  tabindex="0"></div>
+</div>
 ```
 
----
+#### As an button with a specified step and range
 
-#### Multiline example
-
-<div role='textbox' contenteditable></div>
+<div class="slider-track">
+  <button type="button" role="slider"
+		aria-valuemin="30" aria-valuemax="300" aria-valuenow="50" data-step="10"></button>
+</div>
 
 ```html
-<div role='textbox' contenteditable></div>
+<div class="slider-track">
+  <button type="button" role="slider"
+		aria-valuemin="30" aria-valuemax="300" aria-valuenow="50" data-step="10"></button>
+</div>
+```
+
+#### Vertical
+
+<div class="slider-track vertical">
+  <button type="button" role="slider" aria-orientation="vertical"></button>
+</div>
+
+```html
+<div class="slider-track vertical">
+  <button type="button" role="slider" aria-orientation="vertical"></button>
+</div>
+```
+
+#### Disabled
+
+<div class="slider-track">
+  <button type="button" role="slider" aria-disabled="true"></button>
+</div>
+
+```html
+<div class="slider-track">
+  <button type="button" role="slider" aria-disabled="true"></button>
+</div>
 ```
 
 **Kind**: global class  
-**Summary**: A type of input that allows free-form text as its value.  
-**Extends**: [<code>Input</code>](#Input)  
-**Mixes**: [<code>Selection</code>](#Selection)  
+**Summary**: A user input where the user selects a value from within a given range.  
+**Extends**: [<code>Range</code>](#Range)  
+**Emits**: <code>event:change</code>, <code>event:input</code>  
 **Todo**
 
-- [ ] Add options to keep or remove pasted styling
+- [ ] add support for "any"
+- [ ] add events
 
 
-* [Textbox](#Textbox) ⇐ [<code>Input</code>](#Input)
-    * [new Textbox(...args)](#new_Textbox_new)
-    * [.value](#Textbox+value) : <code>String</code>
-    * [.minLength](#Textbox+minLength) : <code>Integer</code>
-    * [.maxLength](#Textbox+maxLength) : <code>Integer</code>
-    * [.size](#Textbox+size) : <code>Integer</code>
-    * [.form](#Input+form) ⇒ [<code>AccessibleNode</code>](#AccessibleNode)
-    * [.list](#Input+list) ⇒ [<code>AccessibleNode</code>](#AccessibleNode)
+* [Slider](#Slider) ⇐ [<code>Range</code>](#Range)
+    * [new Slider(element, [options])](#new_Slider_new)
+    * [.valueMin](#Slider+valueMin)
+    * [._](#Range+_) : <code>Object</code>
+    * [.value](#Range+value) : <code>String</code>
+    * [.valueAsNumber](#Range+valueAsNumber) : <code>Number</code>
     * [.tabIndex](#Roletype+tabIndex) : <code>Number</code>
     * [.labelledBy](#AccessibleNode+labelledBy) : [<code>AccessibleNodeList</code>](#AccessibleNodeList)
     * [.role](#AccessibleNode+role) : <code>String</code>
@@ -57,67 +95,64 @@
     * [.invalid](#AccessibleNode+invalid) : <code>String</code>
     * [.pressed](#AccessibleNode+pressed) : <code>String</code>
     * [.placeholder](#AccessibleNode+placeholder) : <code>String</code>
+    * [.stepDown(ev)](#Range+stepDown)
+    * [.stepUp(ev)](#Range+stepUp)
     * [.addListener(label, callback, [options])](#Roletype+addListener)
 
-<a name="new_Textbox_new"></a>
+<a name="new_Slider_new"></a>
 
-### new Textbox(...args)
+### new Slider(element, [options])
+**Returns**: [<code>Slider</code>](#Slider) - thisArg  
 
-| Param | Type |
-| --- | --- |
-| ...args | <code>\*</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| element | <code>HTMLElement</code> | element to derive information nameFrom |
+| [options] | <code>Object</code> | optional options |
+| [options.slider.track] | <code>HTMLElement</code> | The element that resembles the track, defaults to the elements parent |
+| [options.step] | <code>Number</code> \| <code>&quot;any&quot;</code> | increase/decrease amount |
 
-<a name="Textbox+value"></a>
+<a name="Slider+valueMin"></a>
 
-### textbox.value : <code>String</code>
-Returns / Sets the current value of the textbox.
+### slider.valueMin
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
+**Default**: <code>[0]</code>  
+**Overrides**: <code>Range#valueMin</code>  
+<a name="Range+_"></a>
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
-<a name="Textbox+minLength"></a>
+### slider._ : <code>Object</code>
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
+**Properties**
 
-### textbox.minLength : <code>Integer</code>
-Returns / Sets the minmum length of characters
+| Name | Type | Default |
+| --- | --- | --- |
+| step | <code>Number</code> | <code>1</code> | 
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
-<a name="Textbox+maxLength"></a>
+<a name="Range+value"></a>
 
-### textbox.maxLength : <code>Integer</code>
-Returns / Sets the maximum length of characters
+### slider.value : <code>String</code>
+Passtrough of an stringified `valueNow`
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
-<a name="Textbox+size"></a>
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
+**See**: [AccessibleNode#valueNow](AccessibleNode#valueNow)  
+<a name="Range+valueAsNumber"></a>
 
-### textbox.size : <code>Integer</code>
-Returns / Sets the size of control.
+### slider.valueAsNumber : <code>Number</code>
+Proxy of the `valueNow` value
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
-<a name="Input+form"></a>
-
-### textbox.form ⇒ [<code>AccessibleNode</code>](#AccessibleNode)
-Returns a reference to the parent form element
-
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
-**Returns**: [<code>AccessibleNode</code>](#AccessibleNode) - [Form](#Form)  
-<a name="Input+list"></a>
-
-### textbox.list ⇒ [<code>AccessibleNode</code>](#AccessibleNode)
-Returns the first element pointed by the [AccessibleNode#controls](AccessibleNode#controls) property.
-The property may be null if no HTML element found in the same tree.
-
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
-**Returns**: [<code>AccessibleNode</code>](#AccessibleNode) - [Listbox](#Listbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
+**See**: [AccessibleNode#valueNow](AccessibleNode#valueNow)  
 <a name="Roletype+tabIndex"></a>
 
-### textbox.tabIndex : <code>Number</code>
+### slider.tabIndex : <code>Number</code>
 Current tabindex of the element
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 <a name="AccessibleNode+labelledBy"></a>
 
-### textbox.labelledBy : [<code>AccessibleNodeList</code>](#AccessibleNodeList)
+### slider.labelledBy : [<code>AccessibleNodeList</code>](#AccessibleNodeList)
 Returns an list with AccessibleNode instances that labels the current element
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**
 
 - [AccessibleNode#describedBy](AccessibleNode#describedBy)
@@ -125,21 +160,21 @@ Returns an list with AccessibleNode instances that labels the current element
 
 <a name="AccessibleNode+role"></a>
 
-### textbox.role : <code>String</code>
+### slider.role : <code>String</code>
 Defines a type it represents, e.g. `tab`
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**: https://www.w3.org/TR/wai-aria-1.1/#roles  
 <a name="AccessibleNode+label"></a>
 
-### textbox.label : <code>String</code>
+### slider.label : <code>String</code>
 Defines a string value that labels the current element.
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**: https://www.w3.org/TR/wai-aria-1.1/#aria-label  
 <a name="AccessibleNode+autocomplete"></a>
 
-### textbox.autocomplete : <code>String</code>
+### slider.autocomplete : <code>String</code>
 Indicates whether inputting text could trigger display of one or more predictions of the user's
 intended value for an input and specifies how predictions would be presented if they are made.
 
@@ -152,14 +187,14 @@ The behavior during input is depends on the provided value, it follows beneath t
 | both   | Implements `inline` and `list`
 | none   | No prediction is shown
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**: https://www.w3.org/TR/wai-aria-1.1/#aria-autocomplete  
 <a name="AccessibleNode+hidden"></a>
 
-### textbox.hidden : <code>Boolean</code>
+### slider.hidden : <code>Boolean</code>
 Returns/sets the visibility of the element who is exposed to an accessibility API.
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**
 
 - [disabled](#AccessibleNode+disabled)
@@ -167,45 +202,45 @@ Returns/sets the visibility of the element who is exposed to an accessibility AP
 
 <a name="AccessibleNode+multiline"></a>
 
-### textbox.multiline : <code>Boolean</code>
+### slider.multiline : <code>Boolean</code>
 Indicates whether a text box accepts multiple lines of input or only a single line.
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**: https://www.w3.org/TR/wai-aria-1.1/#aria-multiline  
 <a name="AccessibleNode+multiselectable"></a>
 
-### textbox.multiselectable : <code>Boolean</code>
+### slider.multiselectable : <code>Boolean</code>
 Indicates that the user may select more than one item from the current selectable descendants.
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**: https://www.w3.org/TR/wai-aria-1.1/#aria-multiselectable  
 <a name="AccessibleNode+readOnly"></a>
 
-### textbox.readOnly : <code>Boolean</code>
+### slider.readOnly : <code>Boolean</code>
 Indicates that the user may select more than one item from the current selectable descendants.
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**: https://www.w3.org/TR/wai-aria-1.1/#aria-readonly  
 <a name="AccessibleNode+required"></a>
 
-### textbox.required : <code>Boolean</code>
+### slider.required : <code>Boolean</code>
 Indicates that user input is required on the element before a form may be submitted.
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**: https://www.w3.org/TR/wai-aria-1.1/#aria-required  
 <a name="AccessibleNode+selected"></a>
 
-### textbox.selected : <code>Boolean</code>
+### slider.selected : <code>Boolean</code>
 Indicates that user input is required on the element before a form may be submitted.
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**: https://www.w3.org/TR/wai-aria-1.1/#aria-selected  
 <a name="AccessibleNode+checked"></a>
 
-### textbox.checked : <code>String</code>
+### slider.checked : <code>String</code>
 Indicates the current "checked" state of a [Widget](#Widget), among [Radio](#Radio) and [Checkbox](#Checkbox)
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**
 
 - [pressed](#AccessibleNode+pressed)
@@ -214,10 +249,10 @@ Indicates the current "checked" state of a [Widget](#Widget), among [Radio](#Rad
 
 <a name="AccessibleNode+disabled"></a>
 
-### textbox.disabled : <code>Boolean</code>
+### slider.disabled : <code>Boolean</code>
 Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**
 
 - [hidden](#AccessibleNode+hidden)
@@ -226,10 +261,10 @@ Indicates that the element is perceivable but disabled, so it is not editable or
 
 <a name="AccessibleNode+invalid"></a>
 
-### textbox.invalid : <code>String</code>
+### slider.invalid : <code>String</code>
 Indicates the entered value does not conform to the format expected by the application.
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**
 
 - [AccessibleNode#errorMessage](AccessibleNode#errorMessage)
@@ -237,10 +272,10 @@ Indicates the entered value does not conform to the format expected by the appli
 
 <a name="AccessibleNode+pressed"></a>
 
-### textbox.pressed : <code>String</code>
+### slider.pressed : <code>String</code>
 Indicates the current "checked" state of a [Widget](#Widget), among [Radio](#Radio) and [Checkbox](#Checkbox)
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**
 
 - [pressed](#AccessibleNode+pressed)
@@ -249,18 +284,41 @@ Indicates the current "checked" state of a [Widget](#Widget), among [Radio](#Rad
 
 <a name="AccessibleNode+placeholder"></a>
 
-### textbox.placeholder : <code>String</code>
+### slider.placeholder : <code>String</code>
 Returns / sets a short hint intended to aid the user with data entry when the control has no value.
 A hint could be a sample value or a brief description of the expected format.
 
-**Kind**: instance property of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance property of [<code>Slider</code>](#Slider)  
 **See**: [https://www.w3.org/TR/wai-aria-1.1/#aria-placeholder](https://www.w3.org/TR/wai-aria-1.1/#aria-placeholder)  
+<a name="Range+stepDown"></a>
+
+### slider.stepDown(ev)
+Decrease the value with the amount of 1 step
+
+**Kind**: instance method of [<code>Slider</code>](#Slider)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ev | <code>Event</code> | Event when triggered through an elements |
+
+<a name="Range+stepUp"></a>
+
+### slider.stepUp(ev)
+Increase the value with the amount of 1 step
+
+**Kind**: instance method of [<code>Slider</code>](#Slider)  
+**Package**:   
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ev | <code>Event</code> | Event when triggered through an elements |
+
 <a name="Roletype+addListener"></a>
 
-### textbox.addListener(label, callback, [options])
+### slider.addListener(label, callback, [options])
 Adds an listener to the object and targeted element
 
-**Kind**: instance method of [<code>Textbox</code>](#Textbox)  
+**Kind**: instance method of [<code>Slider</code>](#Slider)  
 **See**: customEvents  
 
 | Param | Type | Description |

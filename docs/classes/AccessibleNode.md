@@ -1,5 +1,5 @@
 
-<base href="D:\Personal\autotility./docs/">
+<base href="//lemnis.github.io/a20y/">
 <link rel="stylesheet" href="./dist/style.css" />
 <a name="AccessibleNode"></a>
 
