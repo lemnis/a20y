@@ -1,5 +1,6 @@
 
 <base href="//lemnis.github.io/a20y/">
+
 ## Classes
 
 <dl>
@@ -25,7 +26,7 @@
 An input representing a range of values that can be set by the user.</p>
 
     </dd>
-    <dt><a href="./classes/Roletype.html">Roletype</a> ⇐ <code><a href="#AccessibleNode">AccessibleNode</a></code></dt>
+    <dt><a href="./classes/Roletype.html">Roletype</a> ⇐ <code>AccessibleNode</code></dt>
     <dd>
             
     </dd>
@@ -105,7 +106,19 @@ when activated, causes the user agent to navigate to that resource.</p>
     <dd>
             <p>A checkable input in a group of elements with the same role,
 only one of which can be checked at a time.</p>
-
+<h3 id="examples">Examples</h3>
+<h4 id="default">Default</h4>
+<div role="radio" aria-checked="true" tabindex="0">Apple</div>
+<div role="radio" aria-checked="false" tabindex="0">Apple</div>
+    </dd>
+    <dt><a href="./classes/Radiogroup.html">Radiogroup</a> ⇐ <code><a href="#Select">Select</a></code></dt>
+    <dd>
+            <h3 id="example">Example</h3>
+<h4 id="basic-example">Basic example</h4>
+<div role="radiogroup" tabindex="0" aria-activedescendant="radio_1">
+  <div id="radio_1" role="radio" aria-checked="true">Apple</div>
+  <div id="radio_2" role="radio" aria-checked="false">Grapefruit</div>
+</div>
     </dd>
     <dt><a href="./classes/Scrollbar.html">Scrollbar</a> ⇐ <code><a href="#Range">Range</a></code></dt>
     <dd>
@@ -133,11 +146,6 @@ only one of which can be checked at a time.</p>
     <dt><a href="./classes/Textbox.html">Textbox</a> ⇐ <code><a href="#Input">Input</a></code></dt>
     <dd>
             <p>A type of input that allows free-form text as its value.</p>
-
-    </dd>
-    <dt><a href="./classes/AccessibleNode.html">AccessibleNode</a></dt>
-    <dd>
-            <p>Based on the AOM spec</p>
 
     </dd>
     <dt><a href="./classes/ValidityState.html">ValidityState</a></dt>
@@ -217,10 +225,6 @@ mostly a key as tagName with an array of allowed roles for that tag</p>
 <p>Indicates if a element is selectable</p>
 
     </dd>
-    <dt><a href="#AccessibleNodeList">AccessibleNodeList()</a></dt>
-    <dd>
-            
-    </dd>
     <dt><a href="#get">get(ay, attributeName)</a> ⇒ <code>Boolean</code></dt>
     <dd>
             <p>Returns the value of given attribute as Boolean</p>
@@ -250,26 +254,6 @@ mostly a key as tagName with an array of allowed roles for that tag</p>
     <dd>
             <p>Returns the opposite state of the attribute,
 needed when attribute uses an token list</p>
-
-    </dd>
-    <dt><a href="#get">get(ay, attributeName)</a> ⇒ <code>Number</code></dt>
-    <dd>
-            <p>Returns the value of a given attribute as Number</p>
-
-    </dd>
-    <dt><a href="#set">set(ay, attributeName, status)</a></dt>
-    <dd>
-            <p>Sync the new value to the DOM</p>
-
-    </dd>
-    <dt><a href="#get">get(ay, attributeName)</a> ⇒ <code>Number</code></dt>
-    <dd>
-            <p>Returns the value of a given attribute as Integer</p>
-
-    </dd>
-    <dt><a href="#set">set(ay, attributeName, status)</a></dt>
-    <dd>
-            <p>Sync the new value to the DOM</p>
 
     </dd>
     <dt><a href="#getChildren">getChildren()</a></dt>
