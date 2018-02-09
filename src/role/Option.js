@@ -10,9 +10,9 @@ class Option extends Input {
 	constructor(...args) {
 		super(...args);
 
-		this.addListener("click", this.onClick.bind(this));
-		this.addListener("key", this.onClick.bind(this), {key: "enter", target: document});
-		this.addListener("key", this.onClick.bind(this), {key: "space", target: document});
+		this.addEventListener("click", this.onClick.bind(this));
+		this.addEventListener("key", this.onClick.bind(this), {key: "enter", target: document});
+		this.addEventListener("key", this.onClick.bind(this), {key: "space", target: document});
 		// this.addKeyListener("Enter", selectItem.bind(this));
 	}
 

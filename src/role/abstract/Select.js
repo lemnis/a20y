@@ -6,6 +6,7 @@ import Roletype from "./Roletype";
 import Option from "./../Option.js";
 import mix from "@vestergaard-company/js-mixin";
 import selector from "./../../utils/selector";
+import owns from "./../../utils/owns";
 
 /**
  * ### Keyboard Support
@@ -58,56 +59,55 @@ class Select extends Roletype {
 		
 		// when in focus, allow the element be controlled by the keys
 		if(typeof this.tabIndex !== "undefined") {
-			this.element.addEventListener("focus", hasTarget.bind(this));
-			this.element.addEventListener("blur", lostTarget.bind(this));
+			this._node.addEventListener("focus", hasTarget.bind(this));
+			this._node.addEventListener("blur", lostTarget.bind(this));
 		}
 
-		this.addListener("key", this.moveToStart.bind(this), {key: "home", target: this.element.ownerDocument});
-		this.addListener("key", this.moveToPrev.bind(this), {key: "up", target: this.element.ownerDocument});
-		this.addListener("key", this.moveToNext.bind(this), {key: "down", target: this.element.ownerDocument});
-		this.addListener("key", this.moveToEnd.bind(this), {key: "end", target: this.element.ownerDocument});
+		this.addEventListener("key", this.moveToStart.bind(this), {key: "home", target: this._node.ownerDocument});
+		this.addEventListener("key", this.moveToPrev.bind(this), {key: "up", target: this._node.ownerDocument});
+		this.addEventListener("key", this.moveToNext.bind(this), {key: "down", target: this._node.ownerDocument});
+		this.addEventListener("key", this.moveToEnd.bind(this), {key: "end", target: this._node.ownerDocument});
 
-		// this.addListener.call({ element: this.element.ownerDocument }, "home", this.moveToStart.bind(this));
-		// this.addListener.call({ element: this.element.ownerDocument }, "up", this.moveToPrev.bind(this));
-		// // this.addListener.call({ element: this.element.ownerDocument }, "shift + up", this.moveToNext.bind(this));
-		// this.addListener.call({ element: this.element.ownerDocument }, "down", this.moveToNext.bind(this));
-		// // this.addListener.call({ element: this.element.ownerDocument }, "shift + down", selectDown.bind(this));
-		// this.addListener.call({ element: this.element.ownerDocument }, "end", this.moveToEnd.bind(this));
-
-		let options = Array.from(this.element.querySelectorAll(selector.getDeepSelector("option")));
-		this.options = [];
-		options.forEach(node => {
-			let value = new Option(node);
-
-			value.addListener("click", this.activeChanged.bind(this));
-			if (value.selected) {
-				fc.add(value);
+		// this.addEventListener.call({ element: this._node.ownerDocument }, "home", this.moveToStart.bind(this));
+		// this.addEventListener.call({ element: this._node.ownerDocument }, "up", this.moveToPrev.bind(this));
+		// // this.addEventListener.call({ element: this._node.ownerDocument }, "shift + up", this.moveToNext.bind(this));
+		// this.addEventListener.call({ element: this._node.ownerDocument }, "down", this.moveToNext.bind(this));
+		// // this.addEventListener.call({ element: this._node.ownerDocument }, "shift + down", selectDown.bind(this));
+		// this.addEventListener.call({ element: this._node.ownerDocument }, "end", this.moveToEnd.bind(this));
+	
+		this.options = owns.getAllAllowedChildren(this);
+		this.options.forEach(ay => {
+			this.addEventListener("click", this.activeChanged.bind(this), {target: ay._node});
+			if (ay.selected) {
+				fc.add(ay);
 			}
-			this.options.push(value);
 		});
 	}
 
-	moveToPrev(ev) { move(this, ev, fc.prev); }
-	moveToNext(ev) { move(this, ev, fc.next); }
-	moveToStart(ev) { move(this, ev, fc.start); }
-	moveToEnd(ev) { move(this, ev, fc.end); }
+	moveToPrev(ev) { move(this, ev, fc.prev, this.moved.bind(this)); }
+	moveToNext(ev) { move(this, ev, fc.next, this.moved.bind(this)); }
+	moveToStart(ev) { move(this, ev, fc.start, this.moved.bind(this)); }
+	moveToEnd(ev) { move(this, ev, fc.end, this.moved.bind(this)); }
+	
+	moved(from, to) {}
+	
 	activeChanged(ev) {
-		// let option elements.get(ev.target);
-		// let prevFocus = fc.get(this.options);
-		// fc.remove(prevFocus);
-		// fc.add(option);
+		let option = elements.get(ev.target);
+		let prevFocus = fc.get(this.options);
+		fc.remove(prevFocus);
+		fc.add(option);
 
-		// if (this.activeDescendant) this.activeDescendant = option;
+		if (this.activeDescendant) this.activeDescendant = option;
 
-		// // update selected on keyevent when only one item can be selected
-		// if (!this.multiselectable) {
-		// 	fc.setSelected(prevFocus, undefined);
-		// }
-		// fc.setSelected(option, boolean.toggle(option.selected));
+		// update selected on keyevent when only one item can be selected
+		if (!this.multiselectable) {
+			fc.setSelected(prevFocus, undefined);
+		}
+		fc.setSelected(option, boolean.toggle(option.selected));		
 	}
 }
 
-function move(ay, ev, func) {
+function move(ay, ev, func, callback) {
 	if (!ay.target) return;
 	if (ev) ev.preventDefault();
 
@@ -117,11 +117,7 @@ function move(ay, ev, func) {
 	let currentFocus = func(ay.options, prevFocus);
 	if (ay.activeDescendant) ay.activeDescendant = currentFocus;
 
-	// update selected on keyevent when only one item can be selected
-	if (!ay.multiselectable) {
-		fc.setSelected(prevFocus, undefined);
-		fc.setSelected(currentFocus, boolean.toggle(currentFocus.selected));
-	}
+	callback(prevFocus, currentFocus);
 }
 
 function hasTarget() { this.target = true; }

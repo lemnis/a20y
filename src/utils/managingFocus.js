@@ -58,18 +58,18 @@ function end(descendants) {
 }
 
 function add(child) {
-	child.element.classList.add("ay-hover");
-	scrollIntoView(child.element);
+	child._node.classList.add("ay-hover");
+	scrollIntoView(child._node);
 	return child;
 }
 
 function remove(child) {
-	child.element.classList.remove("ay-hover");	
+	child._node.classList.remove("ay-hover");	
 	return child;
 }
 
 function get(descendants) {
-	let ay = descendants.find(i => i.element.classList.contains("ay-hover"));
+	let ay = descendants.find(aom => aom._node.classList.contains("ay-hover"));
 	if(!ay) return descendants[0];
 	return ay;
 }

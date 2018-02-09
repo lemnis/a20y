@@ -1,4 +1,4 @@
-import AccessibleNode from "./../../type/AccessibleNode";
+import AccessibleNode from "aomjs/src/AccessibleNode.js";
 
 const Mousetrap = require("mousetrap");
 import objectPath from "object-path";
@@ -24,7 +24,7 @@ function handleCustomElement(path, value) {
 	// only if no element is already set
 	if (!objectPath.has(this, "_." + path)) {
 		// check if element has it defined as data attribute
-		var id = this.element.getAttribute("data-" + path.split(".").join("-"));
+		var id = this._node.getAttribute("data-" + path.split(".").join("-"));
 		if (id) var el = document.getElementById(id);
 		if (el) {
 			objectPath.set(this, "_." + path, el);
@@ -38,7 +38,7 @@ function handleCustomValue(path, value) {
 	// only if no element is already set
 	if (!objectPath.has(this, "_." + path)) {
 		// check if element has it defined as data attribute
-		var dataValue = this.element.getAttribute("data-" + path.split(".").join("-"));
+		var dataValue = this._node.getAttribute("data-" + path.split(".").join("-"));
 		if (dataValue) {
 			objectPath.set(this, "_." + path, dataValue);
 		} else {
@@ -58,7 +58,7 @@ class Roletype extends AccessibleNode {
 	constructor(...args) {
 		super(...args);
 
-		this._.listeners = new Map();
+		Object.defineProperty(this, "_", { value: {} });
 		this._.registerCustomElement = handleCustomElement.bind(this);
 		this._.registerCustomValue = handleCustomValue.bind(this);
 
@@ -81,13 +81,13 @@ class Roletype extends AccessibleNode {
 	 * @type {Number}
 	 */
 	get tabIndex() {
-		if (!this.element.hasAttribute("tabindex")) {
+		if (!this._node.hasAttribute("tabindex")) {
 			return;
 		}
 
-		return this.element.tabIndex;
+		return this._node.tabIndex;
 	}
-	set tabIndex(number) { this.element.tabIndex = number; }
+	set tabIndex(number) { this._node.tabIndex = number; }
 
 	/**
 	 * Adds an listener to the object and targeted element
@@ -102,25 +102,34 @@ class Roletype extends AccessibleNode {
 	 * @param {Boolean} [options.passive]
 	 * @param {Boolean} [options.once]
 	 */
-	addListener(label, callback, options) {
-		var el = options && options.target ? options.target : this.element;
-		this._.listeners.has(label) || this._.listeners.set(label, []);
-		this._.listeners.get(label).push({ callback, options });
+	addEventListener(type, callback, options) {
+		// check if custom target is set
+		var node = options && options.target ? options.target : this._node;
+		
+		// push event to the listener
+		super.addEventListener(type, { callback, options });
 
-		if (label == "key" && options.key) {
-			Mousetrap(el).bind(options.key, callback);
+		// attach listener to given keys
+		if (type == "key" && options.key) {
+			Mousetrap(node).bind(options.key, callback);
 		}
 
-		if (customEvents.indexOf(label) == -1) {
-			el.addEventListener(label, callback, options);
+		// attach native events to target element
+		if (customEvents.indexOf(type) == -1) {
+			node.addEventListener(type, callback, options);
 		}
 	}
 
 	removeListener(label, callback, options) {
-		let listeners = this._.listeners.get(label), index;
+		if (!this._listeners.has(label)) {
+			return;
+		}
 
-		if (listeners && listeners.length) {
-			index = listeners.reduce((i, listener, index) => {
+		let stack = this._listeners.get(label);
+		let index;
+
+		if (stack && stack.length) {
+			index = stack.reduce((i, listener, index) => {
 				if (
 					isFunction(listener.callback) && listener.callback === callback &&
 					(
@@ -141,33 +150,33 @@ class Roletype extends AccessibleNode {
 
 			if (index > -1) {
 				if (customEvents.indexOf(label) == -1) {
-					var el = options && options.target ? options.target : this.element;
+					var el = options && options.target ? options.target : this._node;
 
 					el.removeEventListener(label, callback, options);
 				}
-				listeners.splice(index, 1);
-				this._.listeners.set(label, listeners);
+				stack.splice(index, 1);
+				this._listeners.set(label, stack);
 				return true;
 			}
 		}
 		return false;
 	}
 
-	dispatchEvent(ev) {
-		// let listeners = this._.listeners.get(ev.type);
-		this.element.dispatchEvent(ev);
-		// if (listeners && listeners.length) {
-		// 	listeners.forEach((listener) => {
-		// 		listener(ev);
-		// 	});
-		// 	return true;
-		// }
-		// return false;
-	}
+	dispatchEvent(event) {
+		if (!this._listeners.has(event.type)) {
+			return true;
+		}
+		var stack = this._listeners.get(event.type);
+		stack.forEach(listener => {
+			if(listener.callback) listener.callback.call(this, event);
+		});
+		this._node.dispatchEvent(event);
 
+		return !event.defaultPrevented;
+	}	
 
 	addKeyListener(key, callback) {
-		return this.addListener("key", callback, { key });
+		return this.addEventListener("key", callback, { key });
 	}	
 }
 

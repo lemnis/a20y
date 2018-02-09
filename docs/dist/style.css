@@ -25,6 +25,12 @@
 [role="checkbox"][aria-disabled="true"] { background-color: transparent; }
 [role="checkbox"][aria-disabled="true"]::before { color: darkgrey; }
 
+/* Radio */
+[role="radio"][aria-checked="true"]::before { content: "\2713"; }
+[role="radio"][aria-checked="false"]::before { content: "\2717"; }
+[role="radio"][aria-disabled="true"] { background-color: transparent; }
+[role="radio"][aria-disabled="true"]::before { color: darkgrey; }
+
 /* Dialog */
 [role="dialog"]:not([hidden]) {
 	display: inline-block; position: absolute; left: 50%; transform: translateX(-50%);
@@ -36,7 +42,7 @@
 }
 
 /* Listbox */
-[role="listbox"] { border: 1px solid; padding: 0; margin: 0; list-style: none; max-height: 5.4em; position: relative; overflow-y: scroll; }
+[role="listbox"] { border: 1px solid; padding: 0; margin: 0; list-style: none; position: relative; overflow-y: scroll; }
 [role="listbox"] [role="option"] { padding: .3em .5em; }
 [role="listbox"] [role="option"]:hover, [role="listbox"] [role="option"].ay-hover { background: lightgrey; }
 

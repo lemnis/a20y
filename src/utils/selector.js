@@ -68,4 +68,8 @@ export function getDeep(key) {
 	return getDeepSelectorArray(key).join(", ");
 }
 
-export default { getRole, get, getDeepRole, getDeep };
+export function getOwns(key) {
+	return roles[key].owns;
+}
+
+export default { getRole, get, getDeepRole, getDeep, getOwns };
