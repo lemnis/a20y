@@ -1,31 +1,45 @@
 
 <base href="//lemnis.github.io/a20y/">
 <link rel="stylesheet" href="./dist/style.css" />
-<a name="Radio"></a>
+<a name="Option"></a>
 
-## Radio ⇐ [<code>Command</code>](#Command)
-A checkable input in a group of elements with the same role,only one of which can be checked at a time.### Examples#### Default<div role="radio" aria-checked="true" tabindex="0">Apple</div><div role="radio" aria-checked="false" tabindex="0">Apple</div>
-
+## Option ⇐ [<code>Input</code>](#Input)
 **Kind**: global class  
-**Extends**: [<code>Command</code>](#Command)  
-**Mixes**: [<code>AriaChecked</code>](#AriaChecked)  
+**Extends**: [<code>Input</code>](#Input)  
 
-* [Radio](#Radio) ⇐ [<code>Command</code>](#Command)
+* [Option](#Option) ⇐ [<code>Input</code>](#Input)
+    * [.form](#Input+form) ⇒ <code>AccessibleNode</code>
+    * [.list](#Input+list) ⇒ <code>AccessibleNode</code>
     * [.tabIndex](#Roletype+tabIndex) : <code>Number</code>
     * [.addEventListener(label, callback, [options])](#Roletype+addEventListener)
 
+<a name="Input+form"></a>
+
+### option.form ⇒ <code>AccessibleNode</code>
+Returns a reference to the parent form element
+
+**Kind**: instance property of [<code>Option</code>](#Option)  
+**Returns**: <code>AccessibleNode</code> - [Form](#Form)  
+<a name="Input+list"></a>
+
+### option.list ⇒ <code>AccessibleNode</code>
+Returns the first element pointed by the [AccessibleNode#controls](AccessibleNode#controls) property.
+The property may be null if no HTML element found in the same tree.
+
+**Kind**: instance property of [<code>Option</code>](#Option)  
+**Returns**: <code>AccessibleNode</code> - [Listbox](#Listbox)  
 <a name="Roletype+tabIndex"></a>
 
-### radio.tabIndex : <code>Number</code>
+### option.tabIndex : <code>Number</code>
 Current tabindex of the element
 
-**Kind**: instance property of [<code>Radio</code>](#Radio)  
+**Kind**: instance property of [<code>Option</code>](#Option)  
 <a name="Roletype+addEventListener"></a>
 
-### radio.addEventListener(label, callback, [options])
+### option.addEventListener(label, callback, [options])
 Adds an listener to the object and targeted element
 
-**Kind**: instance method of [<code>Radio</code>](#Radio)  
+**Kind**: instance method of [<code>Option</code>](#Option)  
 **See**: customEvents  
 
 | Param | Type | Description |
