@@ -6,13 +6,16 @@ import Widget from "./Widget";
  *
  * @class
  * @extends Widget
- * @param {HTMLElement} element 				element to derive information nameFrom
- * @param {Object} [options] 						optional options
- * @param {Number|"any"} options.step 	increase/decrease value used
  * @return {Range} this
  * @see {@link https://w3c.github.io/aria/aria/aria.html#range}
  */
 class Range extends Widget {
+	/**
+	 * @alias module:Range-const
+	 * @param {HTMLElement} element 				element to derive information nameFrom
+	 * @param {Object} [options] 						optional options
+ 	 * @param {Number|"any"} options.step 	increase/decrease value used
+	 */
 	constructor(...arg) {
 		super(...arg);
 
@@ -50,7 +53,7 @@ class Range extends Widget {
 		if(ev) ev.preventDefault();
 
 		if(this.valueMin === null || this.valueNow > this.valueMin) {
-			this.valueNow = this.valueNow - this._.step;
+			this.valueNow = this.valueNow - Number(this._.step);
 		}
 	}
 
@@ -64,7 +67,7 @@ class Range extends Widget {
 		if(ev) ev.preventDefault();
 
 		if(this.valueMax === null || this.valueNow < this.valueMax) {
-			this.valueNow = this.valueNow + this._.step;
+			this.valueNow = this.valueNow + Number(this._.step);
 		}
 	}
 }

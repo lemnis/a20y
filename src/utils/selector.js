@@ -72,4 +72,39 @@ export function getOwns(key) {
 	return roles[key].owns;
 }
 
-export default { getRole, get, getDeepRole, getDeep, getOwns };
+function getChildren(key) {
+	let owns = roles[key].owns;
+	
+	// check if element owns any children
+	if(owns) {
+		// strip keys, from { any: [a, b], all: [c, d]} to [a, b, c, d]
+		// var allowedRoles = [].concat(...Object.values(owns));
+		var result = [];
+
+		// get all owned elements of the children
+		owns.forEach((role, i) => {
+			var childRoles = getChildren(role);
+			if(childRoles.length > 0) {
+				// add child roles
+				result = result.concat(childRoles);
+
+				//remove parent role
+				owns.splice(i, 1);
+			}
+		});
+
+		owns = owns.concat(result);
+		return owns;
+	} else {
+		return [];
+	}
+}
+
+export function getDeepOwns(key) {
+	let owns = roles[key].owns;
+	if(!owns) return;
+
+	return getChildren(key);
+}
+
+export default { getRole, get, getDeepRole, getDeep, getOwns, getDeepOwns };

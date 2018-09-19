@@ -1,12 +1,14 @@
 import AccessibleNode from "aomjs/src/AccessibleNode.js";
+import AccessibleNodeList from "aomjs/src/AccessibleNodeList.js";
 
-const Mousetrap = require("mousetrap");
 import objectPath from "object-path";
+import mix from "@vestergaard-company/js-mixin";
 
-// Event names that are only inside the libary
-var customEvents = ["key", "attributes", "characterData", "childlist", "label"];
+import elements from "./../../utils/elements";
+import create from "./../../utils/create";
+import EventTarget from "./../../utils/EventTarget";
 
-let isFunction = function (obj) { return typeof obj == "function" || false; };
+/** @module Roletype */
 
 /**
  * Register extra elements used for some roles,
@@ -48,9 +50,11 @@ function handleCustomValue(path, value) {
 }
 
 /**
+ * @alias module:Roletype
  * @extends AccessibleNode
+ * @mixes module:utils/EventTarget
  */
-class Roletype extends AccessibleNode {
+class Roletype extends mix(AccessibleNode).with(EventTarget) {
 
 	/**
 	 * @extends AccessibleNode
@@ -64,7 +68,7 @@ class Roletype extends AccessibleNode {
 
 		objectPath.push(this._, "mutations", "tabIndex");
 
-		this._onAriaDisabledMutation();
+		// this._onAriaDisabledMutation();
 	}
 
 	_onAriaDisabledMutation() {
@@ -87,97 +91,53 @@ class Roletype extends AccessibleNode {
 
 		return this._node.tabIndex;
 	}
-	set tabIndex(number) { this._node.tabIndex = number; }
-
-	/**
-	 * Adds an listener to the object and targeted element
-	 * @see customEvents
-	 * @param {String} label Type of event
-	 * @param {Function} callback Callback function
-	 * @param {Object} [options] Extends AddEventListenerOptions
-	 * @param {String} [options.key] When label is set to `key` it specifies the keycombo to listen to
-	 * @param {String} [options.attribute] When label is set to `attributes` it specifies which attribute should be changed
-	 * @param {Element} [options.target] Changes the targeted element
-	 * @param {Boolean} [options.capture]
-	 * @param {Boolean} [options.passive]
-	 * @param {Boolean} [options.once]
-	 */
-	addEventListener(type, callback, options) {
-		// check if custom target is set
-		var node = options && options.target ? options.target : this._node;
-		
-		// push event to the listener
-		super.addEventListener(type, { callback, options });
-
-		// attach listener to given keys
-		if (type == "key" && options.key) {
-			Mousetrap(node).bind(options.key, callback);
-		}
-
-		// attach native events to target element
-		if (customEvents.indexOf(type) == -1) {
-			node.addEventListener(type, callback, options);
-		}
+	set tabIndex(number) { 
+		this._node.tabIndex = number;
 	}
 
-	removeListener(label, callback, options) {
-		if (!this._listeners.has(label)) {
-			return;
+	get owns() {
+		if (this._values.owns) return this._values.owns;
+
+		if (this._node.hasAttribute("aria-owns")) {
+			var ids = this._node.getAttribute("aria-owns").split(" ");
+			var list = new AccessibleNodeList();
+			ids.forEach(id => {
+				var node = document.getElementById(id);
+				if (!elements.has(node)) {
+					create.one(node);
+				}
+
+				list.add(elements.get(node));
+			});
+
+			this._values.owns = list;
+			return list;
 		}
 
-		let stack = this._listeners.get(label);
-		let index;
-
-		if (stack && stack.length) {
-			index = stack.reduce((i, listener, index) => {
-				if (
-					isFunction(listener.callback) && listener.callback === callback &&
-					(
-						(
-							listener.options &&
-							listener.options.key == options.key &&
-							listener.options.attribute == options.attribute &&
-							listener.options.capture == options.capture
-						) ||
-						!listener.options && !options
-					)
-				) {
-					return i = index;
-				} else {
-					return i;
-				}
-			}, -1);
-
-			if (index > -1) {
-				if (customEvents.indexOf(label) == -1) {
-					var el = options && options.target ? options.target : this._node;
-
-					el.removeEventListener(label, callback, options);
-				}
-				stack.splice(index, 1);
-				this._listeners.set(label, stack);
-				return true;
-			}
-		}
-		return false;
+		return null;
 	}
 
-	dispatchEvent(event) {
-		if (!this._listeners.has(event.type)) {
-			return true;
+	get controls() {
+		if (this._values.controls) return this._values.controls;
+
+		if (this._node.hasAttribute("aria-controls")) {
+			var ids = this._node.getAttribute("aria-controls").split(" ");
+			var list = new AccessibleNodeList();
+			ids.forEach(id => {
+				var node = document.getElementById(id);
+				if (!elements.has(node)) {
+					create.one(node);
+				}
+
+				list.add(elements.get(node));
+			});
+
+			this._values.controls = list;
+			return list;
 		}
-		var stack = this._listeners.get(event.type);
-		stack.forEach(listener => {
-			if(listener.callback) listener.callback.call(this, event);
-		});
-		this._node.dispatchEvent(event);
 
-		return !event.defaultPrevented;
-	}	
-
-	addKeyListener(key, callback) {
-		return this.addEventListener("key", callback, { key });
-	}	
+		return null;
+	}
 }
 
 export default Roletype;

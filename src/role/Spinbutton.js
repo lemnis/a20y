@@ -37,8 +37,8 @@ class Spinbutton extends Range {
 
 		// todo: allow automatically setting valueText with some sugar
 
-		this._.spinbutton.up.addEventListener("click", this.stepUp.bind(this));
-		this._.spinbutton.down.addEventListener("click", this.stepDown.bind(this));
+		if (this._.spinbutton.down) this._.spinbutton.up.addEventListener("click", this.stepUp.bind(this));
+		if (this._.spinbutton.down) this._.spinbutton.down.addEventListener("click", this.stepDown.bind(this));
 		this.addKeyListener("up", this.stepUp.bind(this));
 		this.addKeyListener("down", this.stepDown.bind(this));
 		this.element.value = this.valueNow;

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Listbox.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Listbox.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Select from "./abstract/Select";
+import boolean from "./../type/boolean";
+
+/**
+ * @summary A widget that allows the user to select one or more items from a list of choices.
+ * @desc
+ * ### Keyboard Support
+ *
+ * #### Default
+ * 
+ * | Key | Function |
+ * | --- | -------- |
+ * | Down Arrow | Moves focus to the next option &lt;br/> If not multiselectable, it selects the focused option.
+ * | Up Arrow 	| Moves focus to the previous option  &lt;br/> If not multiselectable, it selects the focused option.
+ * | Home 			|	Moves focus to the first option  &lt;br/> If not multiselectable, it selects the focused option.
+ * | End  			|	Moves focus to the last option  &lt;br/> If not multiselectable, it selects the focused option.
+ * 
+ * #### Multiple selection
+ * 
+ * | Key | Function |
+ * | --- | -------- |
+ * | Space					| Changes the selection state of the focused option. |
+ * | Shift + Down Arrow 	| Moves focus to and selects the next option. |
+ * | Shift + Up Arrow 	 	| Moves focus to and selects the previous option. |
+ * | Control + Shift + Home |	Selects from the focused option to the beginning of the list. |
+ * | Control + Shift + End  | Selects from the focused option to the end of the list. |
+ * | Control + A 	        | Selects all options in the list. If all options are selected, unselects all options. |
+ * 
+ * ### Example
+ * 
+ * #### Basic example
+ * 
+ * &lt;ul role="listbox" tabindex="0" aria-activedescendant="option_1" data-listbox-size="30">
+ *   &lt;li id="option_1" role="option">Apple&lt;/li>
+ *   &lt;li id="option_3" role="option">Asparagus&lt;/li>
+ *   &lt;li id="option_5" role="option">Beets&lt;/li>
+ *   &lt;li id="option_7" role="option">Broccoli&lt;/li>
+ *   &lt;li id="option_9" role="option">Cabbage&lt;/li>
+ *   &lt;li id="option_11" role="option">Cauliflower&lt;/li>
+ *   &lt;li id="option_13" role="option">Chard&lt;/li>
+ *   &lt;li id="option_15" role="option">Corn&lt;/li>
+ *   &lt;li id="option_17" role="option">Daikon&lt;/li>
+ *   &lt;li id="option_19" role="option">Edamame&lt;/li>
+ * 	&lt;/ul>
+ * 
+ * ```html
+ * &lt;ul role="listbox" tabindex="0" aria-activedescendant="option_1">
+ *   &lt;li id="option_21" role="option">Elderberry&lt;/li>
+ *   ...
+ * &lt;/ul>
+ * ```
+ * 
+ * #### Multi selectable example
+ * 
+ * &lt;ul role="listbox" tabindex="0" aria-activedescendant="option_1" aria-multiselectable="true">
+ *   &lt;li id="option_21" role="option">Elderberry&lt;/li>
+ *   &lt;li id="option_23" role="option">Fig&lt;/li>
+ *   &lt;li id="option_25" role="option">Grape&lt;/li>
+ *   &lt;li id="option_27" role="option">Iceberg lettuce&lt;/li>
+ *   &lt;li id="option_29" role="option">Kale&lt;/li>
+ *   &lt;li id="option_31" role="option">Leek&lt;/li>
+ *   &lt;li id="option_33" role="option">Mango&lt;/li>
+ *   &lt;li id="option_35" role="option">Melon&lt;/li>
+ *   &lt;li id="option_37" role="option">Nectarine&lt;/li>
+ *   &lt;li id="option_39" role="option">Olive&lt;/li>
+ *   &lt;li id="option_41" role="option">Orange&lt;/li>
+ *   &lt;li id="option_43" role="option">Pea&lt;/li>
+ *   &lt;li id="option_45" role="option">Pineapple&lt;/li>
+ *   &lt;li id="option_47" role="option">Pumpkin&lt;/li>
+ *   &lt;li id="option_49" role="option">Radish&lt;/li>
+ *   &lt;li id="option_51" role="option">Shallot&lt;/li>
+ *   &lt;li id="option_53" role="option">Squash&lt;/li>
+ *   &lt;li id="option_55" role="option">Sweet potato&lt;/li>
+ *   &lt;li id="option_57" role="option">Turnip&lt;/li>
+ *   &lt;li id="option_59" role="option">Victoria plum&lt;/li>
+ *   &lt;li id="option_61" role="option">Watermelon&lt;/li>
+ *   &lt;li id="option_63" role="option">Zucchin&lt;/li>
+ * 	&lt;/ul>
+ * 
+ * ```html
+ * &lt;ul role="listbox" tabindex="0" aria-activedescendant="option_1" aria-multiselectable="true">
+ *   &lt;li id="option_21" role="option">Elderberry&lt;/li>
+ *   ...
+ * &lt;ul>
+ * ```
+ * 
+ * @extends Roletype
+ */
+class Listbox extends Select {
+	constructor(...args) {
+		super(...args);
+
+		this._.registerCustomValue("listbox.size", 1);
+
+		this.size = 10;
+		this.addEventListener("change", this.onchange.bind(this));
+
+		// this.addKeyListener("enter", clickOnOption.bind(this));
+	}
+
+	onchange(ev) {
+		if(typeof super.onchange == "function") super.onchange(ev);
+
+		this.options.forEach(option => {
+			if (option._node !== ev.target) {
+				option.selected = false;
+			}
+		});
+	}
+
+	/**
+	 * Returns / Sets the size of control.
+	 * @type {Integer}
+	 */
+	get size() { return this._.listbox.size; }
+	set size(val) {
+		var height = this.options[0].clientHeight;
+		this._node.style.height = height * val + "px";
+		this._.listbox.size = val;
+	}
+
+	moved(from, to) {
+		// update selected on keyevent when only one item can be selected
+		if (!this.multiselectable) {
+			from.selected = undefined;
+			to.selected = true;
+		}
+	}
+}
+
+export default Listbox;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Radio.html">Radio</a></li></ul><h3>Classes</h3><ul><li><a href="Alert.html">Alert</a></li><li><a href="Alertdialog.html">Alertdialog</a></li><li><a href="Button.html">Button</a></li><li><a href="Checkbox.html">Checkbox</a></li><li><a href="Combobox.html">Combobox</a></li><li><a href="Dialog.html">Dialog</a></li><li><a href="Link.html">Link</a></li><li><a href="Listbox.html">Listbox</a></li><li><a href="module-Radio.html">Radio</a></li><li><a href="Option.html">Option</a></li><li><a href="Radiogroup.html">Radiogroup</a></li><li><a href="Scrollbar.html">Scrollbar</a></li><li><a href="Searchbox.html">Searchbox</a></li><li><a href="Slider.html">Slider</a></li><li><a href="Spinbutton.html">Spinbutton</a></li><li><a href="Switch.html">Switch</a></li><li><a href="Textbox.html">Textbox</a></li></ul><h3>Events</h3><ul><li><a href="Link.html#event:accessibleclick">accessibleclick</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Feb 10 2018 18:48:52 GMT+0100 (W. Europe Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

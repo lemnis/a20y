@@ -11,13 +11,13 @@ let AriaExpanded = (superclass) => class extends superclass {
 	constructor(...args) {
 		super(...args);
 		if (this.expanded !== undefined) { // todo: add when first time aria-expanded is boolean
-			this.addListener("click", this.onExpanded.bind(this));
-			// this.addListener("key", this.onExpanded.bind(this), { key: ["enter", "space"] });
+			this.addEventListener("click", this.onexpanded.bind(this));
+			// this.addEventListener("key", this.onexpanded.bind(this), { key: ["Enter", "Space"] });
 		}
 	}
 
-	onExpanded(ev) {
-		if (typeof super.onExpanded == "function") super.onExpanded(ev);
+	onexpanded(ev) {
+		if (typeof super.onexpanded == "function") super.onexpanded(ev);
 		if(ev && typeof ev.preventDefault === "function") ev.preventDefault();
 
 		if(this.disabled !== true) {

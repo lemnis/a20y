@@ -10,6 +10,9 @@ import Checkbox from "./../role/Checkbox";
 import Combobox from "./../role/Combobox";
 import Dialog from "./../role/Dialog";
 import Form from "./../role/Form";
+import Menu from "./../role/Menu";
+import Menubar from "./../role/Menubar";
+import Menuitem from "./../role/Menuitem";
 import Link from "./../role/Link";
 import Listbox from "./../role/Listbox";
 import Option from "./../role/option";
@@ -24,7 +27,7 @@ import Tablist from "./../role/Tablist";
 import Tabpanel from "./../role/Tabpanel";
 import Textbox from "./../role/Textbox";
 
-var obj = { Button, Checkbox, Combobox, Dialog, Form, Listbox, 
+var obj = { Button, Checkbox, Combobox, Dialog, Form, Menu, Menubar, Menuitem, Listbox, 
 	Option, Range, Roletype, Searchbox, Slider, Spinbutton,
 	Tab, Tablist, Tabpanel, Textbox, Link, Switch,
 	Radiogroup, Radio
@@ -34,17 +37,24 @@ function all() {
 	for (let key in obj) {
 		var nodeList = document.querySelectorAll(selector.getRole(key.toLowerCase()));
 		for (let i = 0; i < nodeList.length; i++) {
-			elements.set(nodeList[i], new obj[key](nodeList[i]));
+			if(!elements.has(nodeList[i])) {
+				elements.set(nodeList[i], new obj[key](nodeList[i]));
+			}
 		}
 	}
 }
 
 function one(el) {
 	if(elements.has(el)) return elements.get(el);
-	var role = getComputedRole(el);
+	let role = getComputedRole(el);
+	let constructor;
 	
 	/** @todo Remove fallback method */
-	var constructor = obj[role] || Roletype;
+	if(role){
+		constructor = obj[role.slice(0, 1).toUpperCase() + role.slice(1)] || Roletype;
+	} else {
+		constructor = Roletype;
+	}
 
 	return elements.set(el, new constructor(el));
 }

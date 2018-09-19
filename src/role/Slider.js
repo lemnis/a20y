@@ -41,19 +41,70 @@ function updatePosition(value, track, thumb, min, max, orientation) {
 }
 
 /**
- * `slider` elements let the user specify a numeric value which must be no less
- * than a given value, and no more than another given value. The precise value,
- * however, is not considered important. This is typically represented using a
- * slider or dial control rather than a text entry box like the "number" input
- * type. Because this kind of widget is imprecise, it shouldn't typically be
- * used unless the control's exact value isn't important.
+ * The slider element let the user specify a numeric value which must be no less
+ * than a given value, and no more than another given value. 
+ * 
+ * The precise value,however, is not considered important. This is typically represented using a slider or
+ * dial control rather than a text entry box like the "number" input type. Because this kind of widget
+ * is imprecise, it shouldn't typically be used unless the control's exact value isn't important.
  *
+ * ### Examples
  *
+ * #### Basic example
+ * 
+ * <div class="slider-track">
+ *   <div role="slider"  tabindex="0"></div>
+ * </div>
+ * 
+ * ```html
+ * <div class="slider-track">
+ *   <div role="slider"  tabindex="0"></div>
+ * </div>
+ * ```
+ * 
+ * #### As an button with a specified step and range
  *
- * @class
+ * <div class="slider-track">
+ *   <button type="button" role="slider"
+ * 		aria-valuemin="30" aria-valuemax="300" aria-valuenow="50" data-step="10"></button>
+ * </div>
+ *
+ * ```html
+ * <div class="slider-track">
+ *   <button type="button" role="slider"
+ * 		aria-valuemin="30" aria-valuemax="300" aria-valuenow="50" data-step="10"></button>
+ * </div>
+ * ```
+ * 
+ * #### Vertical
+ * 
+ * <div class="slider-track vertical">
+ *   <button type="button" role="slider" aria-orientation="vertical"></button>
+ * </div>
+ * 
+ * ```html
+ * <div class="slider-track vertical">
+ *   <button type="button" role="slider" aria-orientation="vertical"></button>
+ * </div>
+ * ```
+ * 
+ * #### Disabled
+ * 
+ * <div class="slider-track">
+ *   <button type="button" role="slider" aria-disabled="true"></button>
+ * </div>
+ * 
+ * ```html
+ * <div class="slider-track">
+ *   <button type="button" role="slider" aria-disabled="true"></button>
+ * </div>
+ * ```
+ * 
+ * 
+ * @summary A user input where the user selects a value from within a given range.
  * @extends Range
  *
- * @fires changed
+ * @fires change
  * @fires input
  *
  * @param {HTMLElement} element 				element to derive information nameFrom
@@ -65,32 +116,29 @@ function updatePosition(value, track, thumb, min, max, orientation) {
  *
  * @todo add support for "any"
  * @todo add events
- *
- * @example
- * <div class="track">
- *   <button type="button" role="slider" aria-label="slider" /><button>
- * </div>
  */
 class Slider extends Range {
+	/**
+	 * @param {*} args 
+	 */
 	constructor(...args) {
 		super(...args);
 
 		// register customs
-		this._.registerCustomElement("slider.track", this.element.parentNode);
-		this._.registerCustomValue("step", 1);
+		this._.registerCustomElement("slider.track", this._node.parentNode);
 
 		// set defaults
-		if(null === this.orientation) this.orientation = "horizontal";
-		if(null === this.valueMin) {
+		if(undefined == this.orientation) this.orientation = "horizontal";
+		if(undefined == this.valueMin) {
 			/**
 			 * @default [0]
 			 */
 			this.valueMin = 0;
 		}
-		if(null === this.valueMax) this.valueMax = 0;
-		if(null === this.valueNow && this.valueMax < this.valueMin) {
+		if(undefined == this.valueMax) this.valueMax = 100;
+		if(undefined == this.valueNow && this.valueMax < this.valueMin) {
 			this.valueNow = this.valueMin;
-		} else if(null === this.valueNow) {
+		} else if(undefined == this.valueNow) {
 			this.valueNow = this.valueMin + (this.valueMax - this.valueMin)/2;
 		}
 
@@ -100,20 +148,22 @@ class Slider extends Range {
 
 		// todo: allow automatically setting valueText with some sugar
 
-		this.element.addEventListener("mousedown", this._onMouseDown.bind(this));
-		this.element.addEventListener("touchstart", this._onTouchStart.bind(this));
-		this._.slider.track.addEventListener("click", this.onTrackClick.bind(this));
-		this.addKeyListener("right", this.stepUp.bind(this));
-		this.addKeyListener("up", this.stepUp.bind(this));
-		this.addKeyListener("left", this.stepDown.bind(this));
-		this.addKeyListener("down", this.stepDown.bind(this));
+		this.addEventListener("touchstart", this._onTouchStart.bind(this));
+		this.addEventListener("mousedown", this._onMouseDown.bind(this), { target: this._.slider.track});
+		this.addEventListener("key", this.stepUp.bind(this), { key: "ArrowRight" });
+		this.addEventListener("key", this.stepUp.bind(this), { key: "ArrowUp" });
+		this.addEventListener("key", this.stepDown.bind(this), { key: "ArrowLeft" });
+		this.addEventListener("key", this.stepDown.bind(this), { key: "ArrowDown" });
 
-		updatePosition(this.valueNow, this._.slider.track, this.element, this.valueMin, this.valueMax, this.orientation);
+		updatePosition(this.valueNow, this._.slider.track, this._node, this.valueMin, this.valueMax, this.orientation);
 	}
 
 	_onMouseDown() {
 		document.addEventListener("mousemove", this._onDrag);
 		document.addEventListener("mouseup", this._unTrackMouseBinded);
+
+		// focus the thumb when the user did an action
+		this._node.focus();
 	}
 	_onTouchStart() {
 		document.addEventListener("touchmove", this._onDrag);
@@ -123,6 +173,9 @@ class Slider extends Range {
 	_unTrackMouse() {
 		document.removeEventListener("mousemove", this._onDrag);
 		document.removeEventListener("mouseup", this._unTrackMouseBinded);
+
+		// focus the thumb when the user did an action
+		this._node.focus();		
 	}
 	_unTrackTouch() {
 		document.removeEventListener("touchmove", this._onDrag);
@@ -140,22 +193,31 @@ class Slider extends Range {
 			pos = ev[positionKey];
 		}
 		this.valueNow = calcValueOfTrackPos(
-			pos, this._.slider.track, this.element,
+			pos, this._.slider.track, this._node,
 			this.valueMin, this.valueMax, this._.step, this.orientation
 		);
 	}
 
-	onTrackClick(ev) {
-		this.onDrag(ev);
-	}
-
 	get valueNow() { return super.valueNow; }
 	set valueNow(val) {
-		if(!this.disabled){
+		if(!this.disabled) {
 			super.valueNow = val;
-			updatePosition(val, this._.slider.track, this.element, this.valueMin, this.valueMax, this.orientation);
+			updatePosition(val, this._.slider.track, this._node, this.valueMin, this.valueMax, this.orientation);
 		}
 	}
+
+	/* Native polyfill */
+
+	// automatic polyfilled by attributes
+	// autocomplete
+	// list
+	// min
+	// max
+	// step => data-step
+	// value
+	// valueAsNumber
+	// stepDown
+	// stepUp
 }
 
 export default Slider;

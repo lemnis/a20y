@@ -1,14 +1,12 @@
-import elements from "./../utils/elements";
-import Roletype from "./abstract/Roletype";
 import mix from "@vestergaard-company/js-mixin";
 
-import AriaSelected from "./../attributes/aria-selected";
+import elements from "./../utils/elements";
+import selector from "./../utils/selector";
+import roles from "./../data/roles";
 
-export const options = {
-	owned: "tablist", // parent role
-	selector: "[role='tab']",
-	role: "tab"
-};
+import Roletype from "./abstract/Roletype";
+
+import AriaSelected from "./../attributes/aria-selected";
 
 class Tab extends mix(Roletype).with(AriaSelected) {
 	constructor(...args) {
@@ -16,7 +14,9 @@ class Tab extends mix(Roletype).with(AriaSelected) {
 	}
 
 	onSelect(ev) {
-		let tablist = elements.getParent(this, options.owned, options.role);
+		// gets the selector for finding it's context element (tablist > tab) 
+		var contextSelector = roles.tab.context.map(str => selector.getRole(str)).join(", ");
+		let tablist = elements.getParent(this, contextSelector);
 		if(!tablist) return false;
 		
 		ev.preventDefault();

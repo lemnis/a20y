@@ -1,6 +1,5 @@
 import mix from "@vestergaard-company/js-mixin";
 import Window from "./abstract/Window";
-const Mousetrap = require("mousetrap");
 
 import AriaExpanded from "../attributes/aria-expanded.js";
 
@@ -39,14 +38,15 @@ function focus(node) {
  *  Hello world!
  * 	<button focus type="button">Ok</button>
  * </div>
+ * @extends Window
  */
 class Dialog extends mix(Window).with(AriaExpanded) {
 	constructor(...args) {
 		super(...args);
 
-		// this.element.ownerDocument.addEventListener("focus", this._onFocus.bind(this), true);
-		// this.element.ownerDocument.addEventListener("blur", this._onFocus.bind(this), true);
-		this.addListener("key", this.onClose.bind(this), { key: "esc", target: this.element.ownerDocument});
+		// this._node.ownerDocument.addEventListener("focus", this._onFocus.bind(this), true);
+		// this._node.ownerDocument.addEventListener("blur", this._onFocus.bind(this), true);
+		this.addEventListener("key", this.onClose.bind(this), { key: "Escape", target: this._node.ownerDocument});
 
 		var n = focus(document);
 		var i = 0;
@@ -63,7 +63,7 @@ class Dialog extends mix(Window).with(AriaExpanded) {
 
 	_onFocus(ev) {
 		// ev.preventDefault();
-		let n = focus(this.element.ownerDocument);
+		let n = focus(this._node.ownerDocument);
 		if(n[n.length-1] != ev.target) {
 			ev.preventDefault();
 			window.focus();
@@ -73,14 +73,14 @@ class Dialog extends mix(Window).with(AriaExpanded) {
 
 	onClose(ev) {
 		if(ev) ev.preventDefault();
-		this.element.hidden = true;
+		this._node.hidden = true;
 
 		this.dispatchEvent(new Event("close"));
 	}
 
 	_onHiddenMutation(ev) {
-		if(this.element.getAttribute("hidden") === "true") {
-			var n = focus(this.element);
+		if(this._node.getAttribute("hidden") === "true") {
+			var n = focus(this._node);
 			n[0].focus();
 			console.log(n, document.activeElement, n == document.activeElement);
 		} else {

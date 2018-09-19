@@ -1,7 +1,34 @@
 
-<base href="//lemnis.github.io/a20y/">
+<base href="//D:/Personal/autotility/docs/">
 
-## Classes
+## Modules
+
+<dl>
+<dt><a href="#module_properties/expanded">properties/expanded</a></dt>
+<dd></dd>
+<dt><a href="#module_Roletype">Roletype</a></dt>
+<dd></dd>
+<dt><a href="#module_Button">Button</a></dt>
+<dd></dd>
+<dt><a href="#module_Listbox">Listbox</a></dt>
+<dd></dd>
+<dt><a href="#module_Menu">Menu</a></dt>
+<dd></dd>
+<dt><a href="#module_Menubar">Menubar</a></dt>
+<dd></dd>
+<dt><a href="#module_Menuitem">Menuitem</a></dt>
+<dd></dd>
+<dt><a href="#module_Option">Option</a></dt>
+<dd></dd>
+<dt><a href="#module_Radio">Radio</a></dt>
+<dd></dd>
+<dt><a href="#module_utils/EventTarget">utils/EventTarget</a></dt>
+<dd></dd>
+<dt><a href="#module_Focus">Focus</a></dt>
+<dd></dd>
+</dl>
+
+## 
 
 <dl>
 <dt><a href="./classes/Command.html">Command</a> ⇐ <code><a href="#Widget">Widget</a></code></dt>
@@ -26,10 +53,6 @@
 An input representing a range of values that can be set by the user.</p>
 
     </dd>
-    <dt><a href="./classes/Roletype.html">Roletype</a> ⇐ <code>AccessibleNode</code></dt>
-    <dd>
-            
-    </dd>
     <dt><a href="./classes/Section.html">Section</a> ⇐ <code><a href="#Structure">Structure</a></code></dt>
     <dd>
             
@@ -38,20 +61,20 @@ An input representing a range of values that can be set by the user.</p>
     <dd>
             
     </dd>
-    <dt><a href="./classes/Select.html">Select</a> ⇐ <code><a href="#Roletype">Roletype</a></code></dt>
+    <dt><a href="./classes/Select.html">Select</a> ⇐ <code>Roletype</code></dt>
     <dd>
             <p>A form widget that allows the user to make selections from a set of choices.</p>
 
     </dd>
-    <dt><a href="./classes/Structure.html">Structure</a> ⇐ <code><a href="#Roletype">Roletype</a></code></dt>
+    <dt><a href="./classes/Structure.html">Structure</a> ⇐ <code>Roletype</code></dt>
     <dd>
             
     </dd>
-    <dt><a href="./classes/Widget.html">Widget</a> ⇐ <code><a href="#Roletype">Roletype</a></code></dt>
+    <dt><a href="./classes/Widget.html">Widget</a> ⇐ <code>Roletype</code></dt>
     <dd>
             
     </dd>
-    <dt><a href="./classes/Window.html">Window</a> ⇐ <code><a href="#Roletype">Roletype</a></code></dt>
+    <dt><a href="./classes/Window.html">Window</a> ⇐ <code>Roletype</code></dt>
     <dd>
             
     </dd>
@@ -64,11 +87,6 @@ An input representing a range of values that can be set by the user.</p>
     <dt><a href="./classes/Alertdialog.html">Alertdialog</a> ⇐ <code><a href="#Dialog">Dialog</a></code></dt>
     <dd>
             <p>A dialog containing an alert message</p>
-
-    </dd>
-    <dt><a href="./classes/Button.html">Button</a> ⇐ <code><a href="#Command">Command</a></code></dt>
-    <dd>
-            <p>An input that allows for user-triggered actions when clicked or pressed.</p>
 
     </dd>
     <dt><a href="./classes/Checkbox.html">Checkbox</a> ⇐ <code><a href="#Input">Input</a></code></dt>
@@ -93,31 +111,19 @@ such as a listbox or grid, that can dynamically pop up to help the user set the 
 when activated, causes the user agent to navigate to that resource.</p>
 
     </dd>
-    <dt><a href="./classes/Listbox.html">Listbox</a> ⇐ <code><a href="#Roletype">Roletype</a></code></dt>
-    <dd>
-            <p>A widget that allows the user to select one or more items from a list of choices.</p>
-
-    </dd>
-    <dt><a href="./classes/Option.html">Option</a> ⇐ <code><a href="#Input">Input</a></code></dt>
-    <dd>
-            
-    </dd>
-    <dt><a href="./classes/Radio.html">Radio</a> ⇐ <code><a href="#Command">Command</a></code></dt>
-    <dd>
-            <p>A checkable input in a group of elements with the same role,
-only one of which can be checked at a time.</p>
-<h3 id="examples">Examples</h3>
-<h4 id="default">Default</h4>
-<div role="radio" aria-checked="true" tabindex="0">Apple</div>
-<div role="radio" aria-checked="false" tabindex="0">Apple</div>
-    </dd>
     <dt><a href="./classes/Radiogroup.html">Radiogroup</a> ⇐ <code><a href="#Select">Select</a></code></dt>
     <dd>
             <h3 id="example">Example</h3>
 <h4 id="basic-example">Basic example</h4>
 <div role="radiogroup" tabindex="0" aria-activedescendant="radio_1">
-  <div id="radio_1" role="radio" aria-checked="true">Apple</div>
+  <div id="radio_1" role="radio" aria-checked="false">Apple</div>
   <div id="radio_2" role="radio" aria-checked="false">Grapefruit</div>
+</div>
+
+<h4 id="example-with-tabindex">Example with tabindex</h4>
+<div role="radiogroup">
+  <div id="radio_1" role="radio" tabindex="0" aria-checked="false">Apple</div>
+  <div id="radio_2" role="radio" tabindex="-1" aria-checked="false">Grapefruit</div>
 </div>
     </dd>
     <dt><a href="./classes/Scrollbar.html">Scrollbar</a> ⇐ <code><a href="#Range">Range</a></code></dt>
@@ -154,7 +160,7 @@ only one of which can be checked at a time.</p>
     </dd>
     </dl>
 
-## Mixins
+## 
 
 <dl>
 <dt><a href="./mixin/Form.html">Form</a></dt>
@@ -167,7 +173,7 @@ only one of which can be checked at a time.</p>
     </dd>
     </dl>
 
-## Members
+## 
 
 <dl>
 <dt><a href="#undefinedwillValidate">undefinedwillValidate</a> : <code>Boolean</code></dt>
@@ -188,7 +194,7 @@ mostly a key as tagName with an array of allowed roles for that tag</p>
     </dd>
     </dl>
 
-## Constants
+## 
 
 <dl>
 <dt><a href="#roles">roles</a></dt>
@@ -197,7 +203,7 @@ mostly a key as tagName with an array of allowed roles for that tag</p>
     </dd>
     </dl>
 
-## Functions
+## 
 
 <dl>
 <dt><a href="#AriaChecked">AriaChecked()</a></dt>
@@ -240,16 +246,6 @@ mostly a key as tagName with an array of allowed roles for that tag</p>
             <p>Returns the opposite state of the attribute</p>
 
     </dd>
-    <dt><a href="#get">get(ay, attributeName)</a> ⇒ <code>String</code></dt>
-    <dd>
-            <p>Returns the value of a given attribute</p>
-
-    </dd>
-    <dt><a href="#set">set(ay, attributeName, status)</a></dt>
-    <dd>
-            <p>Sync the new value to the DOM</p>
-
-    </dd>
     <dt><a href="#toggle">toggle()</a> ⇒ <code>String</code></dt>
     <dd>
             <p>Returns the opposite state of the attribute,
@@ -268,31 +264,6 @@ needed when attribute uses an token list</p>
     <dt><a href="#hasAllowedRole">hasAllowedRole(tagName, role)</a> ⇒ <code>Boolean</code></dt>
     <dd>
             <p>Checks if given role is allowed for given tag</p>
-
-    </dd>
-    <dt><a href="#scrollIntoView">scrollIntoView(child)</a></dt>
-    <dd>
-            <p>Scrolls an element into its parent view</p>
-
-    </dd>
-    <dt><a href="#start">start(descendants)</a></dt>
-    <dd>
-            <p>Adds focus to the first element</p>
-
-    </dd>
-    <dt><a href="#prev">prev(descendants, child)</a></dt>
-    <dd>
-            <p>Adds focus to the prev element</p>
-
-    </dd>
-    <dt><a href="#next">next(descendants, child)</a></dt>
-    <dd>
-            <p>Adds focus to the next element</p>
-
-    </dd>
-    <dt><a href="#end">end(descendants)</a></dt>
-    <dd>
-            <p>Adds focus to the last element</p>
 
     </dd>
     <dt><a href="#getRole">getRole(key)</a> ⇒ <code>String</code></dt>

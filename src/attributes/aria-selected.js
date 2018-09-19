@@ -11,8 +11,8 @@ let AriaSelected = (superclass) => class extends superclass {
 	constructor(...args) {
 		super(...args);
 
-		this.addListener("click", this.onSelected.bind(this));
-		this.addListener("key", this.onSelected.bind(this), {key: ["space", "enter"]});
+		this.addEventListener("click", this.onSelected.bind(this));
+		this.addEventListener("key", this.onSelected.bind(this), {key: ["Space", "Enter"]});
 	}
 
 	onSelected(ev) {

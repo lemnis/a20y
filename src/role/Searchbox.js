@@ -1,6 +1,21 @@
+import Textbox from "./Textbox";
 
+/**
+ * @extends Textbox
+ */
+class Searchbox extends Textbox {
+	/**
+	 * #### Example
+	 * 
+	 * <div role="searchbox" contenteditable></div>
+	 * 
+	 * ```html
+	 * <div role="searchbox" contenteditable></div>
+	 * ```
+	 * 
+	 * @param {*} args 
+	 */
+	constructor(...args) { super(...args); }
+}
 
-export const options = {
-	role: "searchbox",
-	selectorsWithImplicitRole: ["input[type='search']:not([list])"]
-};
+export default Searchbox;

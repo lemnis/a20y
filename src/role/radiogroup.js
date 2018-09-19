@@ -1,35 +1,38 @@
-import Radio from "./radio.js";
-import {IS_ACTIVE, IS_NOT_ACTIVE} from "./../utils/state.js";
-import {AriaOwns} from "./../attributes/aria-owns.js";
+import Select from "./abstract/Select.js";
+import focus from "./../utils/focus";
 
-const radiogroupSelector = "[role='radiogroup']";
+/**
+ * ### Example
+ * 
+ * #### Basic example
+ * 
+ * <div role="radiogroup" tabindex="0" aria-activedescendant="radio_1">
+ *   <div id="radio_1" role="radio" aria-checked="false">Apple</div>
+ *   <div id="radio_2" role="radio" aria-checked="false">Grapefruit</div>
+ * </div>
+ * 
+ * #### Example with tabindex
+ * 
+ * <div role="radiogroup">
+ *   <div id="radio_1" role="radio" tabindex="0" aria-checked="false">Apple</div>
+ *   <div id="radio_2" role="radio" tabindex="-1" aria-checked="false">Grapefruit</div>
+ * </div>
+ * 
+ * @extends Select
+ */
+class Radiogroup extends Select {
+	onChange(ev) {
+		// retrieve option that has been changed
+		var changedOption = this.options.find(option => option._node === ev.target);
 
-class Radiogroup {
-	constructor(element) {
-		let radioChildren = element.querySelectorAll("[role='radio']");
-		let activeRadioFound = false;
-		let radios = radioChildren.length > 0 ? radioChildren : new AriaOwns(element).elements;
-
-		this.radios = [];
-
-		for (let radio of radios) {
-			let radioInstance = new Radio(radio);
-			this.radios.push(radioInstance);
-			radioInstance.addListener("toggle", this.toggle.bind(this));
-
-			// find first checked radio and uncheck all later radios
-			if(radioInstance.state == IS_ACTIVE) {
-				if(activeRadioFound == true) radioInstance.state = IS_NOT_ACTIVE;
-				activeRadioFound = true;
-			}
-		}
-	}
-
-	toggle(target) {
-		for (let radio of this.radios) {
-			if(radio.element !== target.element) {
-				radio.state = IS_NOT_ACTIVE;
-			}
+		if(changedOption.checked === "true") {
+			this.options.forEach(radio => {
+				if(radio._node !== ev.target && radio.checked === "true") {
+					radio.checked = false;
+				}
+			});
 		}
 	}
 }
+
+export default Radiogroup;

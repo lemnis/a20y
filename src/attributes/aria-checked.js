@@ -14,15 +14,17 @@ let AriaChecked = (superclass) => class extends superclass {
 	constructor(...args) {
 		super(...args);
 
-		this.addListener("key", this.onChecked.bind(this), {key: "space"});
-		this.addListener("click", this.onChecked.bind(this));
+		this.addEventListener("key", this.onChecked.bind(this), {key: "Space"});
+		this.addEventListener("click", this.onChecked.bind(this));
 	}
 
-	onChecked() {
+	onChecked(ev) {
+		if(ev) ev.preventDefault();
+
 		if(this.disabled !== true) {
 			this.checked = DOMString.toggle(this.checked);
 			this.dispatchEvent(new InputEvent("input"));
-			this.dispatchEvent(new Event("change"));
+			this.dispatchEvent(new Event("change", { bubbles: true }));
 		}
 	}
 };

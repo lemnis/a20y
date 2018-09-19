@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: Slider</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: Slider</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>Slider<span class="signature">(element, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="Slider.html">Slider</a>}</span></h2>
+        
+            <div class="class-description">The slider element let the user specify a numeric value which must be no less
+than a given value, and no more than another given value. 
+
+The precise value,however, is not considered important. This is typically represented using a slider or
+dial control rather than a text entry box like the "number" input type. Because this kind of widget
+is imprecise, it shouldn't typically be used unless the control's exact value isn't important.
+
+### Examples
+
+#### Basic example
+
+<div class="slider-track">
+  <div role="slider"  tabindex="0"></div>
+</div>
+
+```html
+<div class="slider-track">
+  <div role="slider"  tabindex="0"></div>
+</div>
+```
+
+#### As an button with a specified step and range
+
+<div class="slider-track">
+  <button type="button" role="slider"
+		aria-valuemin="30" aria-valuemax="300" aria-valuenow="50" data-step="10"></button>
+</div>
+
+```html
+<div class="slider-track">
+  <button type="button" role="slider"
+		aria-valuemin="30" aria-valuemax="300" aria-valuenow="50" data-step="10"></button>
+</div>
+```
+
+#### Vertical
+
+<div class="slider-track vertical">
+  <button type="button" role="slider" aria-orientation="vertical"></button>
+</div>
+
+```html
+<div class="slider-track vertical">
+  <button type="button" role="slider" aria-orientation="vertical"></button>
+</div>
+```
+
+#### Disabled
+
+<div class="slider-track">
+  <button type="button" role="slider" aria-disabled="true"></button>
+</div>
+
+```html
+<div class="slider-track">
+  <button type="button" role="slider" aria-disabled="true"></button>
+</div>
+```</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="Slider"><span class="type-signature"></span>new Slider<span class="signature">(element, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="Slider.html">Slider</a>}</span></h4>
+    
+
+    
+    <p class="summary">A user input where the user selects a value from within a given range.</p>
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLElement</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">element to derive information nameFrom</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">optional options
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>slider.track</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLElement</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The element that resembles the track, defaults to the elements parent</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>step</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+|
+
+<span class="param-type">"any"</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">increase/decrease amount</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Slider.js.html">Slider.js</a>, <a href="Slider.js.html#line120">line 120</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>add support for "any"</li>
+        
+            <li>add events</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+<h5>Fires:</h5>
+<ul>
+    <li>event:change</li>
+
+    <li>event:input</li>
+</ul>
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    thisArg
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Slider.html">Slider</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>Range</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="valueMin"><span class="type-signature"></span>valueMin<span class="type-signature"></span></h4>
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>[0]</li>
+        </ul></dd>
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Slider.js.html">Slider.js</a>, <a href="Slider.js.html#line136">line 136</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Radio.html">Radio</a></li></ul><h3>Classes</h3><ul><li><a href="Alert.html">Alert</a></li><li><a href="Alertdialog.html">Alertdialog</a></li><li><a href="Button.html">Button</a></li><li><a href="Checkbox.html">Checkbox</a></li><li><a href="Combobox.html">Combobox</a></li><li><a href="Dialog.html">Dialog</a></li><li><a href="Link.html">Link</a></li><li><a href="Listbox.html">Listbox</a></li><li><a href="module-Radio.html">Radio</a></li><li><a href="Option.html">Option</a></li><li><a href="Radiogroup.html">Radiogroup</a></li><li><a href="Scrollbar.html">Scrollbar</a></li><li><a href="Searchbox.html">Searchbox</a></li><li><a href="Slider.html">Slider</a></li><li><a href="Spinbutton.html">Spinbutton</a></li><li><a href="Switch.html">Switch</a></li><li><a href="Textbox.html">Textbox</a></li></ul><h3>Events</h3><ul><li><a href="Link.html#event:accessibleclick">accessibleclick</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Feb 10 2018 18:48:52 GMT+0100 (W. Europe Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -16,8 +16,8 @@ let AriaPressed = (superclass) => class extends superclass {
 		super(...args);
 
 		if(this.pressed !== undefined) { // todo: add when first time aria-pressed is boolean
-			this.addListener("click", this.onPressed.bind(this));
-			this.addListener("key", this.onPressed.bind(this), { key: ["enter", "space"]});
+			this.addEventListener("click", this.onPressed.bind(this));
+			this.addEventListener("key", this.onPressed.bind(this), { key: ["Enter", "Space"]});
 		}
 	}
 

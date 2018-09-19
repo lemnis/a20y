@@ -28,16 +28,16 @@ class Link extends mix(Command).with(AriaExpanded) {
 		this._.registerCustomValue("link.href");
 
 		if(this._.link.href) {
-			this.addListener("click", this.onClick.bind(this));
-			this.addListener("key", this.onClick.bind(this), { key: "enter" });
+			this.addEventListener("click", this.onClick.bind(this));
+			this.addEventListener("key", this.onClick.bind(this), { key: "Enter" });
 		}
 
-		this.addListener("expanded")
+		this.addEventListener("expanded")
 
 		if (this.expanded !== undefined) { // todo: add when first time aria-expanded is boolean
-			this.controls.forEach(control => control.addListener("close", close.bind(this)));
-			this.addListener("click", this.onExpanded.bind(this));
-			this.addListener("key", this.onExpanded.bind(this), { key: "enter" });
+			this.controls.forEach(control => control.addEventListener("close", close.bind(this)));
+			this.addEventListener("click", this.onexpanded.bind(this));
+			this.addEventListener("key", this.onexpanded.bind(this), { key: "Enter" });
 		}
 	}
 
@@ -45,8 +45,8 @@ class Link extends mix(Command).with(AriaExpanded) {
 	 * Fired when state of expanded is changed 
 	 * @param {Event} ev 
 	 */
-	onExpanded(ev) {
-		if (typeof super.onExpanded == "function") super.onExpanded(ev);
+	onexpanded(ev) {
+		if (typeof super.onexpanded == "function") super.onexpanded(ev);
 
 		if (this.disabled !== true) {
 			if (this.expanded) {

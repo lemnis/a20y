@@ -49,10 +49,7 @@ const roles = {
 	/** @todo size attribute doesn't check faulty values */
 	combobox: {
 		super: ["select"],
-		owns: {
-			all: ["textbox"],
-			any: ["listbox", "tree", "grid", "dialog"]
-		},
+		owns: ["textbox", "listbox", "tree", "grid", "dialog"],
 		implicit: ["input[type='email'][list]:not([role])",
 			"input[type='text'][list]:not([role])", "input[type='search'][list]:not([role])",
 			"input[type='tel'][list]:not([role])", "input[type='url'][list]:not([role])",
@@ -97,7 +94,7 @@ const roles = {
 	},
 	feed: {
 		super: ["list"],
-		owns: { any: ["article"] }
+		owns: ["article"],
 	},
 	figure: {
 		super: ["section"],
@@ -110,7 +107,7 @@ const roles = {
 	grid: {
 		super: ["composite", "table"],
 		sub: ["treegrid"],
-		owns: { any: ["rowgroup", "row"] }
+		owns: ["rowgroup", "row"],
 	},
 	gridcell: {
 		super: ["cell", "widget"],
@@ -149,12 +146,12 @@ const roles = {
 	list: {
 		super: ["section"],
 		sub: ["directory", "feed"],
-		owns: { any: ["group", "listitem"] },
+		owns: [["group", "listitem"], "listitem"],
 		implicit: ["dl:not([role])", "ol:not([role])", "ul:not([role])"]
 	},
 	listbox: {
 		super: ["select"],
-		owns: { any: ["option"] },
+		owns: ["option"],
 		implicit: ["datalist:not([role])", "select[multiple]:not([role])",
 			"select[size]:not([size='0']):not([size='1']):not([role])"]
 	},
@@ -182,14 +179,14 @@ const roles = {
 	menu: {
 		super: ["select"],
 		sub: ["menubar"],
-		owns: { any: ["menuitem", "menuitemradio", "menuitemcheckbox", "group"]},
+		owns: ["menuitem", "menuitemradio", "menuitemcheckbox", ["group", "menuitemradio"]],
 		implicit: ["menu[type='context']:not([role])"],
 		defaults: { orientation: "vertical" }
 	},
 	menubar: {
 		super: ["menu"],
 		sub: ["toolbar"],
-		owns: { any: ["menuitem", "menuitemradio", "menuitemcheckbox", "group"] },
+		owns: ["menuitem", "menuitemradio", "menuitemcheckbox", ["group", "menuitemradio"]],
 		defaults: { orientation: "horizontal" }
 	},
 	menuitem: {
@@ -241,7 +238,7 @@ const roles = {
 	},
 	radiogroup: {
 		super: ["select"],
-		owns: ["radio"]
+		owns: ["radio"],
 	},
 	range: {
 		super: ["widget"],
@@ -254,12 +251,12 @@ const roles = {
 	row: {
 		sub: ["group", "widget"],
 		context: ["grid", "rowgroup", "table", "treegrid"],
-		owns: { any: ["cell", "columnheader", "rowheader", "gridcell"] },
+		owns: ["cell", "columnheader", "rowheader", "gridcell"],
 		implicit: ["table tr:not([role])"]
 	},
 	rowgroup: {
 		context: ["grid", "table", "treegrid"],
-		owns: { any: ["row"] },
+		owns: ["row"],
 		implicit: ["thead:not([role])", "tbody:not([role])", "tfoot:not([role])"]
 	},
 	rowheader: {
@@ -329,7 +326,7 @@ const roles = {
 	},
 	switch: {
 		super: ["checkbox"],
-		defaulst: { checked: false }
+		defaults: { checked: false }
 	},
 	tab: {
 		super: ["sectionhead", "widget"],
@@ -339,12 +336,12 @@ const roles = {
 	table: {
 		super: ["section"],
 		sub: ["grid"],
-		owns: { any: ["row", "rowgroup"]},
+		owns: ["row", "rowgroup"],
 		implicit: ["table:not([role])"]
 	},
 	tablist: {
 		super: ["composite"],
-		owns: { any: ["tab"] },
+		owns: ["tab"],
 		defaults: { orientation: "horizontal" }
 	},
 	tabpanel: { super: ["section"] },
@@ -365,7 +362,7 @@ const roles = {
 	tree: {
 		super: ["select"],
 		sub: ["threegrid"],
-		owns: { any: ["group", "treeitem"] }
+		owns: [["group", "treeitem"], "treeitem"]
 	},
 	treegrid: {
 		super: ["grid", "tree"],
@@ -373,7 +370,7 @@ const roles = {
 	},
 	treeitem: {
 		super: ["listitem", "option"],
-		context: { any: ["group", "tree"]}
+		context: ["group", "tree"]
 	},
 	widget: {
 		super: ["roletype"],

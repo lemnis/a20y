@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Textbox.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Textbox.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import mix from "@vestergaard-company/js-mixin";
+
+import Input from "./abstract/Input";
+import Selection from "./../mixins/Selection";
+
+/**
+ * ### Examples
+ *
+ * #### Basic example
+ *   
+ * &lt;div role='textbox' contenteditable>&lt;/div>
+ * 
+ * ```html
+ * &lt;div role='textbox' contenteditable>&lt;/div>
+ * ```
+ * 
+ * ---
+ * 
+ * #### Multiline example
+ * 
+ * &lt;div role='textbox' contenteditable aria-multiline="true">&lt;/div>
+ * 
+ * ```html
+ * &lt;div role='textbox' contenteditable aria-multiline="true">&lt;/div>
+ * ```
+ * 
+ * @summary A type of input that allows free-form text as its value.
+ * @extends Input
+ * @mixes Selection
+ * @todo Add options to keep or remove pasted styling
+ */
+class Textbox extends mix(Input).with(Selection) {
+
+	/**
+	 * @param {*} args
+	 */
+	constructor(...args) {
+		super(...args);
+
+		this._.registerCustomValue("textbox.minlength");
+		this._.registerCustomValue("textbox.maxlength");
+		this._.registerCustomValue("textbox.size");
+
+		if(!this.multiline) {
+			this.addEventListener("key", this._onEnter.bind(this), { key: "enter" });
+			this.addEventListener("paste", this._onPaste.bind(this));
+		}
+	}
+
+	_onEnter(ev) {
+		ev.preventDefault();
+	}
+
+	_onPaste(ev) {
+		ev.preventDefault();
+		let str;
+		let data = ev.clipboardData.getData("text/plain").replace(/\r?\n|\r/g, "");
+		let sel = window.getSelection();
+
+		var c = this._node.childNodes;
+		var a = sel.anchorNode;
+
+		if (c &amp;&amp; a &amp;&amp; Array.prototype.indexOf.call(c, a) > -1) {
+			str = [this._node.innerText.slice(0, sel.anchorOffset), data, this._node.innerText.slice(sel.focusOffset)];
+			str = str.join("");
+		} else {
+			str = this._node.innerText + data;
+		}
+
+		this._node.innerText = str;
+	}
+
+	_onChildListMutation(mutation) {
+		if (!this.multiline) {
+			Array.prototype.forEach.call(mutation.addedNodes, n => {
+				if (n.nodeName !== "#text") {
+					var newChild = document.createTextNode(n.innerText);
+					n.parentNode.replaceChild(newChild, n);
+				}
+			});
+		}
+	}
+
+	/* Native polyfill  */
+	
+	// autocomplete
+	// dirname
+	// list
+	// maxlength
+	// minlength
+	// pattern
+	// placeholder
+	// readonly
+	// required
+	// size
+	// value
+	// list
+	// selection api
+
+	// name	string: Returns / Sets the element's name attribute, containing a name that identifies the element when submitting the form.
+	// type string: Returns / Sets the element's type attribute, indicating the type of control to display. See type attribute of &lt;input> for possible values.
+	// autofocus	boolean: Returns / Sets the element's autofocus attribute, which specifies that a form control should have input focus when the page loads, unless the user overrides it, for example by typing in a different control. Only one form element in a document can have the autofocus attribute. It cannot be applied if the type attribute is set to hidden (that is, you cannot automatically set focus to a hidden control).
+	
+	/**
+	 * Returns / Sets the current value of the textbox.
+	 * @type {String}
+	 */
+	get value() { return this._node.innerText; }
+	set value(str) { this._node.innerText = str; }
+
+	/**
+	 * Returns / Sets the minmum length of characters
+	 * @type {Integer}
+	 */
+	get minLength() { return this._.textbox.minlength; }
+	set minLength(num) { this._.textbox.minlength = num; }
+
+	/**
+	 * Returns / Sets the maximum length of characters
+	 * @type {Integer}
+	 */
+	get maxLength() { return this._.textbox.maxlength; }
+	set maxLength(num) { this._.textbox.maxlength = num; }
+
+	/**
+	 * Returns / Sets the size of control.
+	 * @type {Integer}
+	 */
+	get size() { return this._.textbox.size; }
+	set size(val) {
+		this._node.style.width = 2.16 + 0.48 * val + "em";
+		this._.textbox.size = val;
+	}
+}
+
+export default Textbox;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Radio.html">Radio</a></li></ul><h3>Classes</h3><ul><li><a href="Alert.html">Alert</a></li><li><a href="Alertdialog.html">Alertdialog</a></li><li><a href="Button.html">Button</a></li><li><a href="Checkbox.html">Checkbox</a></li><li><a href="Combobox.html">Combobox</a></li><li><a href="Dialog.html">Dialog</a></li><li><a href="Link.html">Link</a></li><li><a href="Listbox.html">Listbox</a></li><li><a href="module-Radio.html">Radio</a></li><li><a href="Option.html">Option</a></li><li><a href="Radiogroup.html">Radiogroup</a></li><li><a href="Scrollbar.html">Scrollbar</a></li><li><a href="Searchbox.html">Searchbox</a></li><li><a href="Slider.html">Slider</a></li><li><a href="Spinbutton.html">Spinbutton</a></li><li><a href="Switch.html">Switch</a></li><li><a href="Textbox.html">Textbox</a></li></ul><h3>Events</h3><ul><li><a href="Link.html#event:accessibleclick">accessibleclick</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Feb 10 2018 18:48:52 GMT+0100 (W. Europe Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

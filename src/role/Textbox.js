@@ -18,10 +18,10 @@ import Selection from "./../mixins/Selection";
  * 
  * #### Multiline example
  * 
- * <div role='textbox' contenteditable></div>
+ * <div role='textbox' contenteditable aria-multiline="true"></div>
  * 
  * ```html
- * <div role='textbox' contenteditable></div>
+ * <div role='textbox' contenteditable aria-multiline="true"></div>
  * ```
  * 
  * @summary A type of input that allows free-form text as its value.
@@ -40,11 +40,10 @@ class Textbox extends mix(Input).with(Selection) {
 		this._.registerCustomValue("textbox.minlength");
 		this._.registerCustomValue("textbox.maxlength");
 		this._.registerCustomValue("textbox.size");
-		
+
 		if(!this.multiline) {
-			this.addKeyListener("enter", this._onEnter.bind(this));
-			this.element.addEventListener("paste", this._onPaste.bind(this));
-			// this.addMutationListener()
+			this.addEventListener("key", this._onEnter.bind(this), { key: "ArrowEnter" });
+			this.addEventListener("paste", this._onPaste.bind(this));
 		}
 	}
 
@@ -58,17 +57,17 @@ class Textbox extends mix(Input).with(Selection) {
 		let data = ev.clipboardData.getData("text/plain").replace(/\r?\n|\r/g, "");
 		let sel = window.getSelection();
 
-		var c = this.element.childNodes;
+		var c = this._node.childNodes;
 		var a = sel.anchorNode;
 
 		if (c && a && Array.prototype.indexOf.call(c, a) > -1) {
-			str = [this.element.innerText.slice(0, sel.anchorOffset), data, this.element.innerText.slice(sel.focusOffset)];
+			str = [this._node.innerText.slice(0, sel.anchorOffset), data, this._node.innerText.slice(sel.focusOffset)];
 			str = str.join("");
 		} else {
-			str = this.element.innerText + data;
+			str = this._node.innerText + data;
 		}
 
-		this.element.innerText = str;
+		this._node.innerText = str;
 	}
 
 	_onChildListMutation(mutation) {
@@ -106,8 +105,12 @@ class Textbox extends mix(Input).with(Selection) {
 	 * Returns / Sets the current value of the textbox.
 	 * @type {String}
 	 */
-	get value() { return this.element.innerText; }
-	set value(str) { this.element.innerText = str; }
+	get value() { return this._node.value; }
+	set value(str) {
+		console.log(str);
+		this.dispatchEvent(new Event("input", {bubbles: true}));
+		this._node.value = str;
+	}
 
 	/**
 	 * Returns / Sets the minmum length of characters
@@ -129,7 +132,7 @@ class Textbox extends mix(Input).with(Selection) {
 	 */
 	get size() { return this._.textbox.size; }
 	set size(val) {
-		this.element.style.width = 2.16 + 0.48 * val + "em";
+		this._node.style.width = 2.16 + 0.48 * val + "em";
 		this._.textbox.size = val;
 	}
 }

@@ -1,4 +1,4 @@
-:focus, :target {
+:focus, :target, .ay-focus {
   outline: 3px solid blue;
 }
 
@@ -41,6 +41,13 @@
   left: 0; background: rgba(0, 0, 0, 0.1); z-index: 998;
 }
 
+/* Menu */
+[role="menubar"] { list-style: none; }
+[role="menubar"] > * { display: inline-block; vertical-align: top; border: 1px solid;}
+[role="menu"] { list-style: none; border: 1px solid; }
+[role="menuitem"][aria-expanded="true"]::after { content: "\25bc"; }
+[role="menuitem"][aria-expanded="false"]::after { content: "\25b2"; }
+
 /* Listbox */
 [role="listbox"] { border: 1px solid; padding: 0; margin: 0; list-style: none; position: relative; overflow-y: scroll; }
 [role="listbox"] [role="option"] { padding: .3em .5em; }
@@ -73,6 +80,7 @@
 
 /* ARIA attributes */
 
+[aria-hidden="true"] { display: none;}
 [aria-pressed="true"] { background-color: grey; }
 [aria-disabled="true"] { background-color: #DADADA; }
 [aria-selected="true"][aria-selected="true"][aria-selected="true"] { background-color: rgb(133, 159, 216); }

@@ -1,12 +1,12 @@
 import Select from "./abstract/Select";
-import boolean from "./../type/boolean";
+
+/** @module Listbox */
 
 /**
- * @summary A widget that allows the user to select one or more items from a list of choices.
- * @desc
  * ### Keyboard Support
  *
  * #### Default
+ * 
  * | Key | Function |
  * | --- | -------- |
  * | Down Arrow | Moves focus to the next option <br/> If not multiselectable, it selects the focused option.
@@ -15,14 +15,15 @@ import boolean from "./../type/boolean";
  * | End  			|	Moves focus to the last option  <br/> If not multiselectable, it selects the focused option.
  * 
  * #### Multiple selection
+ * 
  * | Key | Function |
  * | --- | -------- |
- * | Space									| Changes the selection state of the focused option.
- * | Shift + Down Arrow 		| Moves focus to and selects the next option.
- * | Shift + Up Arrow 			| Moves focus to and selects the previous option.
- * | Control + Shift + Home |	Selects from the focused option to the beginning of the list.
- * | Control + Shift + End  | Selects from the focused option to the end of the list.
- * | Control + A 	          | Selects all options in the list. If all options are selected, unselects all options.
+ * | Space					| Changes the selection state of the focused option. |
+ * | Shift + Down Arrow 	| Moves focus to and selects the next option. |
+ * | Shift + Up Arrow 	 	| Moves focus to and selects the previous option. |
+ * | Control + Shift + Home |	Selects from the focused option to the beginning of the list. |
+ * | Control + Shift + End  | Selects from the focused option to the end of the list. |
+ * | Control + A 	        | Selects all options in the list. If all options are selected, unselects all options. |
  * 
  * ### Example
  * 
@@ -50,7 +51,7 @@ import boolean from "./../type/boolean";
  * 
  * #### Multi selectable example
  * 
- * <ul role="listbox" tabindex="0" aria-activedescendant="option_1" aria-multiselectable="true">
+ * <ul role="listbox" tabindex="0" aria-activedescendant="option_21" aria-multiselectable="true">
  *   <li id="option_21" role="option">Elderberry</li>
  *   <li id="option_23" role="option">Fig</li>
  *   <li id="option_25" role="option">Grape</li>
@@ -82,20 +83,39 @@ import boolean from "./../type/boolean";
  * <ul>
  * ```
  * 
- * @extends Roletype
- * @fires Listbox#change
- * @fires Listbox#input
+ * @summary A widget that allows the user to select one or more items from a list of choices.
+ * @extends Select
+ * @alias module:Listbox
  */
 class Listbox extends Select {
 	constructor(...args) {
 		super(...args);
 
 		this._.registerCustomValue("listbox.size", 1);
-
 		this.size = 10;
-		// this._node.addEventListener("click", clickOnOption.bind(this));
+	}
 
-		// this.addKeyListener("enter", clickOnOption.bind(this));
+	onChange(ev) {
+		console.log(ev);
+		// retrieve option that has been changed
+		var changedOption = this.options.find(option => option._node === ev.target);
+
+		// if only item can be selected, remove previous selected items
+		if (!this.multiselectable && changedOption.selected === true) {
+			this.options.forEach(option => {
+				if (option.selected && option._node !== ev.target) {
+					option.selected = false;
+				}
+			});
+		} else if(!this.multiselectable) {
+			// check if option got disabled
+			if(!this.options.find(option => option.selected)){
+				// revert action
+				ev.preventDefault();
+			}
+		}
+
+		if(typeof super.onchange == "function") super.onChange(ev);
 	}
 
 	/**
@@ -104,17 +124,9 @@ class Listbox extends Select {
 	 */
 	get size() { return this._.listbox.size; }
 	set size(val) {
-		var styles = getComputedStyle(this._node);
-		this._node.style.height = parseFloat(styles.lineHeight) / parseFloat(styles.fontSize) * val + "em";
+		var height = this.options[0].clientHeight;
+		this._node.style.height = height * val + "px";
 		this._.listbox.size = val;
-	}
-
-	moved(from, to) {
-		// update selected on keyevent when only one item can be selected
-		if (!this.multiselectable) {
-			from.selected = undefined;
-			to.selected = boolean.toggle(to.selected);
-		}
 	}
 }
 
